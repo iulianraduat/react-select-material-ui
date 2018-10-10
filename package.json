@@ -1,12 +1,12 @@
 {
   "name": "react-select-material-ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A react SELECT component based on react-select and looking like a material-ui component",
   "main": "lib/index.js",
   "sideEffects": false,
   "scripts": {
     "build": "rimraf ./lib && tsc",
-    "publish": "cross-env NODE_ENV=production npm run build && npm publish",
+    "deploy": "cross-env NODE_ENV=production npm run build && npm publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,9 +14,8 @@
     "url": "git+https://github.com/iulian-radu-at/react-select-material-ui.git"
   },
   "files": [
-    "dist",
     "lib",
-    "src"
+    "index.d.ts"
   ],
   "keywords": [
     "react-select",
@@ -63,11 +62,6 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
-  "bundlesize": [
-    {
-      "path": "./dist/react-select.js"
-    }
-  ],
   "jest": {
     "modulePathIgnorePatterns": [
       "./node_modules",
