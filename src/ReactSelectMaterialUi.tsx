@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { isArray, isEmpty, isFunction, isNil, isString, map, size } from 'lodash';
-import { StandardTextFieldProps } from '@material-ui/core/TextField';
+import { BaseTextFieldProps } from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl/FormControl';
 import SelectLabel from './SelectLabel';
 import SelectDropdown, { SelectOption, SelectProps } from './SelectDropdown';
@@ -32,8 +32,6 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
             helperText,
             id,
             InputLabelProps,
-            inputProps,
-            InputProps,
             inputRef,
             label,
             multiline,
@@ -201,7 +199,7 @@ interface ReactSelectMaterialUiState {
     selectedOption?: SelectOption | SelectOption[];
 }
 
-export interface ReactSelectMaterialUiProps extends StandardTextFieldProps {
+export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, BaseTextFieldProps {
     isCreatable?: boolean;
     value?: string;
     values?: string[];

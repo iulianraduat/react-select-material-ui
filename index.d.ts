@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StandardTextFieldProps } from '@material-ui/core/TextField';
+import { BaseTextFieldProps } from '@material-ui/core/TextField';
 import { Props as ReactSelectProps } from 'react-select/lib/Select';
 
 export interface SelectOption {
@@ -14,7 +14,7 @@ export interface SelectProps extends ReactSelectProps<SelectOption> {
     msgNoValidValue?: string;
 }
 
-export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, StandardTextFieldProps {
+export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, BaseTextFieldProps {
     isCreatable?: boolean;
     value?: string;
     values?: string[];
@@ -26,7 +26,14 @@ export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMater
 declare class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps> {
 }
 
+declare class SingleSelect extends React.Component<ReactSelectMaterialUiProps> {
+}
+
+declare class MultipleSelect extends React.Component<ReactSelectMaterialUiProps> {
+}
+
 declare module 'react-select-material-ui' {
 }
 
 export default ReactSelectMaterialUi;
+export { SingleSelect, MultipleSelect };
