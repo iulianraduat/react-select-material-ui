@@ -200,7 +200,6 @@ interface ReactSelectMaterialUiState {
 }
 
 export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, BaseTextFieldProps {
-    isCreatable?: boolean;
     value?: string;
     values?: string[];
     options: (string | SelectOption)[];

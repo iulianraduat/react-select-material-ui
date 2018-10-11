@@ -15,14 +15,14 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 
         return (
             <Select
+                isValidNewOption={this.isValidNewOption}
+                createOptionPosition='first'
                 {...selectProps}
                 value={value}
                 options={options}
                 placeholder=''
-                createOptionPosition='first'
                 styles={getStyles(this.props)}
                 noOptionsMessage={this.noOptionsMessage}
-                isValidNewOption={this.isValidNewOption}
                 onChange={onChange}
                 onFocus={onFocus}
                 onBlur={onBlur}
