@@ -31,6 +31,12 @@ declare class SingleSelect extends React.Component<ReactSelectMaterialUiProps> {
 declare class MultipleSelect extends React.Component<ReactSelectMaterialUiProps> {
 }
 
+declare class TagsSelect extends React.Component<ReactSelectMaterialUiProps> {
+}
+
+declare class ColorsSelect extends React.Component<ReactSelectMaterialUiProps> {
+}
+
 declare module 'react-select-material-ui' {
 }
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import MaterialUiCreatable, {MaterialUiCreatableProps} from './MaterialUiCreatable';
+import MaterialUiCreatable, {MaterialUiCreatableProps} from '../MaterialUiCreatable';
 
-const SingleSelect = (props: SingleSelectProps) => (
+const SingleSelect = (props: MaterialUiCreatableProps) => (
     <MaterialUiCreatable
         {...props}
         SelectProps={{
@@ -11,7 +11,5 @@ const SingleSelect = (props: SingleSelectProps) => (
         fullWidth={true}
     />
 );
-
-export type SingleSelectProps = MaterialUiCreatableProps;
 
 export default SingleSelect;

@@ -60,7 +60,7 @@ Backspace will not remove values.
 
 | ReactSelectMaterialUi _uses_ | React-select | Material-ui | React  |
 | ----------------------------:|:------------:|:-----------:|:------:|
-| 1.0.0                        | 2.1.0        | 3.2.0       | 16.5.2 |
+| 1.0.x                        | 2.1.0        | 3.2.0       | 16.5.2 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -81,7 +81,7 @@ import {SingleSelect} from 'react-select-multi-ui';
 import * as React from 'react';
 import MaterialUiCreatable, {MaterialUiCreatableProps} from './MaterialUiCreatable';
 
-const SingleSelect = (props: SingleSelectProps) => (
+const SingleSelect = (props: MaterialUiCreatableProps) => (
     <MaterialUiCreatable
         {...props}
         SelectProps={{
@@ -91,8 +91,6 @@ const SingleSelect = (props: SingleSelectProps) => (
         fullWidth={true}
     />
 );
-
-export type SingleSelectProps = MaterialUiCreatableProps;
 
 export default SingleSelect;
 ```
@@ -108,7 +106,7 @@ Setting SelectProps.isClearable to true will display the clearable button only i
 import * as React from 'react';
 import MaterialUiCreatable, {MaterialUiCreatableProps} from './MaterialUiCreatable';
 
-const MultipleSelect = (props: MultiSelectProps) => (
+const MultipleSelect = (props: MaterialUiCreatableProps) => (
     <MaterialUiCreatable
         {...props}
         SelectProps={{
@@ -120,9 +118,17 @@ const MultipleSelect = (props: MultiSelectProps) => (
     />
 );
 
-export type MultiSelectProps = MaterialUiCreatableProps;
-
 export default MultipleSelect;
+```
+
+**TagsSelect** - a component for selecting multiple tag based on MultipleSelect. It can be imported with:
+```js
+import {TagsSelect} from 'react-select-multi-ui';
+```
+
+**ColorsSelect** - a component for selecting multiple HTML colors (with preview) based on MultipleSelect. It can be imported with:
+```js
+import {ColorsSelect} from 'react-select-multi-ui';
 ```
 
 ---
@@ -204,7 +210,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <MultipleSelect
-          label="Choose a city"
+          label="Choose some cities"
           values={["London","Vienna"]}
           options={options}
           helperText="You can add a new city by writing its name and pressing enter"
@@ -227,6 +233,75 @@ class App extends React.Component {
 export default App;
 ```
 
+The select multiple tags component:
+```js
+import * as React from 'react';
+import { TagsSelect } from 'react-select-material-ui';
+
+class App extends React.Component {
+  render() {
+    const options: string[] = [
+      "Personal", "Work", "Important", "Optional", "Required"
+    ];
+
+    return (
+      <div className="App">
+        <TagsSelect
+          label="Tags"
+          options={options}
+          onChange={this.handleChange}
+          SelectProps={{
+            isCreatable: true,
+            msgNoOptionsAvailable: 'All tags are selected',
+            msgNoOptionsMatchFilter: 'No tag matches the filter'
+          }}
+        />
+      </div>
+    );
+  }
+
+  handleChange = (values: string[]) => {
+    console.log(values);
+  }
+}
+
+export default App;
+```
+
+The select multiple colors component:
+```js
+import * as React from 'react';
+import { ColorsSelect } from 'react-select-material-ui';
+
+class App extends React.Component {
+  render() {
+    const options: string[] = [
+      "red", "#123456", "yellow", "#fedcba"
+    ];
+
+    return (
+      <div className="App">
+        <ColorsSelect
+          label="Colors"
+          options={options}
+          helperText="You can add a new color as long as it is a valid HTML color"
+          onChange={this.handleChange}
+          SelectProps={{
+            isCreatable: true
+          }}
+        />
+      </div>
+    );
+  }
+
+  handleChange = (values: string[]) => {
+    console.log(values);
+  }
+}
+
+export default App;
+```
+
 ---
 
 ## Changelog
@@ -235,3 +310,7 @@ export default App;
 
 * Improved README.md
 * Changed the code to be conform to the behaviour described in Readme
+
+### 1.0.1
+
+* Added subcomponents for: TagsSelect and ColorsSelect

@@ -1,6 +1,6 @@
 {
   "name": "react-select-material-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A react SELECT component based on react-select and looking like a material-ui component",
   "main": "lib/index.js",
   "sideEffects": false,
@@ -29,6 +29,9 @@
     "input",
     "singleselect",
     "multiselect",
+    "multipleselect",
+    "tagsselect",
+    "colorsselect",
     "ui",
     "material design"
   ],
@@ -54,7 +57,6 @@
     "@types/react-dom": "16.0.9",
     "@types/react-select": "2.0.4",
     "@types/rimraf": "2.0.2",
-    "@types/typescript": "2.0.0",
     "babel-core": "6.26.3",
     "babel-jest": "23.6.0",
     "cross-env": "5.2.0",

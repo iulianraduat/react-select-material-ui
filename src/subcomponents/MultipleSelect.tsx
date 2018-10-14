@@ -1,7 +1,7 @@
 import * as React from 'react';
-import MaterialUiCreatable, {MaterialUiCreatableProps} from './MaterialUiCreatable';
+import MaterialUiCreatable, {MaterialUiCreatableProps} from '../MaterialUiCreatable';
 
-const MultipleSelect = (props: MultiSelectProps) => (
+const MultipleSelect = (props: MaterialUiCreatableProps) => (
     <MaterialUiCreatable
         {...props}
         SelectProps={{
@@ -12,7 +12,5 @@ const MultipleSelect = (props: MultiSelectProps) => (
         fullWidth={true}
     />
 );
-
-export type MultiSelectProps = MaterialUiCreatableProps;
 
 export default MultipleSelect;
