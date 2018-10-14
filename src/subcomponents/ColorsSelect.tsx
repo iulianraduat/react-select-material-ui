@@ -3,7 +3,6 @@ import { MaterialUiCreatableProps } from "../MaterialUiCreatable";
 import MultipleSelect from "./MultipleSelect";
 import ColoredDot from "./ColoredDot";
 import ColoredOption from "./ColoredOption";
-import "./ColorsSelect.less";
 
 const label = (props: any) => {
   const value: string = props.data.value;

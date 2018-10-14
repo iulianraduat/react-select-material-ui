@@ -1,7 +1,6 @@
 import * as React from "react";
 import { MaterialUiCreatableProps } from "../MaterialUiCreatable";
 import MultipleSelect from "./MultipleSelect";
-import "./TagsSelect.less";
 
 const TagsSelect = (props: MaterialUiCreatableProps) => (
   <MultipleSelect
