@@ -41,4 +41,4 @@ declare module 'react-select-material-ui' {
 }
 
 export default ReactSelectMaterialUi;
-export { SingleSelect, MultipleSelect };
+export { SingleSelect, MultipleSelect, TagsSelect, ColorsSelect };

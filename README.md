@@ -311,6 +311,6 @@ export default App;
 * Improved README.md
 * Changed the code to be conform to the behaviour described in Readme
 
-### 1.0.3
+### 1.0.4
 
 * Added subcomponents for: TagsSelect and ColorsSelect
