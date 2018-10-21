@@ -1,25 +1,25 @@
-import * as React from 'react';
-import {isEmpty} from 'lodash';
-import FormHelperText, {FormHelperTextProps} from '@material-ui/core/FormHelperText/FormHelperText';
+import * as React from "react";
+import { isEmpty } from "lodash";
+import FormHelperText, { FormHelperTextProps } from "@material-ui/core/FormHelperText/FormHelperText";
 
 const SelectHelperText = (props: SelectHelperTextProps) => {
-    const { helperTextId, helperText, formHelperTextProps } = props;
+  const { id, helperText, formHelperTextProps } = props;
 
-    if (isEmpty(helperText)) {
-        return null;
-    }
+  if (isEmpty(helperText)) {
+    return null;
+  }
 
-    return (
-        <FormHelperText id={helperTextId} {...formHelperTextProps}>
-            {helperText}
-        </FormHelperText>
-    );
-}
+  return (
+    <FormHelperText id={id} {...formHelperTextProps}>
+      {helperText}
+    </FormHelperText>
+  );
+};
 
 interface SelectHelperTextProps {
-    helperTextId?: string;
-    helperText?: React.ReactNode;
-    formHelperTextProps?: Partial<FormHelperTextProps>;
+  id?: string;
+  helperText?: React.ReactNode;
+  formHelperTextProps?: Partial<FormHelperTextProps>;
 }
 
 export default SelectHelperText;
