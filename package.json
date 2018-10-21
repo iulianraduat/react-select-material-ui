@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rimraf ./lib && tsc",
     "deploy": "cross-env NODE_ENV=production npm run build && npm publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -51,6 +51,7 @@
     "@types/babel-core": "6.25.5",
     "@types/enzyme": "3.1.14",
     "@types/enzyme-adapter-react-16": "1.0.3",
+    "@types/jest": "^23.3.5",
     "@types/lodash": "4.14.117",
     "@types/react": "16.4.16",
     "@types/react-dom": "16.0.9",
@@ -61,7 +62,9 @@
     "cross-env": "5.2.0",
     "enzyme": "3.7.0",
     "enzyme-adapter-react-16": "1.6.0",
+    "jest": "23.6.0",
     "rimraf": "2.6.2",
+    "ts-jest": "23.10.4",
     "typescript": "3.1.1"
   },
   "peerDependencies": {
@@ -73,10 +76,26 @@
       "./node_modules",
       "./history"
     ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "roots": [
+      "<rootDir>/src"
+    ],
     "transform": {
-      "^.+\\.js$": "babel-jest"
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "src/*(/(__tests?__/)([^_].*/)*?[^_][^/]*?\\.(test|spec)?\\.(js?))$",
+    "testRegex": "src/.+\\.test\\.tsx$",
     "setupFiles": [
       "./enzymeAdapter.setup.js"
     ]
