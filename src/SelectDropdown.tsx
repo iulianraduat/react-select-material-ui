@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {isEmpty, isNil} from 'lodash';
+import {isArray, isEmpty, isNil, some} from 'lodash';
 import SelectReadOnly from 'react-select';
 import {Props as ReactSelectProps} from 'react-select/lib/Select';
 import SelectCreatable, {CreatableProps} from 'react-select/lib/Creatable';
@@ -7,6 +7,7 @@ import {getStyles} from './SelectDropdownStyles';
 
 class SelectDropdown extends React.Component<SelectDropdownProps> {
     private static spaces: RegExp = /\s/;
+    private static SENSITIVITY = { sensitivity: 'base' };
 
     public render() {
         const {value, options, selectProps, onChange, onFocus, onBlur} = this.props;
@@ -41,11 +42,13 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
             return selectProps.msgNoOptionsAvailable || 'No more options are available';
         }
 
-        if (selectProps.isCreatable) {
-            return selectProps.msgNoValidValue || 'The new value is not valid (contains space)';
+        const {inputValue} = obj;
+
+        if (selectProps.isCreatable !== true || this.containsValue(inputValue) || this.containsOptions(inputValue)) {
+            return selectProps.msgNoOptionsMatchFilter || 'No options match the filter';
         }
 
-        return selectProps.msgNoOptionsMatchFilter || 'No options match the filter';
+        return selectProps.msgNoValidValue || 'The new value is not valid (contains space)';
     };
 
     private isValidNewOption = (inputValue: string) => {
@@ -53,9 +56,31 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
             return false;
         }
 
+        if(this.containsOptions(inputValue)){
+            return false;
+        }
+
         const hasSpaces = SelectDropdown.spaces.test(inputValue);
         return hasSpaces === false;
     };
+
+    private containsOptions(inputValue: string): boolean {
+        return some(this.props.options, (option: SelectOption) => this.equalsIgnoringCase(inputValue, option.value));
+    }
+
+    private containsValue(inputValue: string): boolean {
+        const {value} = this.props;
+
+        if(isArray(value) === false){
+            return false;
+        }
+
+        return some(value, (option: SelectOption) => this.equalsIgnoringCase(inputValue, option.value));
+    }
+
+    private equalsIgnoringCase(a: string, b:string) {
+        return a.localeCompare(b, undefined, SelectDropdown.SENSITIVITY) === 0;
+    }
 }
 
 export interface SelectDropdownProps {

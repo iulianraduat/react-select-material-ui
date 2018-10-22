@@ -319,3 +319,7 @@ export default App;
 ### 1.0.5
 
 - Made SelectProps to accept also the props of Creatable besides of the normal ReactSelect
+
+### 1.0.6
+
+- When adding a new value, it must be different than the existing values and options
