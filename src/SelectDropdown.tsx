@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {isEmpty, isNil} from 'lodash';
-import {Props as ReactSelectProps} from 'react-select/lib/Select';
 import SelectReadOnly from 'react-select';
-import SelectCreatable from 'react-select/lib/Creatable';
+import {Props as ReactSelectProps} from 'react-select/lib/Select';
+import SelectCreatable, {CreatableProps} from 'react-select/lib/Creatable';
 import {getStyles} from './SelectDropdownStyles';
 
 class SelectDropdown extends React.Component<SelectDropdownProps> {
@@ -58,9 +58,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
     };
 }
 
-interface SelectDropdownProps {
-    hasInputFocus?: boolean;
-    isCreatable?: boolean;
+export interface SelectDropdownProps {
     value?: SelectOption | SelectOption[];
     options?: SelectOption[];
     selectProps?: SelectProps;
@@ -69,7 +67,7 @@ interface SelectDropdownProps {
     onBlur?: (event: any) => void;
 }
 
-export interface SelectProps extends ReactSelectProps<SelectOption> {
+export interface SelectProps extends ReactSelectProps<SelectOption>, CreatableProps<SelectOption> {
     isCreatable?: boolean;
     msgNoOptionsAvailable?: string;
     msgNoOptionsMatchFilter?: string;

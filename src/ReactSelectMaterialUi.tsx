@@ -74,7 +74,6 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
           inputLabelProps={InputLabelProps}
         />
         <SelectDropdown
-          hasInputFocus={hasInputFocus}
           value={selectedOption}
           options={this.getOptions(options)}
           selectProps={{
