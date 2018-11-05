@@ -323,3 +323,7 @@ export default App;
 ### 1.0.6
 
 - When adding a new value, it must be different than the existing values and options
+
+### 1.0.7
+
+- Fixed a low severity vulnerability

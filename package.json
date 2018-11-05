@@ -1,6 +1,6 @@
 {
   "name": "react-select-material-ui",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A react SELECT component based on react-select and looking like a material-ui component",
   "main": "lib/index.js",
   "sideEffects": false,
