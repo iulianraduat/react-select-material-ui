@@ -80,7 +80,7 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
             ...SelectProps,
             isClearable
           }}
-          onChange={this.hanldeChangeSelect}
+          onChange={this.handleChangeSelect}
           onFocus={this.handleGotFocus}
           onBlur={this.handleLostFocus}
         />
@@ -138,7 +138,7 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
     return option;
   }
 
-  private hanldeChangeSelect = (value: SelectOption | SelectOption[]) => {
+  private handleChangeSelect = (value: SelectOption | SelectOption[]) => {
     this.setState({
       filter: "",
       selectedOption: value

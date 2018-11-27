@@ -1,103 +1,103 @@
 {
-  "name": "react-select-material-ui",
-  "version": "1.0.7",
-  "description": "A react SELECT component based on react-select and looking like a material-ui component",
-  "main": "lib/index.js",
-  "sideEffects": false,
-  "scripts": {
-    "build": "rimraf ./lib && tsc",
-    "deploy": "cross-env NODE_ENV=production npm run build && npm publish",
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iulian-radu-at/react-select-material-ui.git"
-  },
-  "files": [
-    "lib",
-    "index.d.ts"
-  ],
-  "keywords": [
-    "react-select",
-    "material-ui",
-    "react-select-material-ui",
-    "react",
-    "react-component",
-    "select",
-    "combobox",
-    "input",
-    "singleselect",
-    "multiselect",
-    "multipleselect",
-    "tagsselect",
-    "colorsselect",
-    "ui",
-    "material design"
-  ],
-  "author": "Iulian Radu <iulian.radu@gmx.at>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/iulian-radu-at/react-select-material-ui/issues"
-  },
-  "homepage": "https://github.com/iulian-radu-at/react-select-material-ui#readme",
-  "dependencies": {
-    "@material-ui/core": "3.2.0",
-    "lodash": "4.17.11",
-    "react": "16.5.2",
-    "react-dom": "16.5.2",
-    "react-select": "2.1.0"
-  },
-  "devDependencies": {
-    "@types/babel-core": "6.25.5",
-    "@types/enzyme": "3.1.14",
-    "@types/enzyme-adapter-react-16": "1.0.3",
-    "@types/jest": "23.3.5",
-    "@types/lodash": "4.14.117",
-    "@types/react": "16.4.16",
-    "@types/react-dom": "16.0.9",
-    "@types/react-select": "2.0.4",
-    "@types/rimraf": "2.0.2",
-    "babel-core": "6.26.3",
-    "babel-jest": "23.6.0",
-    "cross-env": "5.2.0",
-    "enzyme": "3.7.0",
-    "enzyme-adapter-react-16": "1.6.0",
-    "jest": "23.6.0",
-    "rimraf": "2.6.2",
-    "ts-jest": "23.10.4",
-    "typescript": "3.1.1"
-  },
-  "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
-  },
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "./node_modules",
-      "./history"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "transform": {
-      "^.+\\.js$": "babel-jest",
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "src/.+\\.test\\.tsx$",
-    "setupFiles": [
-      "./enzymeAdapter.setup.js"
-    ]
-  }
+	"name": "react-select-material-ui",
+	"version": "1.1.0",
+	"description": "A react SELECT component based on react-select and looking like a material-ui component",
+	"main": "lib/index.js",
+	"sideEffects": false,
+	"scripts": {
+		"build": "rimraf ./lib && tsc",
+		"deploy": "cross-env NODE_ENV=production npm run build && npm publish",
+		"test": "jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/iulian-radu-at/react-select-material-ui.git"
+	},
+	"files": [
+		"lib",
+		"index.d.ts"
+	],
+	"keywords": [
+		"react-select",
+		"material-ui",
+		"react-select-material-ui",
+		"react",
+		"react-component",
+		"select",
+		"combobox",
+		"input",
+		"singleselect",
+		"multiselect",
+		"multipleselect",
+		"tagsselect",
+		"colorsselect",
+		"ui",
+		"material design"
+	],
+	"author": "Iulian Radu <iulian.radu@gmx.at>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/iulian-radu-at/react-select-material-ui/issues"
+	},
+	"homepage": "https://github.com/iulian-radu-at/react-select-material-ui#readme",
+	"dependencies": {
+		"@material-ui/core": "^3.6.0",
+		"lodash": "^4.17.11",
+		"react": "^16.6.3",
+		"react-dom": "^16.6.3",
+		"react-select": "^2.1.2"
+	},
+	"devDependencies": {
+		"@types/babel-core": "^6.25.5",
+		"@types/enzyme": "^3.1.15",
+		"@types/enzyme-adapter-react-16": "^1.0.3",
+		"@types/jest": "^23.3.9",
+		"@types/lodash": "^4.14.118",
+		"@types/react": "^16.7.7",
+		"@types/react-dom": "^16.0.10",
+		"@types/react-select": "^2.0.8",
+		"@types/rimraf": "^2.0.2",
+		"babel-core": "^6.26.3",
+		"babel-jest": "^23.6.0",
+		"cross-env": "^5.2.0",
+		"enzyme": "^3.7.0",
+		"enzyme-adapter-react-16": "^1.7.0",
+		"jest": "^23.6.0",
+		"rimraf": "^2.6.2",
+		"ts-jest": "^23.10.5",
+		"typescript": "^3.1.6"
+	},
+	"peerDependencies": {
+		"react": "^16.0.0",
+		"react-dom": "^16.0.0"
+	},
+	"jest": {
+		"modulePathIgnorePatterns": [
+			"./node_modules",
+			"./history"
+		],
+		"moduleDirectories": [
+			"node_modules",
+			"src"
+		],
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"jsx",
+			"json",
+			"node"
+		],
+		"roots": [
+			"<rootDir>/src"
+		],
+		"transform": {
+			"^.+\\.js$": "babel-jest",
+			"^.+\\.tsx?$": "ts-jest"
+		},
+		"testRegex": "src/.+\\.test\\.tsx$",
+		"setupFiles": [
+			"./enzymeAdapter.setup.js"
+		]
+	}
 }

@@ -72,6 +72,7 @@ Backspace will not remove values.
 | ReactSelectMaterialUi _uses_ | React-select | Material-ui | React  |
 | ---------------------------: | :----------: | :---------: | :----: |
 |                        1.0.x |    2.1.0     |    3.2.0    | 16.5.2 |
+|                        1.1.x |    2.1.2     |    3.6.0    | 16.6.3 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -327,3 +328,7 @@ export default App;
 ### 1.0.7
 
 - Fixed a low severity vulnerability
+
+### 1.1.0
+
+- Updated the react and material-ui packages
