@@ -87,7 +87,7 @@ Backspace will not remove values.
 **SingleSelect** - a component for selecting a single value. It can be imported with:
 
 ```js
-import { SingleSelect } from "react-select-multi-ui";
+import { SingleSelect } from "react-select-material-ui";
 ```
 
 ```js
@@ -111,7 +111,7 @@ export default SingleSelect;
 **MultipleSelect** - a component for selecting multiple values. It can be imported with:
 
 ```js
-import { MultipleSelect } from "react-select-multi-ui";
+import { MultipleSelect } from "react-select-material-ui";
 ```
 
 Setting SelectProps.isClearable to true will display the clearable button only if there are more then one selected value.
@@ -138,13 +138,13 @@ export default MultipleSelect;
 **TagsSelect** - a component for selecting multiple tag based on MultipleSelect. It can be imported with:
 
 ```js
-import { TagsSelect } from "react-select-multi-ui";
+import { TagsSelect } from "react-select-material-ui";
 ```
 
 **ColorsSelect** - a component for selecting multiple HTML colors (with preview) based on MultipleSelect. It can be imported with:
 
 ```js
-import { ColorsSelect } from "react-select-multi-ui";
+import { ColorsSelect } from "react-select-material-ui";
 ```
 
 ---
