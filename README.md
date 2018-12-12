@@ -332,3 +332,8 @@ export default App;
 ### 1.1.0
 
 - Updated the react and material-ui packages
+
+### 1.1.1
+
+- Hide the remove option in multiple select when it is disabled
+- Setting disabled or SelectProps.isDisabled to true will make the select disabled
