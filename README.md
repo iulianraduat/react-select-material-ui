@@ -337,3 +337,7 @@ export default App;
 
 - Hide the remove option in multiple select when it is disabled
 - Setting disabled or SelectProps.isDisabled to true will make the select disabled
+
+### 1.1.2
+
+- Handle the case when the user removes the selected value and react-select returns null as selected value

@@ -142,7 +142,7 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 		return option;
 	}
 
-	private handleChangeSelect = (value: SelectOption | SelectOption[]) => {
+	private handleChangeSelect = (value: SelectOption | SelectOption[] | null) => {
 		this.setState({
 			filter: '',
 			selectedOption: value
@@ -155,7 +155,11 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 		}
 	};
 
-	private getValues(value: SelectOption | SelectOption[]): string | string[] {
+	private getValues(value: SelectOption | SelectOption[] | null): string | string[] | null {
+		if (isNil(value)) {
+			return null;
+		}
+
 		if (isArray(value)) {
 			return map(value, this.getValue);
 		}
@@ -195,7 +199,7 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 interface ReactSelectMaterialUiState {
 	hasInputFocus?: boolean;
 	filter?: string;
-	selectedOption?: SelectOption | SelectOption[];
+	selectedOption?: SelectOption | SelectOption[] | null;
 }
 
 export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, BaseTextFieldProps {
