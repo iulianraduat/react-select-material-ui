@@ -73,6 +73,7 @@ Backspace will not remove values.
 | ---------------------------: | :----------: | :---------: | :----: |
 |                        1.0.x |    2.1.0     |    3.2.0    | 16.5.2 |
 |                        1.1.x |    2.1.2     |    3.6.0    | 16.6.3 |
+|                        1.2.x |    2.3.0     |    3.9.2    | 16.8.1 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -341,3 +342,7 @@ export default App;
 ### 1.1.2
 
 - Handle the case when the user removes the selected value and react-select returns null as selected value
+
+### 1.2.0
+
+- Updated packages

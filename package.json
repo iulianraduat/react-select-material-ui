@@ -1,6 +1,6 @@
 {
 	"name": "react-select-material-ui",
-	"version": "1.1.2",
+	"version": "1.2.0",
 	"description": "A react SELECT component based on react-select and looking like a material-ui component",
 	"main": "lib/index.js",
 	"sideEffects": false,
@@ -41,31 +41,31 @@
 	},
 	"homepage": "https://github.com/iulian-radu-at/react-select-material-ui#readme",
 	"dependencies": {
-		"@material-ui/core": "^3.6.0",
+		"@material-ui/core": "^3.9.2",
 		"lodash": "^4.17.11",
-		"react": "^16.6.3",
-		"react-dom": "^16.6.3",
-		"react-select": "^2.1.2"
+		"react": "^16.8.1",
+		"react-dom": "^16.8.1",
+		"react-select": "^2.3.0"
 	},
 	"devDependencies": {
 		"@types/babel-core": "^6.25.5",
-		"@types/enzyme": "^3.1.15",
+		"@types/enzyme": "^3.1.17",
 		"@types/enzyme-adapter-react-16": "^1.0.3",
 		"@types/jest": "^23.3.9",
-		"@types/lodash": "^4.14.118",
-		"@types/react": "^16.7.7",
-		"@types/react-dom": "^16.0.10",
-		"@types/react-select": "^2.0.8",
+		"@types/lodash": "^4.14.120",
+		"@types/react": "^16.8.2",
+		"@types/react-dom": "^16.8.0",
+		"@types/react-select": "^2.0.11",
 		"@types/rimraf": "^2.0.2",
 		"babel-core": "^6.26.3",
-		"babel-jest": "^23.6.0",
+		"babel-jest": "^24.1.0",
 		"cross-env": "^5.2.0",
-		"enzyme": "^3.7.0",
-		"enzyme-adapter-react-16": "^1.7.0",
+		"enzyme": "^3.8.0",
+		"enzyme-adapter-react-16": "^1.9.1",
 		"jest": "^23.6.0",
-		"rimraf": "^2.6.2",
+		"rimraf": "^2.6.3",
 		"ts-jest": "^23.10.5",
-		"typescript": "^3.1.6"
+		"typescript": "^3.3.3"
 	},
 	"peerDependencies": {
 		"react": "^16.0.0",
