@@ -12,11 +12,13 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 	public render() {
 		const { value, options, selectProps, onChange, onFocus, onBlur } = this.props;
 
-		const Select = selectProps && selectProps.isCreatable ? SelectCreatable : SelectReadOnly;
+		const Select: React.ComponentClass<any> =
+			selectProps && selectProps.isCreatable ? SelectCreatable : SelectReadOnly;
 
 		return (
 			<Select
 				isValidNewOption={this.isValidNewOption}
+				captureMenuScroll={false}
 				createOptionPosition="first"
 				{...selectProps}
 				value={value}
