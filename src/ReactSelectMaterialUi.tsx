@@ -59,6 +59,7 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 
 		const isClearable: boolean = !!SelectProps && SelectProps.isClearable && this.isClearable();
 		const isDisabled: boolean = disabled || (!!SelectProps && SelectProps.isDisabled);
+		const selectPlaceholder: string | undefined = label ? '' : placeholder;
 
 		return (
 			<FormControl
@@ -78,6 +79,7 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 				/>
 				<SelectDropdown
 					value={selectedOption}
+					placeholder={selectPlaceholder}
 					options={this.getOptions(options)}
 					selectProps={{
 						...SelectProps,

@@ -10,7 +10,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 	private static SENSITIVITY = { sensitivity: 'base' };
 
 	public render() {
-		const { value, options, selectProps, onChange, onFocus, onBlur } = this.props;
+		const { value, placeholder, options, selectProps, onChange, onFocus, onBlur } = this.props;
 
 		const Select: React.ComponentClass<any> =
 			selectProps && selectProps.isCreatable ? SelectCreatable : SelectReadOnly;
@@ -22,8 +22,8 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 				createOptionPosition="first"
 				{...selectProps}
 				value={value}
+				placeholder={placeholder}
 				options={options}
-				placeholder=""
 				styles={getStyles(this.props)}
 				noOptionsMessage={this.noOptionsMessage}
 				onChange={onChange}
@@ -87,6 +87,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 
 export interface SelectDropdownProps {
 	value?: SelectOption | SelectOption[] | null;
+	placeholder?: string;
 	options?: SelectOption[];
 	selectProps?: SelectProps;
 	onChange?: (value: SelectOption | SelectOption[] | null) => void;

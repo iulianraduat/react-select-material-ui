@@ -27,6 +27,10 @@ The component accepts the props defined bellow in the table plus all props defin
 | msgNoOptionsMatchFilter | string  | no       | No options match the filter                 | The message displayed when no options match case-insensitive the input value                       |
 | msgNoValidValue         | string  | no       | The new value is not valid (contains space) | The message displayed when the input value is not accepted by a Creatable for creating a new value |
 
+### Props ignored in ReactSelectMaterialUiProps
+
+- placeholder (if there is set props 'label' as they can overlap)
+
 ### Props ignored in SelectProps if defined
 
 - noOptionsMessage
@@ -189,7 +193,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <SingleSelect value="America" options={options} onChange={this.handleChange} />
+        <SingleSelect value="America" placeholder="Select a continent" options={options} onChange={this.handleChange} />
       </div>
     );
   }
@@ -346,3 +350,7 @@ export default App;
 ### 1.2.0
 
 - Updated packages
+
+### 1.2.1
+
+- Implemented support for placeholder when there is no label set
