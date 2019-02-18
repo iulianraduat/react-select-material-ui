@@ -354,3 +354,7 @@ export default App;
 ### 1.2.1
 
 - Implemented support for placeholder when there is no label set
+
+### 1.2.2
+
+- Added subcomponents for: TagSelect and ColorSelect (the single select versions of TagsSelect and ColorsSelect)
