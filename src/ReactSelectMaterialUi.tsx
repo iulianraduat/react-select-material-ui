@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { isArray, isEmpty, isFunction, isNil, isString, map, size } from 'lodash';
+import { isArray, isEmpty, isFunction, isNil, isString, isNumber, isBoolean, isSymbol, isObject, isEqual, map, size } from 'lodash';
 import { BaseTextFieldProps } from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl/FormControl';
 
@@ -95,6 +95,15 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 		);
 	}
 
+	public componentWillReceiveProps(props: ReactSelectMaterialUiProps) {
+		const {value} = props;
+		if (!isEqual(value, this.props.value)) {
+			this.setState({
+				selectedOption: isNil(value) ? null : this.getOneOrMoreSelectOptions(value)
+			})
+        }
+	}
+
 	private getOneOrMoreSelectOptions(value: string | string[]) {
 		if (isArray(value)) {
 			return this.getOptions(value);
@@ -126,7 +135,12 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 	}
 
 	private hasValue(): boolean {
-		return isEmpty(this.state.selectedOption) === false;
+		if (isObject(this.state.selectedOption)) {
+            const {value} = this.state.selectedOption as SelectOption;
+            return isNumber(value) || isBoolean(value) || isSymbol(value) || !isEmpty(value);
+		} else {
+			return isEmpty(this.state.selectedOption) === false;
+		}
 	}
 
 	private getOptions(options: (string | SelectOption)[]): SelectOption[] {
