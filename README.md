@@ -78,6 +78,7 @@ Backspace will not remove values.
 |                        1.0.x |    2.1.0     |    3.2.0    | 16.5.2 |
 |                        1.1.x |    2.1.2     |    3.6.0    | 16.6.3 |
 |                        1.2.x |    2.3.0     |    3.9.2    | 16.8.1 |
+|                        1.3.x |    2.4.2     |    3.9.3    | 16.8.6 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -358,3 +359,7 @@ export default App;
 ### 1.2.2
 
 - Added subcomponents for: TagSelect and ColorSelect (the single select versions of TagsSelect and ColorsSelect)
+
+### 1.3.0
+
+- Updated packages
