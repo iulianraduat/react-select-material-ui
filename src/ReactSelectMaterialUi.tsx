@@ -17,17 +17,17 @@ import {
 	size
 	} from 'lodash';
 
-
-class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, ReactSelectMaterialUiState> {
+class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiProps, ReactSelectMaterialUiState> {
 	constructor(props: ReactSelectMaterialUiProps) {
 		super(props);
 
-		const value: string | string[] = (props.values as string[]) || (props.value as string);
+		const defaultValue: string | string[] | undefined =
+			(props.defaultValues as string[]) || (props.defaultValue as string);
 
 		this.state = {
 			filter: '',
 			hasInputFocus: false,
-			selectedOption: isNil(value) ? undefined : this.getOneOrMoreSelectOptions(value)
+			selectedOption: isEmpty(defaultValue) ? undefined : this.getOneOrMoreSelectOptions(defaultValue)
 		};
 	}
 
@@ -38,6 +38,7 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 			children,
 			className,
 			defaultValue,
+			defaultValues,
 			disabled,
 			error,
 			FormHelperTextProps,
@@ -60,18 +61,24 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 			SelectProps,
 			type,
 			value,
+			values,
 			options,
 			variant,
 			...other
 		} = this.props;
 
 		const helperTextId = id && helperText ? `${id}-helper-text` : undefined;
-		const shrink: boolean = this.hasInputFocus() || this.hasFilter() || this.hasValue();
 		const { hasInputFocus, selectedOption } = this.state;
 
 		const isClearable: boolean = !!SelectProps && SelectProps.isClearable && this.isClearable();
 		const isDisabled: boolean = disabled || (!!SelectProps && SelectProps.isDisabled);
 		const selectPlaceholder: string | undefined = label ? '' : placeholder;
+
+		const dropdownValue: string | string[] | undefined = (values as string[]) || (value as string);
+		const dropdownSelectedOption = isNil(dropdownValue)
+			? selectedOption
+			: this.getOneOrMoreSelectOptions(dropdownValue);
+		const shrink: boolean = isEmpty(dropdownSelectedOption) === false || this.hasInputFocus() || this.hasFilter();
 
 		return (
 			<FormControl
@@ -90,7 +97,7 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 					inputLabelProps={InputLabelProps}
 				/>
 				<SelectDropdown
-					value={selectedOption}
+					value={dropdownSelectedOption}
 					placeholder={selectPlaceholder}
 					options={this.getOptions(options)}
 					selectProps={{
@@ -159,10 +166,6 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 		return isEmpty(this.state.filter) === false;
 	}
 
-	private hasValue(): boolean {
-		return isEmpty(this.state.selectedOption) === false;
-	}
-
 	private getOptions(options: (string | SelectOption)[]): SelectOption[] {
 		return map(options, this.getSelectOption);
 	}
@@ -178,16 +181,18 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 		return option;
 	}
 
-	private handleChangeSelect = (value: SelectOption | SelectOption[] | null) => {
-		this.setState({
-			filter: '',
-			selectedOption: value
-		});
+	private handleChangeSelect = (newValue: SelectOption | SelectOption[] | null) => {
+		const { onChange, value, values } = this.props;
 
-		const { onChange } = this.props;
+		if (isEmpty(value) && isEmpty(values)) {
+			this.setState({
+				filter: '',
+				selectedOption: newValue
+			});
+		}
 
 		if (isFunction(onChange)) {
-			onChange(this.getValues(value));
+			onChange(this.getValues(newValue));
 		}
 	};
 
@@ -239,11 +244,13 @@ interface ReactSelectMaterialUiState {
 }
 
 export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, BaseTextFieldProps {
-	value?: string;
-	values?: string[];
+	defaltValue?: string;
+	defaultValues?: string[];
 	options: (string | SelectOption)[];
 	onChange: (value: string | string[] | React.ChangeEvent<any>) => void;
 	SelectProps?: SelectProps | any;
+	value?: string;
+	values?: string[];
 }
 
 export default ReactSelectMaterialUi;

@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { isArray, isEmpty, isNil, some } from 'lodash';
-import SelectReadOnly from 'react-select';
-import { Props as ReactSelectProps } from 'react-select/lib/Select';
 import SelectCreatable, { CreatableProps } from 'react-select/lib/Creatable';
+import SelectReadOnly from 'react-select';
 import { getStyles } from './SelectDropdownStyles';
+import {
+	isArray,
+	isEmpty,
+	isNil,
+	some
+	} from 'lodash';
+import { Props as ReactSelectProps } from 'react-select/lib/Select';
 
 class SelectDropdown extends React.Component<SelectDropdownProps> {
 	private static spaces: RegExp = /\s/;
@@ -104,7 +109,7 @@ export interface SelectProps extends ReactSelectProps<SelectOption>, CreatablePr
 
 export interface SelectOption {
 	label: string;
-	value: any;
+	value: string;
 }
 
 export default SelectDropdown;

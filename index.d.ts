@@ -1,12 +1,10 @@
-import { BaseTextFieldProps } from '@material-ui/core/TextField';
-
 import * as React from 'react';
-
+import { BaseTextFieldProps } from '@material-ui/core/TextField';
 import { Props as ReactSelectProps } from 'react-select/lib/Select';
 
 export interface SelectOption {
 	label: string;
-	value: any;
+	value: string;
 }
 
 export interface SelectProps extends ReactSelectProps<SelectOption> {
@@ -17,11 +15,13 @@ export interface SelectProps extends ReactSelectProps<SelectOption> {
 }
 
 export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, BaseTextFieldProps {
-	value?: string;
-	values?: string[];
+	defaltValue?: string;
+	defaultValues?: string[];
 	options: (string | SelectOption)[];
 	onChange: (value: string | string[] | React.ChangeEvent<any>) => void;
 	SelectProps?: SelectProps | any;
+	value?: string;
+	values?: string[];
 }
 
 declare class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps> {}

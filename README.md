@@ -10,18 +10,20 @@ The component accepts the props defined bellow in the table plus all props defin
 
 ### Props accepted by ReactSelectMaterialUi
 
-| Name        | Type                                | Required | Default   | Description                                            |
-| ----------- | ----------------------------------- | -------- | --------- | ------------------------------------------------------ |
-| onChange    | (value: string \| string[]) => void | yes      | -         | The callback function called when the value is changed |
-| options     | string[] \| SelectOption[]          | yes      | -         | The selectable options                                 |
-| SelectProps | SelectProps                         | no       | undefined | The props for react-select component                   |
-| value       | string                              | no       | undefined | The value for a single select                          |
-| values      | string[]                            | no       | undefined | The value for a multiple select                        |
+| Name          | Type                                | Required | Default   | Description                                            |
+|---------------|-------------------------------------|----------|-----------|--------------------------------------------------------|
+| defaultValue  | string                              | no       | undefined | The default value for a single select                  |
+| defaultValues | string[]                            | no       | undefined | The default value for a multiple select                |
+| onChange      | (value: string \| string[]) => void | yes      | -         | The callback function called when the value is changed |
+| options       | string[] \| SelectOption[]          | yes      | -         | The selectable options                                 |
+| SelectProps   | SelectProps                         | no       | undefined | The props for react-select component                   |
+| value         | string                              | no       | undefined | The value for a single select                          |
+| values        | string[]                            | no       | undefined | The value for a multiple select                        |
 
 ### Fields defined by SelectProps
 
 | Name                    | Type    | Required | Default                                     | Description                                                                                        |
-| ----------------------- | ------- | -------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+|-------------------------|---------|----------|---------------------------------------------|----------------------------------------------------------------------------------------------------|
 | isCreatable             | boolean | no       | false                                       | Set to true to allow creation of new values based on the input string                              |
 | msgNoOptionsAvailable   | string  | no       | No more options are available               | The message displayed when all options are already selected                                        |
 | msgNoOptionsMatchFilter | string  | no       | No options match the filter                 | The message displayed when no options match case-insensitive the input value                       |
@@ -29,7 +31,8 @@ The component accepts the props defined bellow in the table plus all props defin
 
 ### Props ignored in ReactSelectMaterialUiProps
 
-- placeholder (if there is set props 'label' as they can overlap)
+- placeholder (if there is set prop 'label', as they can overlap)
+- variant (as it is implemented only 'standard')
 
 ### Props ignored in SelectProps if defined
 
@@ -39,7 +42,7 @@ The component accepts the props defined bellow in the table plus all props defin
 ### Fields defined by SelectOption
 
 | Name  | Type   | Required | Description                                                  |
-| ----- | ------ | -------- | ------------------------------------------------------------ |
+|-------|--------|----------|--------------------------------------------------------------|
 | label | string | yes      | The text displayed as option or value                        |
 | value | any    | yes      | The value associated to this option and returned by onChange |
 
@@ -74,11 +77,13 @@ Backspace will not remove values.
 ## Versions
 
 | ReactSelectMaterialUi _uses_ | React-select | Material-ui | React  |
+|------------------------------|--------------|-------------|--------|
 | ---------------------------: | :----------: | :---------: | :----: |
-|                        1.0.x |    2.1.0     |    3.2.0    | 16.5.2 |
-|                        1.1.x |    2.1.2     |    3.6.0    | 16.6.3 |
-|                        1.2.x |    2.3.0     |    3.9.2    | 16.8.1 |
-|                        1.3.x |    2.4.2     |    3.9.3    | 16.8.6 |
+| 1.0.x                        | 2.1.0        | 3.2.0       | 16.5.2 |
+| 1.1.x                        | 2.1.2        | 3.6.0       | 16.6.3 |
+| 1.2.x                        | 2.3.0        | 3.9.2       | 16.8.1 |
+| 1.3.x                        | 2.4.2        | 3.9.3       | 16.8.6 |
+| 2.0.x                        | 2.4.2        | 3.9.3       | 16.8.6 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -363,3 +368,15 @@ export default App;
 ### 1.3.0
 
 - Updated packages
+
+### 2.0.0
+
+- Fixed the display of values when using SelectOption instead of string
+
+Breaking changes:
+- SelectOption accepts only strings for value
+
+| props                      | in 1.x is ... for react-select | in 2.x is ... for react-select |
+|----------------------------|--------------------------------|--------------------------------|
+| defaultValue/defaultValues | _ignored_                      | defaultValue                   |
+| value/values               | defaultValue                   | value                          |
