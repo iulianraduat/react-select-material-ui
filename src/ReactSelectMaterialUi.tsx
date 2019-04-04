@@ -1,11 +1,22 @@
 import * as React from 'react';
-import { isArray, isEmpty, isFunction, isNil, isString, map, size } from 'lodash';
-import { BaseTextFieldProps } from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl/FormControl';
-
-import SelectLabel from './SelectLabel';
 import SelectDropdown, { SelectOption, SelectProps } from './SelectDropdown';
 import SelectHelperText from './SelectHelperText';
+import SelectLabel from './SelectLabel';
+import { BaseTextFieldProps } from '@material-ui/core/TextField';
+import {
+	find,
+	isArray,
+	isEmpty,
+	isFunction,
+	isNil,
+	isObject,
+	isString,
+	map,
+	reject,
+	size
+	} from 'lodash';
+
 
 class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, ReactSelectMaterialUiState> {
 	constructor(props: ReactSelectMaterialUiProps) {
@@ -95,13 +106,35 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 		);
 	}
 
-	private getOneOrMoreSelectOptions(value: string | string[]) {
+	private getOneOrMoreSelectOptions(value: string | string[]): SelectOption | SelectOption[] | undefined {
 		if (isArray(value)) {
-			return this.getOptions(value);
+			return reject(map(value, this.getOptionForValue), isNil);
 		}
 
-		return this.getSelectOption(value);
+		return this.getOptionForValue(value);
 	}
+
+	private getOptionForValue = (value: string | any): SelectOption | undefined => {
+		const option: string | SelectOption | undefined = find(this.props.options, this.matchOptionValue(value));
+
+		if (isNil(option)) {
+			return;
+		}
+
+		return this.getSelectOption(option);
+	};
+
+	private matchOptionValue = (value: string | any) => (option: string | SelectOption): boolean => {
+		if (isString(option)) {
+			return value === option;
+		}
+
+		if (isObject(option)) {
+			return value === option.value;
+		}
+
+		return false;
+	};
 
 	private isClearable() {
 		const { selectedOption } = this.state;
