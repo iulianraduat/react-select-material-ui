@@ -61,6 +61,7 @@ class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps, 
 			type,
 			value,
 			options,
+			variant,
 			...other
 		} = this.props;
 
