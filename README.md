@@ -379,3 +379,7 @@ Breaking changes:
 |----------------------------|--------------------------------|--------------------------------|
 | defaultValue/defaultValues | _ignored_                      | defaultValue                   |
 | value/values               | defaultValue                   | value                          |
+
+### 2.0.1
+
+- Enabled SelectOption.value to be of type any instead of string

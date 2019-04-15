@@ -6,13 +6,14 @@ import {
 	isArray,
 	isEmpty,
 	isNil,
-	some
+	some,
+	toString
 	} from 'lodash';
 import { Props as ReactSelectProps } from 'react-select/lib/Select';
 
 class SelectDropdown extends React.Component<SelectDropdownProps> {
 	private static spaces: RegExp = /\s/;
-	private static SENSITIVITY = { sensitivity: 'base' };
+	private static SENSITIVITY: Intl.CollatorOptions = { sensitivity: 'base' };
 
 	public render() {
 		const { value, placeholder, options, selectProps, onChange, onFocus, onBlur } = this.props;
@@ -85,8 +86,8 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 		return some(value, (option: SelectOption) => this.equalsIgnoringCase(inputValue, option.value));
 	}
 
-	private equalsIgnoringCase(a: string, b: string) {
-		return a.localeCompare(b, undefined, SelectDropdown.SENSITIVITY) === 0;
+	private equalsIgnoringCase(a: string, b: SelectOptionValue) {
+		return a.localeCompare(toString(b), undefined, SelectDropdown.SENSITIVITY) === 0;
 	}
 }
 
@@ -109,7 +110,9 @@ export interface SelectProps extends ReactSelectProps<SelectOption>, CreatablePr
 
 export interface SelectOption {
 	label: string;
-	value: string;
+	value: SelectOptionValue;
 }
+
+export type SelectOptionValue = any;
 
 export default SelectDropdown;

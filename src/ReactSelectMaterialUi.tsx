@@ -1,6 +1,6 @@
 import * as React from 'react';
 import FormControl from '@material-ui/core/FormControl/FormControl';
-import SelectDropdown, { SelectOption, SelectProps } from './SelectDropdown';
+import SelectDropdown, { SelectOption, SelectOptionValue, SelectProps } from './SelectDropdown';
 import SelectHelperText from './SelectHelperText';
 import SelectLabel from './SelectLabel';
 import { BaseTextFieldProps } from '@material-ui/core/TextField';
@@ -8,6 +8,7 @@ import {
 	find,
 	isArray,
 	isEmpty,
+	isEqual,
 	isFunction,
 	isNil,
 	isObject,
@@ -122,7 +123,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		return this.getOptionForValue(value);
 	}
 
-	private getOptionForValue = (value: string | any): SelectOption | undefined => {
+	private getOptionForValue = (value: string | SelectOptionValue): SelectOption | undefined => {
 		const option: string | SelectOption | undefined = find(this.props.options, this.matchOptionValue(value));
 
 		if (isNil(option)) {
@@ -132,16 +133,12 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		return this.getSelectOption(option);
 	};
 
-	private matchOptionValue = (value: string | any) => (option: string | SelectOption): boolean => {
+	private matchOptionValue = (value: string | SelectOptionValue) => (option: string | SelectOption): boolean => {
 		if (isString(option)) {
 			return value === option;
 		}
 
-		if (isObject(option)) {
-			return value === option.value;
-		}
-
-		return false;
+		return isEqual(value, option.value);
 	};
 
 	private isClearable() {
@@ -196,7 +193,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		}
 	};
 
-	private getValues(value: SelectOption | SelectOption[] | null): string | string[] | null {
+	private getValues(value: SelectOption | SelectOption[] | null): SelectOptionValue | SelectOptionValue[] | null {
 		if (isNil(value)) {
 			return null;
 		}
@@ -208,7 +205,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		return this.getValue(value);
 	}
 
-	private getValue(option: SelectOption): string {
+	private getValue(option: SelectOption): SelectOptionValue {
 		return option.value;
 	}
 
@@ -244,13 +241,13 @@ interface ReactSelectMaterialUiState {
 }
 
 export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, BaseTextFieldProps {
-	defaltValue?: string;
-	defaultValues?: string[];
+	defaltValue?: SelectOptionValue;
+	defaultValues?: SelectOptionValue[];
 	options: (string | SelectOption)[];
-	onChange: (value: string | string[] | React.ChangeEvent<any>) => void;
+	onChange: ((value: SelectOptionValue | SelectOptionValue[]) => void) | ((value: React.ChangeEvent<any>) => never);
 	SelectProps?: SelectProps | any;
-	value?: string;
-	values?: string[];
+	value?: SelectOptionValue;
+	values?: SelectOptionValue[];
 }
 
 export default ReactSelectMaterialUi;

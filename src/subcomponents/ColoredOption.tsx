@@ -1,8 +1,7 @@
-import * as React from "react";
-import MenuItem from "@material-ui/core/MenuItem/MenuItem";
-import { OptionProps } from "react-select/lib/components/Option";
-import { SelectOption } from "../SelectDropdown";
-import ColoredDot from "./ColoredDot";
+import * as React from 'react';
+import ColoredDot from './ColoredDot';
+import MenuItem from '@material-ui/core/MenuItem/MenuItem';
+import { OptionProps } from 'react-select/lib/components/Option';
 
 const getStyle = (props: OptionProps<any>) => ({
   fontWeight: props.isSelected ? 500 : 400,
@@ -23,7 +22,12 @@ const ColoredOption = (props: ColoredOptionProps) => (
 );
 
 interface ColoredOptionProps extends OptionProps<any> {
-  data: SelectOption;
+  data: ColoredSelectOption;
+}
+
+interface ColoredSelectOption {
+	label: string;
+	value: string;
 }
 
 export default ColoredOption;
