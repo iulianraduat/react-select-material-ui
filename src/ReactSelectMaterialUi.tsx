@@ -11,7 +11,6 @@ import {
 	isEqual,
 	isFunction,
 	isNil,
-	isObject,
 	isString,
 	map,
 	reject,
@@ -76,9 +75,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		const selectPlaceholder: string | undefined = label ? '' : placeholder;
 
 		const dropdownValue: string | string[] | undefined = (values as string[]) || (value as string);
-		const dropdownSelectedOption = isNil(dropdownValue)
-			? selectedOption
-			: this.getOneOrMoreSelectOptions(dropdownValue);
+		const dropdownSelectedOption: SelectOption | SelectOption[] | null = this.getDropdownSelectedOption(dropdownValue);
 		const shrink: boolean = isEmpty(dropdownSelectedOption) === false || this.hasInputFocus() || this.hasFilter();
 
 		return (
@@ -115,7 +112,17 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		);
 	}
 
-	private getOneOrMoreSelectOptions(value: string | string[]): SelectOption | SelectOption[] | undefined {
+	private getDropdownSelectedOption(dropdownValue?: string | string[]): SelectOption | SelectOption[] | null {
+		const oneOrMoreSelectOptions: SelectOption | SelectOption[] | undefined = this.getOneOrMoreSelectOptions(dropdownValue);
+
+		if(isNil(oneOrMoreSelectOptions)){
+			return null;
+		}		
+
+		return oneOrMoreSelectOptions;
+	}
+
+	private getOneOrMoreSelectOptions(value: string | string[] | undefined): SelectOption | SelectOption[] | undefined {
 		if (isArray(value)) {
 			return reject(map(value, this.getOptionForValue), isNil);
 		}
@@ -123,7 +130,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		return this.getOptionForValue(value);
 	}
 
-	private getOptionForValue = (value: string | SelectOptionValue): SelectOption | undefined => {
+	private getOptionForValue = (value: string | SelectOptionValue | undefined): SelectOption | undefined => {
 		const option: string | SelectOption | undefined = find(this.props.options, this.matchOptionValue(value));
 
 		if (isNil(option)) {
