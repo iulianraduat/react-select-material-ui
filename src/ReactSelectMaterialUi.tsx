@@ -74,9 +74,9 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		const isDisabled: boolean = disabled || (!!SelectProps && SelectProps.isDisabled);
 		const selectPlaceholder: string | undefined = label ? '' : placeholder;
 
-		const dropdownValue: string | string[] | undefined = (values as string[]) || (value as string);
-		const dropdownSelectedOption: SelectOption | SelectOption[] | null = this.getDropdownSelectedOption(dropdownValue);
-		const shrink: boolean = isEmpty(dropdownSelectedOption) === false || this.hasInputFocus() || this.hasFilter();
+		const dropdownValue: string | string[] | null | undefined = (values as string[]) || (value as string);
+		const dropdownSelectedOption: SelectOption | SelectOption[] | null | undefined = this.getDropdownSelectedOption(dropdownValue);
+		const shrink: boolean = this.isShrinked(dropdownSelectedOption, selectedOption);
 
 		return (
 			<FormControl
@@ -112,7 +112,11 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		);
 	}
 
-	private getDropdownSelectedOption(dropdownValue?: string | string[]): SelectOption | SelectOption[] | null {
+	private getDropdownSelectedOption(dropdownValue?: string | string[] | null): SelectOption | SelectOption[] | null | undefined {
+		if(isNil(dropdownValue)){
+			return dropdownValue;
+		}
+		
 		const oneOrMoreSelectOptions: SelectOption | SelectOption[] | undefined = this.getOneOrMoreSelectOptions(dropdownValue);
 
 		if(isNil(oneOrMoreSelectOptions)){
@@ -147,6 +151,18 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 
 		return isEqual(value, option.value);
 	};
+
+	private isShrinked(dropdownSelectedOption?: SelectOption | SelectOption[] | null, selectedOption?: SelectOption | SelectOption[] | null): boolean {
+		if(this.hasInputFocus() || this.hasFilter()){
+			return true;
+		}
+		
+		if(isEmpty(dropdownSelectedOption) === false){
+			return true;
+		}
+		
+		return dropdownSelectedOption === undefined && isEmpty(selectedOption) === false;
+	}
 
 	private isClearable() {
 		const { selectedOption } = this.state;
