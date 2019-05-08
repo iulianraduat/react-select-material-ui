@@ -14,8 +14,8 @@ The component accepts the props defined bellow in the table plus all props defin
 |---------------|------------------------------------|----------|-----------|--------------------------------------------------------|
 | defaultValue  | string                             | no       | undefined | The default value for a single select                  |
 | defaultValues | string[]                           | no       | undefined | The default value for a multiple select                |
-| onChange      | (value: string | string[]) => void | yes      | -         | The callback function called when the value is changed |
-| options       | string[] | SelectOption[]          | yes      | -         | The selectable options                                 |
+| onChange      | (value: string \| string[]) => void | yes      | -         | The callback function called when the value is changed |
+| options       | string[] \| SelectOption[]          | yes      | -         | The selectable options                                 |
 | SelectProps   | SelectProps                        | no       | undefined | The props for react-select component                   |
 | value         | string                             | no       | undefined | The value for a single select                          |
 | values        | string[]                           | no       | undefined | The value for a multiple select                        |
