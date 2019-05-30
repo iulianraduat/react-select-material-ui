@@ -395,6 +395,6 @@ Breaking changes:
 
 - Fixed bug introduced with 2.1.0 related to: a selected value is not displayed when using the uncontrolled mode
 
-### 2.2.0
+### 3.0.0
 
 - Added the possibility to style the label using InputLabelProps.className (position and color will be overridden) or InputLabelProps.style
