@@ -5,17 +5,17 @@ import SelectHelperText from './SelectHelperText';
 import SelectLabel from './SelectLabel';
 import { BaseTextFieldProps } from '@material-ui/core/TextField';
 import {
-	find,
-	isArray,
-	isEmpty,
-	isEqual,
-	isFunction,
-	isNil,
-	isString,
-	map,
-	reject,
-	size
-	} from 'lodash';
+    find,
+    isArray,
+    isEmpty,
+    isEqual,
+    isFunction,
+    isNil,
+    isString,
+    map,
+    reject,
+    size
+    } from 'lodash';
 
 class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiProps, ReactSelectMaterialUiState> {
 	constructor(props: ReactSelectMaterialUiProps) {
@@ -268,6 +268,7 @@ export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMater
 	defaultValues?: SelectOptionValue[];
 	options: (string | SelectOption)[];
 	onChange: ((value: SelectOptionValue | SelectOptionValue[]) => void) | ((value: React.ChangeEvent<any>) => never);
+	ref: any;
 	SelectProps?: SelectProps | any;
 	value?: SelectOptionValue;
 	values?: SelectOptionValue[];

@@ -10,15 +10,15 @@ The component accepts the props defined bellow in the table plus all props defin
 
 ### Props accepted by ReactSelectMaterialUi
 
-| Name          | Type                               | Required | Default   | Description                                            |
-|---------------|------------------------------------|----------|-----------|--------------------------------------------------------|
-| defaultValue  | string                             | no       | undefined | The default value for a single select                  |
-| defaultValues | string[]                           | no       | undefined | The default value for a multiple select                |
-| onChange      | (value: string \| string[]) => void | yes      | -         | The callback function called when the value is changed |
-| options       | string[] \| SelectOption[]          | yes      | -         | The selectable options                                 |
-| SelectProps   | SelectProps                        | no       | undefined | The props for react-select component                   |
-| value         | string                             | no       | undefined | The value for a single select                          |
-| values        | string[]                           | no       | undefined | The value for a multiple select                        |
+| Name          | Type             | Required          | Default   | Description                                              |
+|---------------|------------------|-------------------|-----------|----------------------------------------------------------|
+| defaultValue  | string           | no                | undefined | The default value for a single select                    |
+| defaultValues | string[]         | no                | undefined | The default value for a multiple select                  |
+| onChange      | (value: string \| string[]) => void | yes       | -|The callback function called when the value is changed |
+| options       | string[] \| SelectOption[]          | yes       | -|The selectable options                                 |
+| SelectProps   | SelectProps      | no                | undefined | The props for react-select component                     |
+| value         | string           | no                | undefined | The value for a single select                            |
+| values        | string[]         | no                | undefined | The value for a multiple select                          |
 
 ### Fields defined by SelectProps
 
@@ -84,6 +84,7 @@ Backspace will not remove values.
 |                        1.3.x |    2.4.2     |    3.9.3    | 16.8.6 |
 |                        2.0.x |    2.4.2     |    3.9.3    | 16.8.6 |
 |                        2.1.x |    2.4.3     |    3.9.3    | 16.8.6 |
+|                        3.0.x |    3.0.3     |    4.0.1    | 16.8.6 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -390,6 +391,10 @@ Breaking changes:
 - Fixed bug related to: setting value to undefined displays the label over the previously selected value
 - If options are provided as SelectOption and there is one option having the value set to undefined, we will display its label if value is set to undefined
 
-### 2.1.0
+### 2.1.1
 
 - Fixed bug introduced with 2.1.0 related to: a selected value is not displayed when using the uncontrolled mode
+
+### 2.2.0
+
+- Added the possibility to style the label using InputLabelProps.className (position and color will be overridden) or InputLabelProps.style

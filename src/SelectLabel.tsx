@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {isEmpty} from 'lodash';
-import InputLabel, {InputLabelProps} from '@material-ui/core/InputLabel/InputLabel';
-import {colorNoFocus, colorFocus} from './ColorConstants';
+import InputLabel, { InputLabelProps } from '@material-ui/core/InputLabel/InputLabel';
+import { colorFocus, colorNoFocus } from './ColorConstants';
+import { isEmpty } from 'lodash';
 
 const SelectLabel = (props: SelectLabelProps) => {
     const { id, label, hasInputFocus, shrink, inputLabelProps } = props;
@@ -15,12 +15,16 @@ const SelectLabel = (props: SelectLabelProps) => {
         color: hasInputFocus ? colorFocus : colorNoFocus
     }
 
+    const userStyle: React.CSSProperties | undefined = inputLabelProps ? inputLabelProps.style : undefined;
+
     return (
-        <InputLabel htmlFor={id} {...inputLabelProps} style={style} shrink={shrink}>
+        <InputLabel htmlFor={id} {...inputLabelProps} style={getStyle(style, userStyle)} shrink={shrink}>
             {label}
         </InputLabel>
     );
 }
+
+const getStyle = (style: React.CSSProperties, userStyle?: React.CSSProperties): React.CSSProperties => userStyle ? {...style, ...userStyle} : style;
 
 interface SelectLabelProps {
     id?: string;
