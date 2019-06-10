@@ -4,6 +4,10 @@ A react SELECT component based on [react-select](https://github.com/JedWatson/re
 
 ---
 
+## Demo
+
+You can access the storybook for this component [here](https://iulian-radu-at.github.io/react-select-material-ui/).
+
 ## Props
 
 The component accepts the props defined bellow in the table plus all props defined for [BaseTextFieldProps](https://material-ui.com/api/text-field/#props) except InputProps, inputProps and variant (as there is no input).
@@ -15,7 +19,7 @@ The component accepts the props defined bellow in the table plus all props defin
 | defaultValue  | string           | no                | undefined | The default value for a single select                    |
 | defaultValues | string[]         | no                | undefined | The default value for a multiple select                  |
 | onChange      | (value: string \| string[]) => void | yes       | -|The callback function called when the value is changed |
-| options       | string[] \| SelectOption[]          | yes       | -|The selectable options                                 |
+| options       | string[] \| SelectOption[]    | yes       | -|The selectable options                                 |
 | SelectProps   | SelectProps      | no                | undefined | The props for react-select component                     |
 | value         | string           | no                | undefined | The value for a single select                            |
 | values        | string[]         | no                | undefined | The value for a multiple select                          |
@@ -85,6 +89,7 @@ Backspace will not remove values.
 |                        2.0.x |    2.4.2     |    3.9.3    | 16.8.6 |
 |                        2.1.x |    2.4.3     |    3.9.3    | 16.8.6 |
 |                        3.0.x |    3.0.3     |    4.0.1    | 16.8.6 |
+|                        4.0.x |    2.4.4     |    4.0.2    | 16.8.6 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -109,7 +114,7 @@ import MaterialUiCreatable, { MaterialUiCreatableProps } from "./MaterialUiCreat
 const SingleSelect = (props: MaterialUiCreatableProps) => (
   <MaterialUiCreatable
     {...props}
-    SelectProps={{
+    SelectProps={{Without helper text
       ...props.SelectProps,
       isMulti: false
     }}
@@ -398,3 +403,10 @@ Breaking changes:
 ### 3.0.0
 
 - Added the possibility to style the label using InputLabelProps.className (position and color will be overridden) or InputLabelProps.style
+
+### 4.0.0
+
+- Reverted package react-select from v3 to v2 because of the mismatch between its types and structure of distributed package
+- Fixed using defaultValue(s) and value(s)
+- Added a storybook for this component
+

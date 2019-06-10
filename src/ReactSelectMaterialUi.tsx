@@ -5,29 +5,29 @@ import SelectHelperText from './SelectHelperText';
 import SelectLabel from './SelectLabel';
 import { BaseTextFieldProps } from '@material-ui/core/TextField';
 import {
-    find,
-    isArray,
-    isEmpty,
-    isEqual,
-    isFunction,
-    isNil,
-    isString,
-    map,
-    reject,
-    size
-    } from 'lodash';
+	find,
+	isArray,
+	isEmpty,
+	isEqual,
+	isFunction,
+	isNil,
+	isString,
+	map,
+	reject,
+	size
+	} from 'lodash';
 
 class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiProps, ReactSelectMaterialUiState> {
 	constructor(props: ReactSelectMaterialUiProps) {
 		super(props);
 
-		const defaultValue: string | string[] | undefined =
+		const value: string | string[] | undefined = (props.values as string[]) || (props.value as string) ||
 			(props.defaultValues as string[]) || (props.defaultValue as string);
 
 		this.state = {
 			filter: '',
 			hasInputFocus: false,
-			selectedOption: isEmpty(defaultValue) ? undefined : this.getOneOrMoreSelectOptions(defaultValue)
+			selectedOption: isEmpty(value) ? undefined : this.getOneOrMoreSelectOptions(value)
 		};
 	}
 
@@ -70,13 +70,10 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		const helperTextId = id && helperText ? `${id}-helper-text` : undefined;
 		const { hasInputFocus, selectedOption } = this.state;
 
-		const isClearable: boolean = !!SelectProps && SelectProps.isClearable && this.isClearable();
+		const isClearable: boolean = !!SelectProps && SelectProps.isClearable === true && this.isClearable();
 		const isDisabled: boolean = disabled || (!!SelectProps && SelectProps.isDisabled);
 		const selectPlaceholder: string | undefined = label ? '' : placeholder;
-
-		const dropdownValue: string | string[] | null | undefined = (values as string[]) || (value as string);
-		const dropdownSelectedOption: SelectOption | SelectOption[] | null | undefined = this.getDropdownSelectedOption(dropdownValue);
-		const shrink: boolean = this.isShrinked(dropdownSelectedOption, selectedOption);
+		const shrink: boolean = this.isShrinked(selectedOption);
 
 		return (
 			<FormControl
@@ -95,7 +92,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 					inputLabelProps={InputLabelProps}
 				/>
 				<SelectDropdown
-					value={dropdownSelectedOption}
+					value={selectedOption}
 					placeholder={selectPlaceholder}
 					options={this.getOptions(options)}
 					selectProps={{
@@ -110,20 +107,6 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 				<SelectHelperText id={helperTextId} helperText={helperText} formHelperTextProps={FormHelperTextProps} />
 			</FormControl>
 		);
-	}
-
-	private getDropdownSelectedOption(dropdownValue?: string | string[] | null): SelectOption | SelectOption[] | null | undefined {
-		if(isNil(dropdownValue)){
-			return dropdownValue;
-		}
-		
-		const oneOrMoreSelectOptions: SelectOption | SelectOption[] | undefined = this.getOneOrMoreSelectOptions(dropdownValue);
-
-		if(isNil(oneOrMoreSelectOptions)){
-			return null;
-		}		
-
-		return oneOrMoreSelectOptions;
 	}
 
 	private getOneOrMoreSelectOptions(value: string | string[] | undefined): SelectOption | SelectOption[] | undefined {
@@ -152,20 +135,21 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		return isEqual(value, option.value);
 	};
 
-	private isShrinked(dropdownSelectedOption?: SelectOption | SelectOption[] | null, selectedOption?: SelectOption | SelectOption[] | null): boolean {
+	private isShrinked(selectedOption?: SelectOption | SelectOption[] | null): boolean {
 		if(this.hasInputFocus() || this.hasFilter()){
 			return true;
 		}
 		
-		if(isEmpty(dropdownSelectedOption) === false){
-			return true;
-		}
-		
-		return dropdownSelectedOption === undefined && isEmpty(selectedOption) === false;
+		return isEmpty(selectedOption) === false;
 	}
 
 	private isClearable() {
+		const { value, values } = this.props;
 		const { selectedOption } = this.state;
+
+		if (value || values) {
+			return false;
+		}
 
 		if (isEmpty(selectedOption)) {
 			return false;
@@ -203,13 +187,15 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 
 	private handleChangeSelect = (newValue: SelectOption | SelectOption[] | null) => {
 		const { onChange, value, values } = this.props;
-
-		if (isEmpty(value) && isEmpty(values)) {
-			this.setState({
-				filter: '',
-				selectedOption: newValue
-			});
+		
+		if (isEmpty(value) === false || isEmpty(values) === false) {
+			return;
 		}
+
+		this.setState({
+			filter: '',
+			selectedOption: newValue
+		});
 
 		if (isFunction(onChange)) {
 			onChange(this.getValues(newValue));
@@ -268,7 +254,7 @@ export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMater
 	defaultValues?: SelectOptionValue[];
 	options: (string | SelectOption)[];
 	onChange: ((value: SelectOptionValue | SelectOptionValue[]) => void) | ((value: React.ChangeEvent<any>) => never);
-	ref: any;
+	ref?: any;
 	SelectProps?: SelectProps | any;
 	value?: SelectOptionValue;
 	values?: SelectOptionValue[];

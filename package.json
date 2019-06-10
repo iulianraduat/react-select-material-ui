@@ -1,13 +1,15 @@
 {
   "name": "react-select-material-ui",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A react SELECT component based on react-select and looking like a material-ui component",
   "main": "lib/index.js",
   "sideEffects": false,
   "scripts": {
     "build": "rimraf ./lib && tsc",
     "deploy": "cross-env NODE_ENV=production npm run build && npm publish",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "start-storybook -c storybook",
+    "build-storybook": "build-storybook -c storybook -o docs"
   },
   "repository": {
     "type": "git",
@@ -41,27 +43,30 @@
   },
   "homepage": "https://github.com/iulian-radu-at/react-select-material-ui#readme",
   "dependencies": {
-    "@material-ui/core": "^4.0.1",
+    "@material-ui/core": "^4.0.2",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-select": "^3.0.3"
+    "react-select": "^2.4.4"
   },
   "devDependencies": {
+    "@storybook/react": "^5.1.3",
     "@types/babel-core": "^6.25.6",
     "@types/enzyme": "^3.9.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.13",
-    "@types/lodash": "^4.14.132",
+    "@types/lodash": "^4.14.134",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "@types/react-select": "^2.0.19",
     "@types/rimraf": "^2.0.2",
+    "@types/storybook__react": "^4.0.2",
     "babel-core": "^6.26.3",
     "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.6",
     "cross-env": "^5.2.0",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.13.2",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "jest": "^24.8.0",
     "rimraf": "^2.6.3",
     "ts-jest": "^24.0.2",
