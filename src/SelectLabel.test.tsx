@@ -1,8 +1,8 @@
-import * as React from "react";
-import { ShallowWrapper, shallow } from "enzyme";
-import InputLabel, { InputLabelProps } from "@material-ui/core/InputLabel/InputLabel";
-import SelectLabel from "./SelectLabel";
-import { colorNoFocus, colorFocus } from "./ColorConstants";
+import * as React from 'react';
+import InputLabel, { InputLabelProps } from '@material-ui/core/InputLabel/InputLabel';
+import SelectLabel from './SelectLabel';
+import { colorFocus, colorNoFocus } from './ColorConstants';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 describe("SelectLabel", () => {
   it("does not render if label is missing", () => {
@@ -43,11 +43,13 @@ describe("SelectLabel", () => {
     const label: string = "label";
     let hasInputFocus: boolean = true;
     let wrapper: ShallowWrapper = shallow(<SelectLabel label={label} hasInputFocus={hasInputFocus} />);
-    expect(wrapper.find(InputLabel).prop("style").color).toEqual(colorFocus);
+    expect(wrapper.find(InputLabel).prop("style")).toBeDefined();
+    expect(wrapper.find(InputLabel).prop("style")!.color).toEqual(colorFocus);
 
     hasInputFocus = false;
     wrapper = shallow(<SelectLabel label={label} hasInputFocus={hasInputFocus} />);
-    expect(wrapper.find(InputLabel).prop("style").color).toEqual(colorNoFocus);
+    expect(wrapper.find(InputLabel).prop("style")).toBeDefined();
+    expect(wrapper.find(InputLabel).prop("style")!.color).toEqual(colorNoFocus);
   });
 
   it("passes inputLabelProps to child", () => {

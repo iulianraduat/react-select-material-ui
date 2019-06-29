@@ -1,12 +1,8 @@
-import * as React from "react";
-import { ShallowWrapper, shallow } from "enzyme";
-import SelectReadOnly from "react-select";
-import SelectCreatable from "react-select/lib/Creatable";
-import SelectDropdown, {
-  SelectProps,
-  SelectDropdownProps,
-  SelectOption
-} from "./SelectDropdown";
+import * as React from 'react';
+import SelectCreatable from 'react-select/lib/Creatable';
+import SelectDropdown, { SelectDropdownProps, SelectOption, SelectProps } from './SelectDropdown';
+import SelectReadOnly from 'react-select';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 describe("SelectDropdown", () => {
   it("produces a normal select", () => {
@@ -34,7 +30,7 @@ describe("SelectDropdown", () => {
     const wrapper: ShallowWrapper = shallow(
       <SelectDropdown {...selectDropdownProps} selectProps={selectProps}/>
     );
-    const props: SelectDropdownProps = wrapper.find(SelectCreatable).props();
+    const props: SelectDropdownProps = wrapper.find<any>(SelectCreatable).props();
     expect(props).toMatchObject(selectDropdownProps);
     expect(props).toMatchObject(selectProps);
   });
