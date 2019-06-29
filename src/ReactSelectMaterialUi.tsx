@@ -188,14 +188,12 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 	private handleChangeSelect = (newValue: SelectOption | SelectOption[] | null) => {
 		const { onChange, value, values } = this.props;
 		
-		if (isEmpty(value) === false || isEmpty(values) === false) {
-			return;
+		if (isEmpty(value) && isEmpty(values)) {
+			this.setState({
+				filter: '',
+				selectedOption: newValue
+			});
 		}
-
-		this.setState({
-			filter: '',
-			selectedOption: newValue
-		});
 
 		if (isFunction(onChange)) {
 			onChange(this.getValues(newValue));

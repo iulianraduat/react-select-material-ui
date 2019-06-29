@@ -90,6 +90,7 @@ Backspace will not remove values.
 |                        2.1.x |    2.4.3     |    3.9.3    | 16.8.6 |
 |                        3.0.x |    3.0.3     |    4.0.1    | 16.8.6 |
 |                        4.0.x |    2.4.4     |    4.0.2    | 16.8.6 |
+|                        4.1.x |    2.4.4     |    4.1.3    | 16.8.6 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -410,3 +411,7 @@ Breaking changes:
 - Fixed using defaultValue(s) and value(s)
 - Added a storybook for this component
 
+### 4.1.0
+
+- Change on behavior of onChange when value(s) is set. Before no call was triggered. Now it is called with the new selection. The component is controlled so there is no change in the visual if value(s) keep(s) the previous value 
+- Updated packages

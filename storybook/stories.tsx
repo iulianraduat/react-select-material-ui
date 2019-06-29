@@ -238,7 +238,7 @@ storiesOf("ReactSelectMaterialUi", module)
         onChange={showSelectedValue("v")}
       />
       <div style={style} />
-      Selected value: <span id="v"></span>
+      The value passed in onChange(): <span id="v"></span>
     </div>
   ))
   .add("with and without helper text", () => (
