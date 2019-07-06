@@ -27,8 +27,62 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		this.state = {
 			filter: '',
 			hasInputFocus: false,
-			selectedOption: isEmpty(value) ? undefined : this.getOneOrMoreSelectOptions(value)
+			selectedOption: isEmpty(value) ? undefined : ReactSelectMaterialUi.getOneOrMoreSelectOptions(props.options, value)
 		};
+	}
+
+	public static getDerivedStateFromProps(nextProps:ReactSelectMaterialUiProps, prevState:ReactSelectMaterialUiState) {
+		const value: string | string[] | undefined = (nextProps.values as string[]) || (nextProps.value as string) ||
+			(nextProps.defaultValues as string[]) || (nextProps.defaultValue as string);
+
+		if(!value){
+			return null;
+		}
+
+		return {
+			selectedOption: ReactSelectMaterialUi.getOneOrMoreSelectOptions(nextProps.options, value)
+		}
+	}
+
+	private static getOneOrMoreSelectOptions(options:(string | SelectOption)[], value: string | string[] | undefined): SelectOption | SelectOption[] | undefined {
+		if (isArray(value)) {
+			return reject(map(value, ReactSelectMaterialUi.getOptionForValue(options)), isNil);
+		}
+
+		return ReactSelectMaterialUi.getOptionForValue(options)(value);
+	}
+
+	private static getOptionForValue = (options:(string | SelectOption)[]) => (value: string | SelectOptionValue | undefined): SelectOption | undefined => {
+		const option: string | SelectOption | undefined = find(options, ReactSelectMaterialUi.matchOptionValue(value));
+
+		if (isNil(option)) {
+			return;
+		}
+
+		return ReactSelectMaterialUi.getSelectOption(option);
+	};
+
+	private static matchOptionValue = (value: string | SelectOptionValue) => (option: string | SelectOption): boolean => {
+		if (isString(option)) {
+			return value === option;
+		}
+
+		return isEqual(value, option.value);
+	};
+
+	private static getOptions(options: (string | SelectOption)[]): SelectOption[] {
+		return map(options, ReactSelectMaterialUi.getSelectOption);
+	}
+
+	private static getSelectOption(option: string | SelectOption): SelectOption {
+		if (isString(option)) {
+			return {
+				label: option,
+				value: option
+			};
+		}
+
+		return option;
 	}
 
 	public render() {
@@ -94,7 +148,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 				<SelectDropdown
 					value={selectedOption}
 					placeholder={selectPlaceholder}
-					options={this.getOptions(options)}
+					options={ReactSelectMaterialUi.getOptions(options)}
 					selectProps={{
 						...SelectProps,
 						isClearable,
@@ -108,32 +162,6 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 			</FormControl>
 		);
 	}
-
-	private getOneOrMoreSelectOptions(value: string | string[] | undefined): SelectOption | SelectOption[] | undefined {
-		if (isArray(value)) {
-			return reject(map(value, this.getOptionForValue), isNil);
-		}
-
-		return this.getOptionForValue(value);
-	}
-
-	private getOptionForValue = (value: string | SelectOptionValue | undefined): SelectOption | undefined => {
-		const option: string | SelectOption | undefined = find(this.props.options, this.matchOptionValue(value));
-
-		if (isNil(option)) {
-			return;
-		}
-
-		return this.getSelectOption(option);
-	};
-
-	private matchOptionValue = (value: string | SelectOptionValue) => (option: string | SelectOption): boolean => {
-		if (isString(option)) {
-			return value === option;
-		}
-
-		return isEqual(value, option.value);
-	};
 
 	private isShrinked(selectedOption?: SelectOption | SelectOption[] | null): boolean {
 		if(this.hasInputFocus() || this.hasFilter()){
@@ -168,21 +196,6 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 
 	private hasFilter(): boolean {
 		return isEmpty(this.state.filter) === false;
-	}
-
-	private getOptions(options: (string | SelectOption)[]): SelectOption[] {
-		return map(options, this.getSelectOption);
-	}
-
-	private getSelectOption(option: string | SelectOption): SelectOption {
-		if (isString(option)) {
-			return {
-				label: option,
-				value: option
-			};
-		}
-
-		return option;
 	}
 
 	private handleChangeSelect = (newValue: SelectOption | SelectOption[] | null) => {

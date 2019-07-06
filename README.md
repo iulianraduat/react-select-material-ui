@@ -415,3 +415,7 @@ Breaking changes:
 
 - Change on behavior of onChange when value(s) is set. Before no call was triggered. Now it is called with the new selection. The component is controlled so there is no change in the visual if value(s) keep(s) the previous value 
 - Updated packages
+
+### 4.1.1
+
+- Fixed bug related to component not updating the selected value in the controlled mode

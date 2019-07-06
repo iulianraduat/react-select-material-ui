@@ -1,3 +1,4 @@
+import ATDynamicUpdateValuesControlledComponent from './ATDynamicUpdateValuesControlledComponent';
 import ColorsSelect from '../src/subcomponents/ColorsSelect';
 import MultipleSelect from '../src/subcomponents/MultipleSelect';
 import React from 'react';
@@ -276,6 +277,14 @@ storiesOf("ReactSelectMaterialUi", module)
         fullWidth={true}
         onChange={doNothing}
       />
+    </div>
+  ));
+
+  storiesOf("Advanced tests", module)
+  .add("Dynamic update of values for a controlled component", () => (
+    <div>
+      <ATDynamicUpdateValuesControlledComponent/>
+      <p>The selected value should change every 0.5 seconds.</p>
     </div>
   ));
 
