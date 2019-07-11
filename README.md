@@ -91,6 +91,7 @@ Backspace will not remove values.
 |                        3.0.x |    3.0.3     |    4.0.1    | 16.8.6 |
 |                        4.0.x |    2.4.4     |    4.0.2    | 16.8.6 |
 |                        4.1.x |    2.4.4     |    4.1.3    | 16.8.6 |
+|                        4.2.x |    2.4.4     |    4.2.0    | 16.8.6 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -419,3 +420,7 @@ Breaking changes:
 ### 4.1.1
 
 - Fixed bug related to component not updating the selected value in the controlled mode
+
+### 4.2.0
+
+- Updated packages
