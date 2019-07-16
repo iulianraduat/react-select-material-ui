@@ -46,8 +46,16 @@ const isValidNewOption = (inputValue: string) => inputValue === "Hello";
 
 const doNothing = () => {};
 
-const showSelectedValue = (id: string) => (value: string) =>
-  (document.getElementById(id).textContent = value);
+const getDiffOption = (value: string, option?: SelectOption) => {
+  if(option === undefined || option.label === undefined || option.label === value){
+    return '';
+  }
+
+  return ` | Selected label: ${option.label}`;
+}
+
+const showSelectedValue = (id: string) => (value: string, option?: SelectOption) =>
+  (document.getElementById(id).textContent = value + getDiffOption(value, option));
 
 storiesOf("ReactSelectMaterialUi", module)
   .add("with and without fullWidth set", () => (

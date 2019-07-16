@@ -209,7 +209,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		}
 
 		if (isFunction(onChange)) {
-			onChange(this.getValues(newValue));
+			onChange(this.getValues(newValue), newValue === null ? undefined : newValue);
 		}
 	};
 
@@ -260,16 +260,18 @@ interface ReactSelectMaterialUiState {
 	selectedOption?: SelectOption | SelectOption[] | null;
 }
 
-export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, BaseTextFieldProps {
+export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, Omit<BaseTextFieldProps, 'onChange'> {
 	defaltValue?: SelectOptionValue;
 	defaultValues?: SelectOptionValue[];
-	options: (string | SelectOption)[];
-	onChange: ((value: SelectOptionValue | SelectOptionValue[]) => void) | ((value: React.ChangeEvent<any>) => never);
+	options: string[] | SelectOption[];
+	onChange: (value: SelectOptionValue | SelectOptionValue[], option?: SelectOption | SelectOption[]) => void;
 	ref?: any;
 	SelectProps?: SelectProps | any;
 	value?: SelectOptionValue;
 	values?: SelectOptionValue[];
 }
+
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
 
 export default ReactSelectMaterialUi;
 

@@ -14,16 +14,18 @@ export interface SelectProps extends ReactSelectProps<SelectOption> {
 	msgNoValidValue?: string;
 }
 
-export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, BaseTextFieldProps {
+export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, Omit<BaseTextFieldProps, 'onChange'> {
 	defaltValue?: any;
 	defaultValues?: any[];
-	options: (string | SelectOption)[];
-	onChange: (value: string | string[] | React.ChangeEvent<any>) => void;
+	options: string[] | SelectOption[];
+	onChange: (value: any | any[], option?: SelectOption | SelectOption[]) => void;
 	ref?: any;
 	SelectProps?: SelectProps | any;
 	value?: any;
 	values?: any[];
 }
+
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
 
 declare class ReactSelectMaterialUi extends React.Component<ReactSelectMaterialUiProps> {}
 
