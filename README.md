@@ -14,15 +14,15 @@ The component accepts the props defined bellow in the table plus all props defin
 
 ### Props accepted by ReactSelectMaterialUi
 
-| Name          | Type             | Required          | Default   | Description                                              |
-|---------------|------------------|-------------------|-----------|----------------------------------------------------------|
-| defaultValue  | string           | no                | undefined | The default value for a single select                    |
-| defaultValues | string[]         | no                | undefined | The default value for a multiple select                  |
-| onChange      | (value: string \| string[], SelectOption \| SelectOption[] \| undefined) => void | yes       | -|The callback function called when the option is changed |
-| options       | string[] \| SelectOption[]    | yes       | -|The selectable options                                 |
-| SelectProps   | SelectProps      | no                | undefined | The props for react-select component                     |
-| value         | string           | no                | undefined | The value for a single select                            |
-| values        | string[]         | no                | undefined | The value for a multiple select                          |
+| Name          | Type             | Required                 | Default          | Description                                                                      |
+|---------------|------------------|--------------------------|------------------|----------------------------------------------------------------------------------|
+| defaultValue  | string           | no                       | undefined        | The default value for a single select                                            |
+| defaultValues | string[]         | no                       | undefined        | The default value for a multiple select                                          |
+| onChange      | (value: string \| string[], SelectOption \| SelectOption[] \| undefined) => void|yes|-|The callback function called when the option is changed |
+| options       | string[] \| SelectOption[]           | yes              | -|The selectable options                                                         |
+| SelectProps   | SelectProps      | no                       | undefined        | The props for react-select component                                             |
+| value         | string           | no                       | undefined        | The value for a single select                                                    |
+| values        | string[]         | no                       | undefined        | The value for a multiple select                                                  |
 
 ### Fields defined by SelectProps
 
@@ -428,4 +428,8 @@ Breaking changes:
 ### 4.2.1
 
 - onChange returns as second argument the selected option(s)
-- cotrrected in index.d.ts the type of the value for onChange
+- corrected in index.d.ts the type of the value for onChange
+
+### 4.2.2
+
+- Fixed the bug related to defaultValue(s) behaves as value(s)

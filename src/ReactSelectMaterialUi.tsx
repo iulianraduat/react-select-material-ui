@@ -13,6 +13,7 @@ import {
 	isNil,
 	isString,
 	map,
+	memoize,
 	reject,
 	size
 	} from 'lodash';
@@ -21,48 +22,44 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 	constructor(props: ReactSelectMaterialUiProps) {
 		super(props);
 
-		const value: string | string[] | undefined = (props.values as string[]) || (props.value as string) ||
-			(props.defaultValues as string[]) || (props.defaultValue as string);
+		const {defaultValue, defaultValues, value, values, } = props;
+		const finalValue: string | string[] | undefined = this.getFinalValue(value as string, values as string[], 
+			defaultValue as string, defaultValues as string[]);
 
 		this.state = {
 			filter: '',
 			hasInputFocus: false,
-			selectedOption: isEmpty(value) ? undefined : ReactSelectMaterialUi.getOneOrMoreSelectOptions(props.options, value)
+			selectedOption: this.getSelectedOption(props.options, finalValue)
 		};
 	}
 
-	public static getDerivedStateFromProps(nextProps:ReactSelectMaterialUiProps, prevState:ReactSelectMaterialUiState) {
-		const value: string | string[] | undefined = (nextProps.values as string[]) || (nextProps.value as string) ||
-			(nextProps.defaultValues as string[]) || (nextProps.defaultValue as string);
+	private getFinalValue = memoize((value?: string, values?: string[], defaultValue?: string, defaultValues?: string[]): string | string[] | undefined => {
+		return values || value || defaultValues || defaultValue;
+	})
 
-		if(!value){
-			return null;
-		}
+	private getSelectedOption = memoize((options: string[] | SelectOption[], value?: string | string[]) => {
+		return isEmpty(value) ? undefined : this.getOneOrMoreSelectOptions(options, value);
+	})
 
-		return {
-			selectedOption: ReactSelectMaterialUi.getOneOrMoreSelectOptions(nextProps.options, value)
-		}
-	}
-
-	private static getOneOrMoreSelectOptions(options:(string | SelectOption)[], value: string | string[] | undefined): SelectOption | SelectOption[] | undefined {
+	private getOneOrMoreSelectOptions(options:(string | SelectOption)[], value: string | string[] | undefined): SelectOption | SelectOption[] | undefined {
 		if (isArray(value)) {
-			return reject(map(value, ReactSelectMaterialUi.getOptionForValue(options)), isNil);
+			return reject(map(value, this.getOptionForValue(options)), isNil);
 		}
 
-		return ReactSelectMaterialUi.getOptionForValue(options)(value);
+		return this.getOptionForValue(options)(value);
 	}
 
-	private static getOptionForValue = (options:(string | SelectOption)[]) => (value: string | SelectOptionValue | undefined): SelectOption | undefined => {
-		const option: string | SelectOption | undefined = find(options, ReactSelectMaterialUi.matchOptionValue(value));
+	private getOptionForValue = (options:(string | SelectOption)[]) => (value: string | SelectOptionValue | undefined): SelectOption | undefined => {
+		const option: string | SelectOption | undefined = find(options, this.matchOptionValue(value));
 
 		if (isNil(option)) {
 			return;
 		}
 
-		return ReactSelectMaterialUi.getSelectOption(option);
+		return this.getSelectOption(option);
 	};
 
-	private static matchOptionValue = (value: string | SelectOptionValue) => (option: string | SelectOption): boolean => {
+	private matchOptionValue = (value: string | SelectOptionValue) => (option: string | SelectOption): boolean => {
 		if (isString(option)) {
 			return value === option;
 		}
@@ -70,11 +67,11 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		return isEqual(value, option.value);
 	};
 
-	private static getOptions(options: (string | SelectOption)[]): SelectOption[] {
-		return map(options, ReactSelectMaterialUi.getSelectOption);
+	private getOptions(options: (string | SelectOption)[]): SelectOption[] {
+		return map(options, this.getSelectOption);
 	}
 
-	private static getSelectOption(option: string | SelectOption): SelectOption {
+	private getSelectOption(option: string | SelectOption): SelectOption {
 		if (isString(option)) {
 			return {
 				label: option,
@@ -124,10 +121,17 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		const helperTextId = id && helperText ? `${id}-helper-text` : undefined;
 		const { hasInputFocus, selectedOption } = this.state;
 
+		let dropdownOption: SelectOption | SelectOption[] | null | undefined = selectedOption;
+		if(value || values){
+			const finalValue: string | string[] | undefined = this.getFinalValue(value as string, values as string[]);
+			dropdownOption = this.getSelectedOption(options, finalValue);
+		}
+
 		const isClearable: boolean = !!SelectProps && SelectProps.isClearable === true && this.isClearable();
 		const isDisabled: boolean = disabled || (!!SelectProps && SelectProps.isDisabled);
 		const selectPlaceholder: string | undefined = label ? '' : placeholder;
 		const shrink: boolean = this.isShrinked(selectedOption);
+
 
 		return (
 			<FormControl
@@ -146,9 +150,9 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 					inputLabelProps={InputLabelProps}
 				/>
 				<SelectDropdown
-					value={selectedOption}
+					value={dropdownOption}
 					placeholder={selectPlaceholder}
-					options={ReactSelectMaterialUi.getOptions(options)}
+					options={this.getOptions(options)}
 					selectProps={{
 						...SelectProps,
 						isClearable,
