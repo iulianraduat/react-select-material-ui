@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import ReactSelectMaterialUi from '../src/ReactSelectMaterialUi';
 
-const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesControlledComponentProps> = ({Comp}) => {
-  const [form, setForm] = useState({ selectedOption: 'America' });
+const fewOptions = ['Africa', 'America', 'Asia', 'Europe', 'Australia'];
+const manyOptions = Array.from(Array(1000), (x, index) => `Option ${index + 1} / 1000`);
 
-  const options = ['Africa', 'America', 'Asia', 'Europe', 'Australia'];
+const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesControlledComponentProps> = ({Comp, useHugeOptionsList}) => {
+  const options = useHugeOptionsList ? manyOptions : fewOptions;
+  const [form, setForm] = useState({ selectedOption: options[0] });
 
   /* simulate update of the options in a controlled mode */
   setTimeout(() => {
     const selectedOption: string = pickRandomOption(options);
-    console.log({ selectedOption });
     setForm({ ...form, selectedOption });
   }, 500);
 
@@ -37,6 +37,7 @@ const pickRandomOption = (selectOptions: string[]): string => {
 
 interface ATDynamicUpdateValuesControlledComponentProps {
   Comp: typeof React.Component | React.FC;
+  useHugeOptionsList?: boolean;
 }
 
 export default ATDynamicUpdateValuesControlledComponent;

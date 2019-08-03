@@ -394,4 +394,11 @@ storiesOf("Subcomponents", module)
       <ATDynamicUpdateValuesControlledComponent Comp={ColorsSelect}/>
       <p>The selected value should change every 0.5 seconds.</p>
     </div>
-  ));
+  ))
+  .add("ReactSelectMaterialUi with many options", () => (
+    <div>
+      <ATDynamicUpdateValuesControlledComponent Comp={ReactSelectMaterialUi} useHugeOptionsList={true}/>
+      <p>The selected value should change every 0.5 seconds.</p>
+    </div>
+  ))
+;

@@ -433,3 +433,8 @@ Breaking changes:
 ### 4.2.2
 
 - Fixed the bug related to defaultValue(s) behaves as value(s)
+
+### 4.2.3
+
+- Fixed the bug related to a new value(s) is ignored
+- Added more demo in storybook for controlled components

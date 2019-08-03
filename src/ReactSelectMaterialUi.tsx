@@ -13,7 +13,6 @@ import {
 	isNil,
 	isString,
 	map,
-	memoize,
 	reject,
 	size
 	} from 'lodash';
@@ -33,13 +32,13 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		};
 	}
 
-	private getFinalValue = memoize((value?: string, values?: string[], defaultValue?: string, defaultValues?: string[]): string | string[] | undefined => {
+	private getFinalValue = (value?: string, values?: string[], defaultValue?: string, defaultValues?: string[]): string | string[] | undefined => {
 		return values || value || defaultValues || defaultValue;
-	})
+	}
 
-	private getSelectedOption = memoize((options: string[] | SelectOption[], value?: string | string[]) => {
+	private getSelectedOption = (options: string[] | SelectOption[], value?: string | string[]) => {
 		return isEmpty(value) ? undefined : this.getOneOrMoreSelectOptions(options, value);
-	})
+	}
 
 	private getOneOrMoreSelectOptions(options:(string | SelectOption)[], value: string | string[] | undefined): SelectOption | SelectOption[] | undefined {
 		if (isArray(value)) {
@@ -130,7 +129,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		const isClearable: boolean = !!SelectProps && SelectProps.isClearable === true && this.isClearable();
 		const isDisabled: boolean = disabled || (!!SelectProps && SelectProps.isDisabled);
 		const selectPlaceholder: string | undefined = label ? '' : placeholder;
-		const shrink: boolean = this.isShrinked(selectedOption);
+		const shrink: boolean = this.isShrinked(dropdownOption);
 
 
 		return (
