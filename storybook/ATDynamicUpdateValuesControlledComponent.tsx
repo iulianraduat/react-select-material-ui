@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactSelectMaterialUi from '../src/ReactSelectMaterialUi';
 
-const ATDynamicUpdateValuesControlledComponent: React.FC = () => {
+const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesControlledComponentProps> = ({Comp}) => {
   const [form, setForm] = useState({ selectedOption: 'America' });
 
   const options = ['Africa', 'America', 'Asia', 'Europe', 'Australia'];
@@ -18,7 +18,7 @@ const ATDynamicUpdateValuesControlledComponent: React.FC = () => {
   };
 
   return (
-    <ReactSelectMaterialUi
+    <Comp
       value={form.selectedOption}
       options={options}
       placeholder="Dynamically update of values of a controlled component"
@@ -34,5 +34,9 @@ const pickRandomOption = (selectOptions: string[]): string => {
   index = (index + 1) % selectOptions.length;
   return selectOptions[index];
 };
+
+interface ATDynamicUpdateValuesControlledComponentProps {
+  Comp: typeof React.Component | React.FC;
+}
 
 export default ATDynamicUpdateValuesControlledComponent;

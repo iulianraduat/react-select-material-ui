@@ -288,14 +288,6 @@ storiesOf("ReactSelectMaterialUi", module)
     </div>
   ));
 
-  storiesOf("Advanced tests", module)
-  .add("Dynamic update of values for a controlled component", () => (
-    <div>
-      <ATDynamicUpdateValuesControlledComponent/>
-      <p>The selected value should change every 0.5 seconds.</p>
-    </div>
-  ));
-
 storiesOf("Subcomponents", module)
   .add("SingleSelect", () => (
     <div>
@@ -369,5 +361,37 @@ storiesOf("Subcomponents", module)
       />
       <div style={style} />
       Selected value: <span id="cs"></span>
+    </div>
+  ));
+
+  storiesOf("Dynamic update of values for a controlled component", module)
+  .add("ReactSelectMaterialUi", () => (
+    <div>
+      <ATDynamicUpdateValuesControlledComponent Comp={ReactSelectMaterialUi}/>
+      <p>The selected value should change every 0.5 seconds.</p>
+    </div>
+  ))
+  .add("SingleSelect", () => (
+    <div>
+      <ATDynamicUpdateValuesControlledComponent Comp={SingleSelect}/>
+      <p>The selected value should change every 0.5 seconds.</p>
+    </div>
+  ))
+  .add("MultipleSelect", () => (
+    <div>
+      <ATDynamicUpdateValuesControlledComponent Comp={MultipleSelect}/>
+      <p>The selected value should change every 0.5 seconds.</p>
+    </div>
+  ))
+  .add("TagsSelect", () => (
+    <div>
+      <ATDynamicUpdateValuesControlledComponent Comp={TagsSelect}/>
+      <p>The selected value should change every 0.5 seconds.</p>
+    </div>
+  ))
+  .add("ColorsSelect", () => (
+    <div>
+      <ATDynamicUpdateValuesControlledComponent Comp={ColorsSelect}/>
+      <p>The selected value should change every 0.5 seconds.</p>
     </div>
   ));
