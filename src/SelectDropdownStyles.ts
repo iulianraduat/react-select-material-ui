@@ -1,10 +1,17 @@
-import { colorClearHover, colorClearNormal, colorFocus, colorHover, colorNoFocus } from './ColorConstants';
+import {
+	colorClearHover,
+	colorClearNormal,
+	colorFocus,
+	colorHover,
+	colorNoFocus
+	} from './ColorConstants';
+import { SelectProps } from './SelectDropdown';
+import { styleFn as StyleFn } from 'react-select/lib/styles';
 
-const styleControl = (props: any) => (base: any) => ({
-	...base,
+const styleControl = (hasInputFocus: boolean = false) => ({
 	background: 'transparent',
 	borderWidth: 0,
-	borderBottom: getBorder(props.hasInputFocus),
+	borderBottom: getBorder(hasInputFocus),
 	borderRadius: 0,
 	boxShadow: 'none',
 	marginRight: 25,
@@ -21,28 +28,16 @@ const styleControl = (props: any) => (base: any) => ({
 // FIXME hasInputFocus should produce a 2px border, but such a border moves the content up so we use only 1px
 const getBorder = (hasInputFocus: boolean) => (hasInputFocus ? `solid 1px ${colorFocus}` : `solid 1px ${colorNoFocus}`);
 
-const styleValueContainer = (props: any) => (base: any) => ({
-	...base,
-	padding: 0,
-	marginLeft: -2,
-	marginRight: !!props.selectProps && props.selectProps.isClearable ? 25 : 0,
-	overflow: 'hidden',
-	whiteSpace: 'nowrap',
-	textOverflow: 'ellipsis'
-});
-
-const styleIndicatorsContainer = (base: any) => ({
-	...base,
+const styleIndicatorsContainer: React.CSSProperties = {
 	position: 'absolute',
 	right: 0,
 	marginLeft: 8,
 	marginRight: -25,
 	backgroundColor: 'transparent',
 	height: '100%'
-});
+};
 
-const styleClearIndicator = (base: any) => ({
-	...base,
+const styleClearIndicator = (base: any): React.CSSProperties | any => ({
 	color: colorClearNormal,
 	margin: '0 4px 0 0',
 	padding: 0,
@@ -52,44 +47,54 @@ const styleClearIndicator = (base: any) => ({
 	}
 });
 
-const styleDropdownIndicator = (base: any) => ({
-	...base,
+const styleDropdownIndicator: React.CSSProperties = {
 	margin: '0 0 0 4px',
 	padding: 0,
 	cursor: 'pointer'
-});
+};
 
-const styleMenuList = (base: any) => ({
-	...base,
+const styleMenuList: React.CSSProperties = {
 	padding: 0
-});
+};
 
-// enable this to change the look of an option in the list of them
-const styleOption = (base: any) => base;
-
-// enable this to see the helperText
-const styleContainer = (base: any) => base;
-
-const styleNoOptionsMessage = (base: any) => ({
-	...base,
+const styleNoOptionsMessage: React.CSSProperties = {
 	textAlign: 'left',
 	color: '#ff8080'
-});
+};
 
-const styleMultiValueRemove = (props: any) => (base: any) => ({
+const styleMultiValueRemove = (isDisabled: boolean = false) => (base: any) => ({
 	...base,
-	display: !!props.selectProps && props.selectProps.isDisabled ? 'none' : base.display
+	display: isDisabled ? 'none' : base.display
 });
 
-export const getStyles = (props: any) => ({
-	container: styleContainer,
-	control: styleControl(props),
-	clearIndicator: styleClearIndicator,
-	dropdownIndicator: styleDropdownIndicator,
-	indicatorsContainer: styleIndicatorsContainer,
-	menuList: styleMenuList,
-	multiValueRemove: styleMultiValueRemove(props),
-	noOptionsMessage: styleNoOptionsMessage,
-	option: styleOption,
-	valueContainer: styleValueContainer(props)
+const styleValueContainer = (isClearable: boolean = false): React.CSSProperties => ({
+	padding: 0,
+	marginRight: isClearable ? 25 : 0,
+	overflow: 'hidden',
+	whiteSpace: 'nowrap',
+	textOverflow: 'ellipsis'
+});
+
+export const getStyles = (props?: SelectProps, hasInputFocus?: boolean) => {
+	const customStyles = props && props.styles ? props.styles : {};
+	const isDisabled = props && props.isDisabled ? true : false;
+	const isClearable = props && props.isClearable ? true : false;
+
+	return ({
+		...customStyles,
+		control: mixStyle(styleControl(hasInputFocus), customStyles.control),
+		clearIndicator: mixStyle(styleClearIndicator, customStyles.clearIndicator),
+		dropdownIndicator: mixStyle(styleDropdownIndicator, customStyles.dropdownIndicator),
+		indicatorsContainer: mixStyle(styleIndicatorsContainer, customStyles.indicatorsContainer),
+		menuList: mixStyle(styleMenuList, customStyles.menuList),
+		multiValueRemove: mixStyle(styleMultiValueRemove(isDisabled), customStyles.multiValueRemove),
+		noOptionsMessage: mixStyle(styleNoOptionsMessage, customStyles.noOptionsMessage),
+		valueContainer: mixStyle(styleValueContainer(isClearable), customStyles.valueContainer),
+	});
+}
+
+const mixStyle = (customStyle: React.CSSProperties | StyleFn, styleFn?: StyleFn): StyleFn => (base: any, state: any) => ({
+	...base,
+	...(typeof customStyle === 'function' ? customStyle(base, state) : customStyle),
+	...(styleFn ? styleFn(base, state) : {})
 });

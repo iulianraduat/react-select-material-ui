@@ -6,10 +6,69 @@ import ReactSelectMaterialUi, { SelectOption } from '../src/ReactSelectMaterialU
 import SingleSelect from '../src/subcomponents/SingleSelect';
 import TagsSelect from '../src/subcomponents/TagsSelect';
 import { storiesOf } from '@storybook/react';
+import { StylesConfig } from 'react-select/lib/styles';
 
 const style: React.CSSProperties = {
   height: 20
 };
+
+const styles: {[key: string]: React.CSSProperties} = {
+  div: {
+    backgroundColor: '#444444',
+    padding: '20px 20px 200px 20px'
+  },
+  label: {
+    color: '#ffffff'
+  }
+};
+
+const stylesFn: StylesConfig = {
+    clearIndicator: (base: any) => ({
+      ...base,
+      color: '#ffff80',
+      '&:hover': { color: '#ff0000' }
+    }),
+    dropdownIndicator: (base: any) => ({
+      ...base,
+      color: '#ffff80',
+      '&:hover': { color: '#ff0000' }
+    }),
+    menuList: (base: any) => ({
+      ...base,
+      backgroundColor: '#123456',
+      color: '#ffffff'
+    }),
+    multiValue: (base: any) => ({
+      ...base,
+      backgroundColor: '#888888'
+    }),
+    multiValueLabel: (base: any) => ({
+      ...base,
+      color: '#ffff80'
+    }),
+    multiValueRemove: (base: any) => ({
+      ...base,
+      color: '#ffff80',
+      '&:hover': { color: '#ff0000', backgroundColor: 'rgba(0,0,0,0)' }
+    }),
+    noOptionsMessage: (base: any) => ({
+      ...base,
+      backgroundColor: '#888888',
+      color: '#ffff80',
+      textAlign: 'left'
+    }),
+    option: (base: any, { isSelected }) => ({
+      ...base,
+      backgroundColor: isSelected ? '#ffff80' : '#123456',
+      color: isSelected ? '#123456' : '#ffffff',
+      '&:hover': { backgroundColor: '#234567', color: '#ffff80' }
+    }),
+    singleValue: (base: any) => ({
+      ...base,
+      backgroundColor: '#444444',
+      color: '#ffff80'
+    }),
+}
 
 const simpleOptions: string[] = ["Option 1", "Option 2", "Option 3"];
 
@@ -282,6 +341,36 @@ storiesOf("ReactSelectMaterialUi", module)
         label="Messages when you can create new options"
         options={simpleOptions}
         SelectProps={{ ...customMessages, formatCreateLabel, isValidNewOption, isCreatable: true, isMulti: true }}
+        fullWidth={true}
+        onChange={doNothing}
+      />
+    </div>
+  ))
+  .add("styled", () => (
+    <div style={styles.div}>
+      <ReactSelectMaterialUi
+        label="Single select"
+        options={simpleOptions}
+        defaultValue={simpleOptions[0]}
+        InputLabelProps={{style: styles.label}}
+        SelectProps={{
+          isClearable: true,
+          styles: stylesFn
+        }}
+        fullWidth={true}
+        onChange={doNothing}
+      />
+      <div style={style}/>
+      <ReactSelectMaterialUi
+        label="Multiple select"
+        options={simpleOptions}
+        defaultValues={[simpleOptions[0]]}
+        InputLabelProps={{style: styles.label}}
+        SelectProps={{
+          isClearable: true,
+          isMulti: true,
+          styles: stylesFn
+        }}
         fullWidth={true}
         onChange={doNothing}
       />

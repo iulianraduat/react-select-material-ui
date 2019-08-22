@@ -16,7 +16,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 	private static SENSITIVITY: Intl.CollatorOptions = { sensitivity: 'base' };
 
 	public render() {
-		const { value, placeholder, options, selectProps, onChange, onFocus, onBlur } = this.props;
+		const { hasInputFocus, value, placeholder, options, selectProps, onChange, onFocus, onBlur } = this.props;
 
 		const Select: React.ComponentClass<any> =
 			selectProps && selectProps.isCreatable ? SelectCreatable : SelectReadOnly;
@@ -30,7 +30,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 				value={value}
 				placeholder={placeholder}
 				options={options}
-				styles={getStyles(this.props)}
+				styles={getStyles(selectProps, hasInputFocus)}
 				noOptionsMessage={this.noOptionsMessage}
 				onChange={onChange}
 				onFocus={onFocus}
@@ -96,6 +96,7 @@ export interface SelectDropdownProps {
 	placeholder?: string;
 	options?: SelectOption[];
 	selectProps?: SelectProps;
+    hasInputFocus?: boolean;
 	onChange?: (value: SelectOption | SelectOption[] | null) => void;
 	onFocus?: (event: any) => void;
 	onBlur?: (event: any) => void;

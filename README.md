@@ -28,6 +28,7 @@ The component accepts the props defined bellow in the table plus all props defin
 
 | Name                    | Type    | Required | Default                                     | Description                                                                                        |
 |-------------------------|---------|----------|---------------------------------------------|----------------------------------------------------------------------------------------------------|
+| isClearable             | boolean | no       | false                                       | Set to true to allow remove of selection with backspace or clicking on the x of the value(s)       |
 | isCreatable             | boolean | no       | false                                       | Set to true to allow creation of new values based on the input string                              |
 | msgNoOptionsAvailable   | string  | no       | No more options are available               | The message displayed when all options are already selected                                        |
 | msgNoOptionsMatchFilter | string  | no       | No options match the filter                 | The message displayed when no options match case-insensitive the input value                       |
@@ -72,9 +73,13 @@ The new option will be at start of options list.
 
 > Set **SelectProps.createOptionPosition** to **last** to display the new option to the end of options list.
 
-Backspace will not remove values.
+### Styling the component
 
-> Set **SelectProps.backspaceRemovesValue** to **true** to make pressing backspace removing a value.
+Label: inputLabelProps.style
+
+ReactSelect: [SelectProps.styles](https://react-select.com/styles)
+
+Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-at/react-select-material-ui/blob/master/storybook/stories.tsx) to see how to customize ReactSelectMaterialUi.
 
 ---
 
@@ -92,6 +97,7 @@ Backspace will not remove values.
 |                        4.0.x |    2.4.4     |    4.0.2    | 16.8.6 |
 |                        4.1.x |    2.4.4     |    4.1.3    | 16.8.6 |
 |                        4.2.x |    2.4.4     |    4.2.0    | 16.8.6 |
+|                        4.3.x |    2.4.4     |    4.3.3    | 16.9.0 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -438,3 +444,9 @@ Breaking changes:
 
 - Fixed the bug related to a new value(s) is ignored
 - Added more demo in storybook for controlled components
+
+### 4.3.0
+
+- Updated the documentation
+- Added a storybook for styling the component
+- Updated packages

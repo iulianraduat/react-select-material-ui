@@ -27,11 +27,11 @@ const SelectLabel = (props: SelectLabelProps) => {
 const getStyle = (style: React.CSSProperties, userStyle?: React.CSSProperties): React.CSSProperties => userStyle ? {...style, ...userStyle} : style;
 
 interface SelectLabelProps {
+    hasInputFocus?: boolean;
     id?: string;
+    inputLabelProps?: Partial<InputLabelProps>;
     label?: React.ReactNode;
     shrink?: boolean;
-    hasInputFocus?: boolean;
-    inputLabelProps?: Partial<InputLabelProps>;
 }
 
 export default SelectLabel;

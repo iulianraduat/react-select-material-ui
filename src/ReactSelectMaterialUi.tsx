@@ -157,6 +157,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 						isClearable,
 						isDisabled
 					}}
+					hasInputFocus={hasInputFocus}
 					onChange={this.handleChangeSelect}
 					onFocus={this.handleGotFocus}
 					onBlur={this.handleLostFocus}
