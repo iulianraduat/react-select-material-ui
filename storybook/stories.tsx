@@ -117,6 +117,7 @@ const showSelectedValue = (id: string) => (value: string, option?: SelectOption)
   (document.getElementById(id).textContent = value + getDiffOption(value, option));
 
 storiesOf("ReactSelectMaterialUi", module)
+  .addParameters({ options: { showPanel: false } })
   .add("with and without fullWidth set", () => (
     <div>
       <ReactSelectMaterialUi
@@ -378,6 +379,7 @@ storiesOf("ReactSelectMaterialUi", module)
   ));
 
 storiesOf("Subcomponents", module)
+  .addParameters({ options: { showPanel: false } })
   .add("SingleSelect", () => (
     <div>
       <SingleSelect
@@ -453,7 +455,8 @@ storiesOf("Subcomponents", module)
     </div>
   ));
 
-  storiesOf("Dynamic update of values for a controlled component", module)
+storiesOf("Dynamic update of values for a controlled component", module)
+  .addParameters({ options: { showPanel: false } })
   .add("ReactSelectMaterialUi", () => (
     <div>
       <ATDynamicUpdateValuesControlledComponent Comp={ReactSelectMaterialUi}/>
