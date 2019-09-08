@@ -98,6 +98,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 |                        4.1.x |    2.4.4     |    4.1.3    | 16.8.6 |
 |                        4.2.x |    2.4.4     |    4.2.0    | 16.8.6 |
 |                        4.3.x |    2.4.4     |    4.3.3    | 16.9.0 |
+|                        5.0.x |    2.4.4     |    4.4.1    | 16.8.0 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -450,3 +451,8 @@ Breaking changes:
 - Updated the documentation
 - Added a storybook for styling the component
 - Updated packages
+
+### 5.0.0
+
+- Starting with this version, react and react-dom are no longer dependencies, which means they will no longer be installed in node_modules of this component
+- Updated the packages
