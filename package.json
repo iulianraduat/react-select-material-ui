@@ -1,6 +1,6 @@
 {
   "name": "react-select-material-ui",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "A react SELECT component based on react-select and looking like a material-ui component",
   "main": "lib/index.js",
   "sideEffects": false,
@@ -75,8 +75,8 @@
     "typescript": "^3.6.2"
   },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   },
   "jest": {
     "modulePathIgnorePatterns": [
