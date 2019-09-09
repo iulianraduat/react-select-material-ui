@@ -460,3 +460,7 @@ Breaking changes:
 ### 5.0.1
 
 - Fixed the dependency version of react
+
+### 5.0.2
+
+- Removed the source maps from generated package
