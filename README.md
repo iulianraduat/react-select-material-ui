@@ -102,9 +102,9 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 
 ### About versioning schema used for ReactSelectMaterialUi
 
-- Major - it will be increased if any major version of the three dependat packages changes or there are breaking changes in the code of ReactSelectMaterialUi
-- Minor - it will be increased if no major version of the three dependat packages changes, but there are changes of the minor or patch versions of them
-- Patch - it will be increased if there are no changes of the three dependat packages, but there are non breaking changes in the code of ReactSelectMaterialUi
+- Major - it will be increased if any major version of any dependat package changes or there are breaking changes in this package
+- Minor - it will be increased if any minor or patch version of any dependat package changes or there is added functionality in a backwards compatible manner
+- Patch - it will be increased if there are backwards compatible bug fixes
 
 ---
 
@@ -464,3 +464,7 @@ Breaking changes:
 ### 5.0.2
 
 - Removed the source maps from generated package
+
+### 5.1.0
+
+- Added support for group of options

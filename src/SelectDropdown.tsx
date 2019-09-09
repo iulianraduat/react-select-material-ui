@@ -111,7 +111,8 @@ export interface SelectProps extends ReactSelectProps<SelectOption>, CreatablePr
 
 export interface SelectOption {
 	label: string;
-	value: SelectOptionValue;
+	options?: SelectOption[];
+	value?: SelectOptionValue;
 }
 
 export type SelectOptionValue = any;

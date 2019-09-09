@@ -5,7 +5,9 @@ import SelectHelperText from './SelectHelperText';
 import SelectLabel from './SelectLabel';
 import { BaseTextFieldProps } from '@material-ui/core/TextField';
 import {
+	filter,
 	find,
+	flatMap,
 	isArray,
 	isEmpty,
 	isEqual,
@@ -52,7 +54,13 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		const option: string | SelectOption | undefined = find(options, this.matchOptionValue(value));
 
 		if (isNil(option)) {
-			return;
+			const subOptions: SelectOption[] = filter(options, this.hasSubOptions) as SelectOption[];
+
+			if(isEmpty(subOptions)){
+				return;
+			}
+
+			return this.getOptionForValue(flatMap(subOptions,this.getSubOption))(value);
 		}
 
 		return this.getSelectOption(option);
@@ -65,6 +73,12 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 
 		return isEqual(value, option.value);
 	};
+
+	private hasSubOptions = (option: string | SelectOption) => {
+		return isString(option) === false && isArray((option as SelectOption).options);
+	}
+
+	private getSubOption = (option: SelectOption): SelectOption[] => option.options!;
 
 	private getOptions(options: (string | SelectOption)[]): SelectOption[] {
 		return map(options, this.getSelectOption);
