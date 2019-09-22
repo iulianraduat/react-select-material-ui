@@ -18,7 +18,9 @@ export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMater
 	defaltValue?: any;
 	defaultValues?: any[];
 	options: string[] | SelectOption[];
+	onBlur?: (event: React.FocusEvent<HTMLElement>) => void;
 	onChange: (value: any | any[], option?: SelectOption | SelectOption[]) => void;
+	onFocus?: (event: React.FocusEvent<HTMLElement>) => void;
 	ref?: any;
 	SelectProps?: SelectProps | any;
 	value?: any;

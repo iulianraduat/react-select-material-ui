@@ -1,4 +1,5 @@
 import ATDynamicUpdateValuesControlledComponent from './ATDynamicUpdateValuesControlledComponent';
+import ClearValues from './ClearValues';
 import ColorsSelect from '../src/subcomponents/ColorsSelect';
 import MultipleSelect from '../src/subcomponents/MultipleSelect';
 import React from 'react';
@@ -372,6 +373,36 @@ storiesOf("ReactSelectMaterialUi", module)
       />
     </div>
   ))
+  .add("clear value(s) button", () => (
+    <ClearValues disabled={false}/>
+  ))
+  .add("no clear value(s) button when component is disabled", () => (
+    <ClearValues disabled={true}/>
+  ))
+  .add("disabled", () => (
+    <div>
+      <ReactSelectMaterialUi
+        label="Single select"
+        options={simpleOptions}
+        defaultValue={simpleOptions[0]}
+        disabled={true}
+        fullWidth={true}
+        onChange={doNothing}
+      />
+      <div style={style} />
+      <ReactSelectMaterialUi
+        label="Multiple select"
+        options={simpleOptions}
+        defaultValues={[simpleOptions[0]]}
+        disabled={true}
+        SelectProps={{
+          isMulti: true
+        }}
+        fullWidth={true}
+        onChange={doNothing}
+      />
+    </div>
+  ))
   .add("styled", () => (
     <div style={styles.div}>
       <ReactSelectMaterialUi
@@ -584,5 +615,4 @@ storiesOf("Dynamic update of values for a controlled component", module)
       <ATDynamicUpdateValuesControlledComponent Comp={ReactSelectMaterialUi} useHugeOptionsList={true}/>
       <p>The selected value should change every 0.5 seconds.</p>
     </div>
-  ))
-;
+  ));

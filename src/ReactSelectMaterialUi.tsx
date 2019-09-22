@@ -39,7 +39,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 	}
 
 	private getSelectedOption = (options: string[] | SelectOption[], value?: string | string[]) => {
-		return isEmpty(value) ? undefined : this.getOneOrMoreSelectOptions(options, value);
+		return isNil(value) ? undefined : this.getOneOrMoreSelectOptions(options, value);
 	}
 
 	private getOneOrMoreSelectOptions(options:(string | SelectOption)[], value: string | string[] | undefined): SelectOption | SelectOption[] | undefined {
@@ -135,7 +135,9 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		const { hasInputFocus, selectedOption } = this.state;
 
 		let dropdownOption: SelectOption | SelectOption[] | null | undefined = selectedOption;
-		if(value || values){
+		if(value === null || values === null){
+			dropdownOption = null;
+		} else if(value || values){
 			const finalValue: string | string[] | undefined = this.getFinalValue(value as string, values as string[]);
 			dropdownOption = this.getSelectedOption(options, finalValue);
 		}
@@ -190,10 +192,10 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 	}
 
 	private isClearable() {
-		const { value, values } = this.props;
+		const { disabled } = this.props;
 		const { selectedOption } = this.state;
 
-		if (value || values) {
+ 		if (disabled) {
 			return false;
 		}
 
@@ -247,7 +249,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		return option.value;
 	}
 
-	private handleGotFocus = (event: any) => {
+	private handleGotFocus = (event: React.FocusEvent<HTMLElement>) => {
 		this.setState({
 			hasInputFocus: true
 		});
@@ -259,7 +261,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		}
 	};
 
-	private handleLostFocus = (event: any) => {
+	private handleLostFocus = (event: React.FocusEvent<HTMLElement>) => {
 		this.setState({
 			hasInputFocus: false
 		});
@@ -282,7 +284,9 @@ export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMater
 	defaltValue?: SelectOptionValue;
 	defaultValues?: SelectOptionValue[];
 	options: string[] | SelectOption[];
+	onBlur?: (event: React.FocusEvent<HTMLElement>) => void;
 	onChange: (value: SelectOptionValue | SelectOptionValue[], option?: SelectOption | SelectOption[]) => void;
+	onFocus?: (event: React.FocusEvent<HTMLElement>) => void;
 	ref?: any;
 	SelectProps?: SelectProps | any;
 	value?: SelectOptionValue;

@@ -99,6 +99,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 |                        4.2.x |    2.4.4     |    4.2.0    | 16.8.6 |
 |                        4.3.x |    2.4.4     |    4.3.3    | 16.9.0 |
 |                        5.0.x |    2.4.4     |    4.4.1    | 16.9.0 |
+|                        6.0.x |    2.4.4     |    4.4.2    | 16.9.0 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -468,3 +469,10 @@ Breaking changes:
 ### 5.1.0
 
 - Added support for group of options
+
+### 6.0.0
+
+- Setting SelectProps.isClearable to true will display the clear button also when the value is set via value(s) prop
+- Fixed the remove of the selected option(s) when the provided value(s) prop is null or values prop is an empty array
+- When the component is disabled, there is no clear button displayed
+- Fixed index.d.ts to include onBlur and onFocus
