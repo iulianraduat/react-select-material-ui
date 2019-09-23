@@ -142,7 +142,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 			dropdownOption = this.getSelectedOption(options, finalValue);
 		}
 
-		const isClearable: boolean = !!SelectProps && SelectProps.isClearable === true && this.isClearable();
+		const isClearable: boolean = !!SelectProps && SelectProps.isClearable === true && this.isClearable(dropdownOption);
 		const isDisabled: boolean = disabled || (!!SelectProps && SelectProps.isDisabled);
 		const selectPlaceholder: string | undefined = label ? '' : placeholder;
 		const shrink: boolean = this.isShrinked(dropdownOption);
@@ -191,19 +191,18 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 		return isEmpty(selectedOption) === false;
 	}
 
-	private isClearable() {
+	private isClearable(dropdownOption: SelectOption | SelectOption[] | null | undefined) {
 		const { disabled } = this.props;
-		const { selectedOption } = this.state;
 
  		if (disabled) {
 			return false;
 		}
 
-		if (isEmpty(selectedOption)) {
+		if (isEmpty(dropdownOption)) {
 			return false;
 		}
 
-		if (isArray(selectedOption) && size(selectedOption) <= 1) {
+		if (isArray(dropdownOption) && size(dropdownOption) < 2) {
 			return false;
 		}
 
@@ -220,7 +219,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
 
 	private handleChangeSelect = (newValue: SelectOption | SelectOption[] | null) => {
 		const { onChange, value, values } = this.props;
-		
+
 		if (isEmpty(value) && isEmpty(values)) {
 			this.setState({
 				filter: '',

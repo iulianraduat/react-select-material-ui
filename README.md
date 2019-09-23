@@ -476,3 +476,7 @@ Breaking changes:
 - Fixed the remove of the selected option(s) when the provided value(s) prop is null or values prop is an empty array
 - When the component is disabled, there is no clear button displayed
 - Fixed index.d.ts to include onBlur and onFocus
+
+### 6.0.1
+
+- Fixed bug related to clear button not correctly displayed when the values of a multi select are changed
