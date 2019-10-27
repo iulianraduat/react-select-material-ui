@@ -160,7 +160,7 @@ storiesOf("ReactSelectMaterialUi", module)
       />
     </div>
   ))
-  .add("single and multiple select - not allowing creating ew options", () => (
+  .add("single and multiple select - not allowing creating new options", () => (
     <div>
       <ReactSelectMaterialUi
         label="Single select"
