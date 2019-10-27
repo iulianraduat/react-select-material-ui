@@ -29,6 +29,19 @@ const stylesFn: StylesConfig = {
       color: '#ffff80',
       '&:hover': { color: '#ff0000' }
     }),
+    control: (base: any, state: any) => ({
+      ...base,
+      background: 'transparent',
+      borderBottom: state.isFocused ? '#ff0000' : '#ffff80',
+      borderBottomWidth: 3,
+      borderBottomStyle: 'solid',
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      borderTopWidth: 0,
+      borderRadius: 0,
+      boxShadow: 'none',
+      marginRight: 25
+    }),
     dropdownIndicator: (base: any) => ({
       ...base,
       color: '#ffff80',
