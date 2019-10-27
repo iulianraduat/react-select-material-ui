@@ -160,41 +160,78 @@ storiesOf("ReactSelectMaterialUi", module)
       />
     </div>
   ))
-  .add("single and multiple select - not allowing creating new options", () => (
+  .add("not allowing creating new options", () => (
     <div>
       <ReactSelectMaterialUi
-        label="Single select"
+        label="Clearable - Single select"
         options={simpleOptions}
+        SelectProps={{ isClearable: true }}
         fullWidth={true}
-        onChange={doNothing}
+        onChange={showSelectedValue("nacno")}
       />
       <div style={style} />
       <ReactSelectMaterialUi
-        label="Multiple select"
+        label="Not clearable - Single select"
         options={simpleOptions}
-        SelectProps={{ isMulti: true }}
+        SelectProps={{ isClearable: false }}
         fullWidth={true}
-        onChange={doNothing}
+        onChange={showSelectedValue("nacno")}
       />
+      <div style={style} />
+      <ReactSelectMaterialUi
+        label="Clearable - Multiple select"
+        options={simpleOptions}
+        SelectProps={{ isClearable: true, isMulti: true }}
+        fullWidth={true}
+        onChange={showSelectedValue("nacno")}
+      />
+      <div style={style} />
+      <ReactSelectMaterialUi
+        label="Not clearable - Multiple select"
+        options={simpleOptions}
+        SelectProps={{ isClearable: false, isMulti: true }}
+        fullWidth={true}
+        onChange={showSelectedValue("nacno")}
+      />
+      <div style={style} />
+      Selected value: <span id="nacno"></span>
     </div>
   ))
-  .add("single and multiple select - allowing creating new options", () => (
+  .add("allowing creating new options", () => (
     <div>
       <ReactSelectMaterialUi
-        label="Single select"
+        label="Clearable - Single select"
         options={simpleOptions}
-        SelectProps={{ isCreatable: true }}
+        SelectProps={{ isClearable: true, isCreatable: true }}
         fullWidth={true}
-        onChange={doNothing}
+        onChange={showSelectedValue("acno")}
       />
       <div style={style} />
       <ReactSelectMaterialUi
-        label="Multiple select"
+        label="Not clearable - Single select"
         options={simpleOptions}
-        SelectProps={{ isCreatable: true, isMulti: true }}
+        SelectProps={{ isClearable: false, isCreatable: true }}
         fullWidth={true}
-        onChange={doNothing}
+        onChange={showSelectedValue("acno")}
       />
+      <div style={style} />
+      <ReactSelectMaterialUi
+        label="Clearable - Multiple select"
+        options={simpleOptions}
+        SelectProps={{ isClearable: true, isCreatable: true, isMulti: true }}
+        fullWidth={true}
+        onChange={showSelectedValue("acno")}
+      />
+      <div style={style} />
+      <ReactSelectMaterialUi
+        label="Not clearable - Multiple select"
+        options={simpleOptions}
+        SelectProps={{ isClearable: false, isCreatable: true, isMulti: true }}
+        fullWidth={true}
+        onChange={showSelectedValue("acno")}
+      />
+      <div style={style} />
+      Selected value: <span id="acno"></span>
     </div>
   ))
   .add("with options having label and value equal", () => (
@@ -219,43 +256,6 @@ storiesOf("ReactSelectMaterialUi", module)
       />
       <div style={style} />
       Selected value: <span id="ohlvd"></span>
-    </div>
-  ))
-  .add("clearable and not clearable", () => (
-    <div>
-      <ReactSelectMaterialUi
-        label="Clearable - Single select"
-        options={simpleOptions}
-        SelectProps={{ isClearable: true }}
-        fullWidth={true}
-        onChange={showSelectedValue("cnc")}
-      />
-      <div style={style} />
-      <ReactSelectMaterialUi
-        label="Not clearable - Single select"
-        options={simpleOptions}
-        SelectProps={{ isClearable: false }}
-        fullWidth={true}
-        onChange={showSelectedValue("cnc")}
-      />
-      <div style={style} />
-      <ReactSelectMaterialUi
-        label="Clearable - Multiple select"
-        options={simpleOptions}
-        SelectProps={{ isClearable: true, isMulti: true }}
-        fullWidth={true}
-        onChange={showSelectedValue("cnc")}
-      />
-      <div style={style} />
-      <ReactSelectMaterialUi
-        label="Not clearable - Multiple select"
-        options={simpleOptions}
-        SelectProps={{ isClearable: false, isMulti: true }}
-        fullWidth={true}
-        onChange={showSelectedValue("cnc")}
-      />
-      <div style={style} />
-      Selected value: <span id="cnc"></span>
     </div>
   ))
   .add("with defaultValue", () => (

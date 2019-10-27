@@ -100,6 +100,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 |                        4.3.x |    2.4.4     |    4.3.3    | 16.9.0 |
 |                        5.0.x |    2.4.4     |    4.4.1    | 16.9.0 |
 |                        6.0.x |    2.4.4     |    4.4.2    | 16.9.0 |
+|                        6.1.x |    2.4.4     |    4.5.1    | 16.9.0 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -480,3 +481,9 @@ Breaking changes:
 ### 6.0.1
 
 - Fixed bug related to clear button not correctly displayed when the values of a multi select are changed
+
+### 6.1.0
+
+- Fixed missing tslint package
+- Keep only the lock file for installing packages via npm
+- Improved the storybook
