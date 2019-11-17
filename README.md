@@ -101,6 +101,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 |                        5.0.x |    2.4.4     |    4.4.1    | 16.9.0 |
 |                        6.0.x |    2.4.4     |    4.4.2    | 16.9.0 |
 |                        6.1.x |    2.4.4     |    4.5.1    | 16.9.0 |
+|                        6.2.x |    2.4.4     |    4.6.1    | 16.9.0 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -487,3 +488,8 @@ Breaking changes:
 - Fixed missing tslint package
 - Keep only the lock file for installing packages via npm
 - Improved the storybook
+
+### 6.2.0
+
+- Updated packages
+- Added a storybook for keeping or not open at add time the multiple select options menu

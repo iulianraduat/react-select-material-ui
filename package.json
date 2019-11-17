@@ -1,6 +1,6 @@
 {
   "name": "react-select-material-ui",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "description": "A react SELECT component based on react-select and looking like a material-ui component",
   "main": "lib/index.js",
   "sideEffects": false,
@@ -43,20 +43,20 @@
   },
   "homepage": "https://github.com/iulian-radu-at/react-select-material-ui#readme",
   "dependencies": {
-    "@material-ui/core": "^4.5.1",
+    "@material-ui/core": "^4.6.1",
     "lodash": "^4.17.15",
     "react-select": "^2.4.4"
   },
   "devDependencies": {
-    "@storybook/react": "^5.2.5",
+    "@storybook/react": "^5.2.6",
     "@types/babel-core": "^6.25.6",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/jest": "^24.0.20",
-    "@types/lodash": "^4.14.144",
-    "@types/node": "^12.11.7",
+    "@types/jest": "^24.0.23",
+    "@types/lodash": "^4.14.148",
+    "@types/node": "^12.12.8",
     "@types/react": "16.9.11",
-    "@types/react-dom": "16.9.3",
+    "@types/react-dom": "16.9.4",
     "@types/react-select": "^2.0.19",
     "@types/rimraf": "^2.0.3",
     "@types/storybook__react": "^4.0.2",
@@ -72,7 +72,7 @@
     "rimraf": "^3.0.0",
     "ts-jest": "^24.1.0",
     "tslint-react": "^4.1.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   },
   "peerDependencies": {
     "react": "^16.9.0",
