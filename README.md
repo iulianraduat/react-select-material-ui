@@ -102,6 +102,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 |                        6.0.x |    2.4.4     |    4.4.2    | 16.9.0 |
 |                        6.1.x |    2.4.4     |    4.5.1    | 16.9.0 |
 |                        6.2.x |    2.4.4     |    4.6.1    | 16.9.0 |
+|                        6.3.x |    2.4.4     |    4.9.0    | 16.9.0 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -493,3 +494,7 @@ Breaking changes:
 
 - Updated packages
 - Added a storybook for keeping or not open at add time the multiple select options menu
+
+### 6.3.0
+
+- Updated packages
