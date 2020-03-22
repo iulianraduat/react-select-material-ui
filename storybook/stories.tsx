@@ -10,6 +10,7 @@ import SingleSelect from "../src/subcomponents/SingleSelect";
 import TagsSelect from "../src/subcomponents/TagsSelect";
 import { storiesOf } from "@storybook/react";
 import { StylesConfig } from "react-select";
+import { Checkbox, FormControlLabel } from "@material-ui/core";
 
 const style: React.CSSProperties = {
   height: 20
@@ -165,6 +166,25 @@ const showSelectedValue = (id: string) => (
   (document.getElementById(id).textContent =
     value + getDiffOption(value, option));
 
+/////////
+
+const log = (value: any, option?: SelectOption | SelectOption[]) => {
+  console.log({ value, option });
+};
+
+const filterOption = (option: any, rawInput: string): boolean => {
+  console.log({
+    option,
+    rawInput
+  });
+  return true;
+};
+
+const isOptionDisabled = (option: any, a: any): boolean => {
+  console.log({ option, a });
+  return true;
+};
+
 storiesOf("ReactSelectMaterialUi", module)
   .addParameters({ options: { showPanel: false } })
   .add("with and without fullWidth set", () => (
@@ -173,6 +193,9 @@ storiesOf("ReactSelectMaterialUi", module)
         label="Without fullWith"
         options={simpleOptions}
         onChange={doNothing}
+        SelectProps={{
+          filterOption
+        }}
       />
       <div style={style} />
       <ReactSelectMaterialUi
@@ -677,5 +700,47 @@ storiesOf("Dynamic update of values for a controlled component", module)
         useHugeOptionsList={true}
       />
       <p>The selected value should change every 0.5 seconds.</p>
+    </div>
+  ));
+
+const issue28Options: string[] = [
+  "Action flag",
+  "Celebration flag",
+  "Information flag",
+  "Response flag"
+];
+
+storiesOf("Issues", module)
+  .addParameters({ options: { showPanel: false } })
+  .add("#28", () => (
+    <div>
+      <ReactSelectMaterialUi
+        label="Filter by flag"
+        options={issue28Options}
+        fullWidth={true}
+        onChange={doNothing}
+      />
+      <FormControlLabel
+        control={<Checkbox name="actionFlag" color="primary" />}
+        label="Action flag"
+        style={{ width: "100%" }}
+      />
+      <FormControlLabel
+        control={<Checkbox name="celebrationFlag" color="primary" />}
+        label="Celebration flag"
+        style={{ width: "100%" }}
+      />
+      <FormControlLabel
+        control={<Checkbox name="informationFlag" color="primary" />}
+        label="Information flag"
+        style={{ width: "100%" }}
+      />
+      <FormControlLabel
+        control={<Checkbox name="responseFlag" color="primary" />}
+        label="Response flag"
+        style={{ width: "100%" }}
+      />
+      <div style={style} />
+      The checkboxes should be covered by options dialog
     </div>
   ));
