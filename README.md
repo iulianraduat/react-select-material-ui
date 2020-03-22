@@ -523,3 +523,7 @@ Breaking changes:
 
 - Updated packages
 - Moved from npm to yarn
+
+### 6.4.1
+
+- Fixed the typescript definition
