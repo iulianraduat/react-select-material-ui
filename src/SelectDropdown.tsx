@@ -11,6 +11,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 
   public render() {
     const {
+      inputId,
       hasInputFocus,
       value,
       placeholder,
@@ -26,6 +27,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 
     return (
       <Select
+        inputId={inputId}
         isValidNewOption={this.isValidNewOption}
         captureMenuScroll={false}
         createOptionPosition="first"
@@ -112,6 +114,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
 }
 
 export interface SelectDropdownProps {
+  inputId?: string;
   value?: SelectOption | SelectOption[] | null;
   placeholder?: string;
   options?: SelectOption[];

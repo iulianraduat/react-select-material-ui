@@ -712,6 +712,18 @@ const issue28Options: string[] = [
 
 storiesOf("Issues", module)
   .addParameters({ options: { showPanel: false } })
+  .add("#26", () => (
+    <div>
+      <ReactSelectMaterialUi
+        id="issue26"
+        label="Label is referencing the input"
+        options={simpleOptions}
+        helperText="if you provide an id"
+        fullWidth={true}
+        onChange={doNothing}
+      />
+    </div>
+  ))
   .add("#28", () => (
     <div>
       <ReactSelectMaterialUi

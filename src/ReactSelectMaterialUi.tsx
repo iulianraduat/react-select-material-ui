@@ -5,294 +5,310 @@ import SelectHelperText from './SelectHelperText';
 import SelectLabel from './SelectLabel';
 import { BaseTextFieldProps } from '@material-ui/core/TextField';
 import {
-	filter,
-	find,
-	flatMap,
-	isArray,
-	isEmpty,
-	isEqual,
-	isFunction,
-	isNil,
-	isString,
-	map,
-	reject,
-	size
-	} from 'lodash';
+  filter,
+  find,
+  flatMap,
+  isArray,
+  isEmpty,
+  isEqual,
+  isFunction,
+  isNil,
+  isString,
+  map,
+  reject,
+  size
+} from 'lodash';
 
 class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiProps, ReactSelectMaterialUiState> {
-	constructor(props: ReactSelectMaterialUiProps) {
-		super(props);
+  constructor(props: ReactSelectMaterialUiProps) {
+    super(props);
 
-		const {defaultValue, defaultValues, value, values, } = props;
-		const finalValue: string | string[] | undefined = this.getFinalValue(value as string, values as string[], 
-			defaultValue as string, defaultValues as string[]);
+    const { defaultValue, defaultValues, value, values } = props;
+    const finalValue: string | string[] | undefined = this.getFinalValue(
+      value as string,
+      values as string[],
+      defaultValue as string,
+      defaultValues as string[]
+    );
 
-		this.state = {
-			filter: '',
-			hasInputFocus: false,
-			selectedOption: this.getSelectedOption(props.options, finalValue)
-		};
-	}
+    this.state = {
+      filter: '',
+      hasInputFocus: false,
+      selectedOption: this.getSelectedOption(props.options, finalValue)
+    };
+  }
 
-	private getFinalValue = (value?: string, values?: string[], defaultValue?: string, defaultValues?: string[]): string | string[] | undefined => {
-		return values || value || defaultValues || defaultValue;
-	}
+  private getFinalValue = (
+    value?: string,
+    values?: string[],
+    defaultValue?: string,
+    defaultValues?: string[]
+  ): string | string[] | undefined => {
+    return values || value || defaultValues || defaultValue;
+  };
 
-	private getSelectedOption = (options: string[] | SelectOption[], value?: string | string[]) => {
-		return isNil(value) ? undefined : this.getOneOrMoreSelectOptions(options, value);
-	}
+  private getSelectedOption = (options: string[] | SelectOption[], value?: string | string[]) => {
+    return isNil(value) ? undefined : this.getOneOrMoreSelectOptions(options, value);
+  };
 
-	private getOneOrMoreSelectOptions(options:(string | SelectOption)[], value: string | string[] | undefined): SelectOption | SelectOption[] | undefined {
-		if (isArray(value)) {
-			return reject(map(value, this.getOptionForValue(options)), isNil);
-		}
+  private getOneOrMoreSelectOptions(
+    options: (string | SelectOption)[],
+    value: string | string[] | undefined
+  ): SelectOption | SelectOption[] | undefined {
+    if (isArray(value)) {
+      return reject(map(value, this.getOptionForValue(options)), isNil);
+    }
 
-		return this.getOptionForValue(options)(value);
-	}
+    return this.getOptionForValue(options)(value);
+  }
 
-	private getOptionForValue = (options:(string | SelectOption)[]) => (value: string | SelectOptionValue | undefined): SelectOption | undefined => {
-		const option: string | SelectOption | undefined = find(options, this.matchOptionValue(value));
+  private getOptionForValue = (options: (string | SelectOption)[]) => (
+    value: string | SelectOptionValue | undefined
+  ): SelectOption | undefined => {
+    const option: string | SelectOption | undefined = find(options, this.matchOptionValue(value));
 
-		if (isNil(option)) {
-			const subOptions: SelectOption[] = filter(options, this.hasSubOptions) as SelectOption[];
+    if (isNil(option)) {
+      const subOptions: SelectOption[] = filter(options, this.hasSubOptions) as SelectOption[];
 
-			if(isEmpty(subOptions)){
-				return;
-			}
+      if (isEmpty(subOptions)) {
+        return;
+      }
 
-			return this.getOptionForValue(flatMap(subOptions,this.getSubOption))(value);
-		}
+      return this.getOptionForValue(flatMap(subOptions, this.getSubOption))(value);
+    }
 
-		return this.getSelectOption(option);
-	};
+    return this.getSelectOption(option);
+  };
 
-	private matchOptionValue = (value: string | SelectOptionValue) => (option: string | SelectOption): boolean => {
-		if (isString(option)) {
-			return value === option;
-		}
+  private matchOptionValue = (value: string | SelectOptionValue) => (option: string | SelectOption): boolean => {
+    if (isString(option)) {
+      return value === option;
+    }
 
-		return isEqual(value, option.value);
-	};
+    return isEqual(value, option.value);
+  };
 
-	private hasSubOptions = (option: string | SelectOption) => {
-		return isString(option) === false && isArray((option as SelectOption).options);
-	}
+  private hasSubOptions = (option: string | SelectOption) => {
+    return isString(option) === false && isArray((option as SelectOption).options);
+  };
 
-	private getSubOption = (option: SelectOption): SelectOption[] => option.options!;
+  private getSubOption = (option: SelectOption): SelectOption[] => option.options!;
 
-	private getOptions(options: (string | SelectOption)[]): SelectOption[] {
-		return map(options, this.getSelectOption);
-	}
+  private getOptions(options: (string | SelectOption)[]): SelectOption[] {
+    return map(options, this.getSelectOption);
+  }
 
-	private getSelectOption(option: string | SelectOption): SelectOption {
-		if (isString(option)) {
-			return {
-				label: option,
-				value: option
-			};
-		}
+  private getSelectOption(option: string | SelectOption): SelectOption {
+    if (isString(option)) {
+      return {
+        label: option,
+        value: option
+      };
+    }
 
-		return option;
-	}
+    return option;
+  }
 
-	public render() {
-		const {
-			autoComplete,
-			autoFocus,
-			children,
-			className,
-			defaultValue,
-			defaultValues,
-			disabled,
-			error,
-			FormHelperTextProps,
-			fullWidth,
-			helperText,
-			id,
-			InputLabelProps,
-			inputRef,
-			label,
-			multiline,
-			name,
-			onBlur,
-			onChange,
-			onFocus,
-			placeholder,
-			required,
-			rows,
-			rowsMax,
-			select,
-			SelectProps,
-			type,
-			value,
-			values,
-			options,
-			variant,
-			...other
-		} = this.props;
+  public render() {
+    const {
+      autoComplete,
+      autoFocus,
+      children,
+      className,
+      defaultValue,
+      defaultValues,
+      disabled,
+      error,
+      FormHelperTextProps,
+      fullWidth,
+      helperText,
+      id,
+      InputLabelProps,
+      inputRef,
+      label,
+      multiline,
+      name,
+      onBlur,
+      onChange,
+      onFocus,
+      placeholder,
+      required,
+      rows,
+      rowsMax,
+      select,
+      SelectProps,
+      type,
+      value,
+      values,
+      options,
+      variant,
+      ...other
+    } = this.props;
 
-		const helperTextId = id && helperText ? `${id}-helper-text` : undefined;
-		const { hasInputFocus, selectedOption } = this.state;
+    const helperTextId = id && helperText ? `${id}-helper-text` : undefined;
+    const { hasInputFocus, selectedOption } = this.state;
 
-		let dropdownOption: SelectOption | SelectOption[] | null | undefined = selectedOption;
-		if(value === null || values === null){
-			dropdownOption = null;
-		} else if(value || values){
-			const finalValue: string | string[] | undefined = this.getFinalValue(value as string, values as string[]);
-			dropdownOption = this.getSelectedOption(options, finalValue);
-		}
+    let dropdownOption: SelectOption | SelectOption[] | null | undefined = selectedOption;
+    if (value === null || values === null) {
+      dropdownOption = null;
+    } else if (value || values) {
+      const finalValue: string | string[] | undefined = this.getFinalValue(value as string, values as string[]);
+      dropdownOption = this.getSelectedOption(options, finalValue);
+    }
 
-		const isClearable: boolean = !!SelectProps && SelectProps.isClearable === true && this.isClearable(dropdownOption);
-		const isDisabled: boolean = disabled || (!!SelectProps && SelectProps.isDisabled);
-		const selectPlaceholder: string | undefined = label ? '' : placeholder;
-		const shrink: boolean = this.isShrinked(dropdownOption);
+    const isClearable: boolean = !!SelectProps && SelectProps.isClearable === true && this.isClearable(dropdownOption);
+    const isDisabled: boolean = disabled || (!!SelectProps && SelectProps.isDisabled);
+    const selectPlaceholder: string | undefined = label ? '' : placeholder;
+    const shrink: boolean = this.isShrinked(dropdownOption);
 
+    return (
+      <FormControl
+        aria-describedby={helperTextId}
+        className={className}
+        error={error}
+        fullWidth={fullWidth}
+        required={required}
+        {...other}
+      >
+        <SelectLabel
+          inputId={id}
+          label={label}
+          shrink={shrink}
+          hasInputFocus={hasInputFocus}
+          inputLabelProps={InputLabelProps}
+        />
+        <SelectDropdown
+          inputId={id}
+          value={dropdownOption}
+          placeholder={selectPlaceholder}
+          options={this.getOptions(options)}
+          selectProps={{
+            ...SelectProps,
+            isClearable,
+            isDisabled
+          }}
+          hasInputFocus={hasInputFocus}
+          onChange={this.handleChangeSelect}
+          onFocus={this.handleGotFocus}
+          onBlur={this.handleLostFocus}
+        />
+        <SelectHelperText id={helperTextId} helperText={helperText} formHelperTextProps={FormHelperTextProps} />
+      </FormControl>
+    );
+  }
 
-		return (
-			<FormControl
-				aria-describedby={helperTextId}
-				className={className}
-				error={error}
-				fullWidth={fullWidth}
-				required={required}
-				{...other}
-			>
-				<SelectLabel
-					id={id}
-					label={label}
-					shrink={shrink}
-					hasInputFocus={hasInputFocus}
-					inputLabelProps={InputLabelProps}
-				/>
-				<SelectDropdown
-					value={dropdownOption}
-					placeholder={selectPlaceholder}
-					options={this.getOptions(options)}
-					selectProps={{
-						...SelectProps,
-						isClearable,
-						isDisabled
-					}}
-					hasInputFocus={hasInputFocus}
-					onChange={this.handleChangeSelect}
-					onFocus={this.handleGotFocus}
-					onBlur={this.handleLostFocus}
-				/>
-				<SelectHelperText id={helperTextId} helperText={helperText} formHelperTextProps={FormHelperTextProps} />
-			</FormControl>
-		);
-	}
+  private isShrinked(selectedOption?: SelectOption | SelectOption[] | null): boolean {
+    if (this.hasInputFocus() || this.hasFilter()) {
+      return true;
+    }
 
-	private isShrinked(selectedOption?: SelectOption | SelectOption[] | null): boolean {
-		if(this.hasInputFocus() || this.hasFilter()){
-			return true;
-		}
-		
-		return isEmpty(selectedOption) === false;
-	}
+    return isEmpty(selectedOption) === false;
+  }
 
-	private isClearable(dropdownOption: SelectOption | SelectOption[] | null | undefined) {
-		const { disabled } = this.props;
+  private isClearable(dropdownOption: SelectOption | SelectOption[] | null | undefined) {
+    const { disabled } = this.props;
 
- 		if (disabled) {
-			return false;
-		}
+    if (disabled) {
+      return false;
+    }
 
-		if (isEmpty(dropdownOption)) {
-			return false;
-		}
+    if (isEmpty(dropdownOption)) {
+      return false;
+    }
 
-		if (isArray(dropdownOption) && size(dropdownOption) < 2) {
-			return false;
-		}
+    if (isArray(dropdownOption) && size(dropdownOption) < 2) {
+      return false;
+    }
 
-		return true;
-	}
+    return true;
+  }
 
-	private hasInputFocus(): boolean {
-		return this.state.hasInputFocus === true;
-	}
+  private hasInputFocus(): boolean {
+    return this.state.hasInputFocus === true;
+  }
 
-	private hasFilter(): boolean {
-		return isEmpty(this.state.filter) === false;
-	}
+  private hasFilter(): boolean {
+    return isEmpty(this.state.filter) === false;
+  }
 
-	private handleChangeSelect = (newValue: SelectOption | SelectOption[] | null) => {
-		const { onChange, value, values } = this.props;
+  private handleChangeSelect = (newValue: SelectOption | SelectOption[] | null) => {
+    const { onChange, value, values } = this.props;
 
-		if (isEmpty(value) && isEmpty(values)) {
-			this.setState({
-				filter: '',
-				selectedOption: newValue
-			});
-		}
+    if (isEmpty(value) && isEmpty(values)) {
+      this.setState({
+        filter: '',
+        selectedOption: newValue
+      });
+    }
 
-		if (isFunction(onChange)) {
-			onChange(this.getValues(newValue), newValue === null ? undefined : newValue);
-		}
-	};
+    if (isFunction(onChange)) {
+      onChange(this.getValues(newValue), newValue === null ? undefined : newValue);
+    }
+  };
 
-	private getValues(value: SelectOption | SelectOption[] | null): SelectOptionValue | SelectOptionValue[] | null {
-		if (isNil(value)) {
-			return null;
-		}
+  private getValues(value: SelectOption | SelectOption[] | null): SelectOptionValue | SelectOptionValue[] | null {
+    if (isNil(value)) {
+      return null;
+    }
 
-		if (isArray(value)) {
-			return map(value, this.getValue);
-		}
+    if (isArray(value)) {
+      return map(value, this.getValue);
+    }
 
-		return this.getValue(value);
-	}
+    return this.getValue(value);
+  }
 
-	private getValue(option: SelectOption): SelectOptionValue {
-		return option.value;
-	}
+  private getValue(option: SelectOption): SelectOptionValue {
+    return option.value;
+  }
 
-	private handleGotFocus = (event: React.FocusEvent<HTMLElement>) => {
-		this.setState({
-			hasInputFocus: true
-		});
+  private handleGotFocus = (event: React.FocusEvent<HTMLElement>) => {
+    this.setState({
+      hasInputFocus: true
+    });
 
-		const { onFocus } = this.props;
+    const { onFocus } = this.props;
 
-		if (isFunction(onFocus)) {
-			onFocus(event);
-		}
-	};
+    if (isFunction(onFocus)) {
+      onFocus(event);
+    }
+  };
 
-	private handleLostFocus = (event: React.FocusEvent<HTMLElement>) => {
-		this.setState({
-			hasInputFocus: false
-		});
+  private handleLostFocus = (event: React.FocusEvent<HTMLElement>) => {
+    this.setState({
+      hasInputFocus: false
+    });
 
-		const { onBlur } = this.props;
+    const { onBlur } = this.props;
 
-		if (isFunction(onBlur)) {
-			onBlur(event);
-		}
-	};
+    if (isFunction(onBlur)) {
+      onBlur(event);
+    }
+  };
 }
 
 interface ReactSelectMaterialUiState {
-	hasInputFocus?: boolean;
-	filter?: string;
-	selectedOption?: SelectOption | SelectOption[] | null;
+  hasInputFocus?: boolean;
+  filter?: string;
+  selectedOption?: SelectOption | SelectOption[] | null;
 }
 
-export interface ReactSelectMaterialUiProps extends React.Props<ReactSelectMaterialUi>, Omit<BaseTextFieldProps, 'onChange'> {
-	defaltValue?: SelectOptionValue;
-	defaultValues?: SelectOptionValue[];
-	options: string[] | SelectOption[];
-	onBlur?: (event: React.FocusEvent<HTMLElement>) => void;
-	onChange: (value: SelectOptionValue | SelectOptionValue[], option?: SelectOption | SelectOption[]) => void;
-	onFocus?: (event: React.FocusEvent<HTMLElement>) => void;
-	ref?: any;
-	SelectProps?: SelectProps | any;
-	value?: SelectOptionValue;
-	values?: SelectOptionValue[];
+export interface ReactSelectMaterialUiProps
+  extends React.Props<ReactSelectMaterialUi>,
+    Omit<BaseTextFieldProps, 'onChange'> {
+  defaltValue?: SelectOptionValue;
+  defaultValues?: SelectOptionValue[];
+  options: string[] | SelectOption[];
+  onBlur?: (event: React.FocusEvent<HTMLElement>) => void;
+  onChange: (value: SelectOptionValue | SelectOptionValue[], option?: SelectOption | SelectOption[]) => void;
+  onFocus?: (event: React.FocusEvent<HTMLElement>) => void;
+  ref?: any;
+  SelectProps?: SelectProps | any;
+  value?: SelectOptionValue;
+  values?: SelectOptionValue[];
 }
 
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export default ReactSelectMaterialUi;
 
