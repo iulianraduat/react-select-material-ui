@@ -1,4 +1,4 @@
-# react-select-material-ui
+# react-select-material-ui ![Weekly downloads](https://img.shields.io/npm/dw/react-select-material-ui "Weekly downloads")
 
 A react SELECT component based on [react-select](https://github.com/JedWatson/react-select) and looking like a [material-ui](https://material-ui.com/demos/selects/) component
 
@@ -14,20 +14,20 @@ The component accepts the props defined bellow in the table plus all props defin
 
 ### Props accepted by ReactSelectMaterialUi
 
-| Name          | Type             | Required                 | Default          | Description                                                                      |
-|---------------|------------------|--------------------------|------------------|----------------------------------------------------------------------------------|
-| defaultValue  | string           | no                       | undefined        | The default value for a single select                                            |
-| defaultValues | string[]         | no                       | undefined        | The default value for a multiple select                                          |
-| onChange      | (value: string \| string[], SelectOption \| SelectOption[] \| undefined) => void|yes|-|The callback function called when the option is changed |
-| options       | string[] \| SelectOption[]           | yes              | -|The selectable options                                                         |
-| SelectProps   | SelectProps      | no                       | undefined        | The props for react-select component                                             |
-| value         | string           | no                       | undefined        | The value for a single select                                                    |
-| values        | string[]         | no                       | undefined        | The value for a multiple select                                                  |
+| Name          | Type                                                                             | Required | Default   | Description                                             |
+| ------------- | -------------------------------------------------------------------------------- | -------- | --------- | ------------------------------------------------------- |
+| defaultValue  | string                                                                           | no       | undefined | The default value for a single select                   |
+| defaultValues | string[]                                                                         | no       | undefined | The default value for a multiple select                 |
+| onChange      | (value: string \| string[], SelectOption \| SelectOption[] \| undefined) => void | yes      | -         | The callback function called when the option is changed |
+| options       | string[] \| SelectOption[]                                                       | yes      | -         | The selectable options                                  |
+| SelectProps   | SelectProps                                                                      | no       | undefined | The props for react-select component                    |
+| value         | string                                                                           | no       | undefined | The value for a single select                           |
+| values        | string[]                                                                         | no       | undefined | The value for a multiple select                         |
 
 ### Fields defined by SelectProps
 
 | Name                    | Type    | Required | Default                                     | Description                                                                                        |
-|-------------------------|---------|----------|---------------------------------------------|----------------------------------------------------------------------------------------------------|
+| ----------------------- | ------- | -------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | isClearable             | boolean | no       | false                                       | Set to true to allow remove of selection with backspace or clicking on the x of the value(s)       |
 | isCreatable             | boolean | no       | false                                       | Set to true to allow creation of new values based on the input string                              |
 | msgNoOptionsAvailable   | string  | no       | No more options are available               | The message displayed when all options are already selected                                        |
@@ -47,7 +47,7 @@ The component accepts the props defined bellow in the table plus all props defin
 ### Fields defined by SelectOption
 
 | Name  | Type   | Required | Description                                                  |
-|-------|--------|----------|--------------------------------------------------------------|
+| ----- | ------ | -------- | ------------------------------------------------------------ |
 | label | string | yes      | The text displayed as option or value                        |
 | value | any    | yes      | The value associated to this option and returned by onChange |
 
@@ -86,7 +86,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 ## Versions
 
 | ReactSelectMaterialUi _uses_ | React-select | Material-ui | React  |
-|-----------------------------:|:------------:|:-----------:|:------:|
+| ---------------------------: | :----------: | :---------: | :----: |
 |                        1.0.x |    2.1.0     |    3.2.0    | 16.5.2 |
 |                        1.1.x |    2.1.2     |    3.6.0    | 16.6.3 |
 |                        1.2.x |    2.3.0     |    3.9.2    | 16.8.1 |
@@ -103,6 +103,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 |                        6.1.x |    2.4.4     |    4.5.1    | 16.9.0 |
 |                        6.2.x |    2.4.4     |    4.6.1    | 16.9.0 |
 |                        6.3.x |    2.4.4     |    4.9.0    | 16.9.0 |
+|                        6.4.x |    3.1.0     |    4.9.7    | 16.9.0 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -148,7 +149,9 @@ Setting SelectProps.isClearable to true will display the clearable button only i
 
 ```js
 import * as React from "react";
-import MaterialUiCreatable, { MaterialUiCreatableProps } from "./MaterialUiCreatable";
+import MaterialUiCreatable, {
+  MaterialUiCreatableProps
+} from "./MaterialUiCreatable";
 
 const MultipleSelect = (props: MaterialUiCreatableProps) => (
   <MaterialUiCreatable
@@ -193,7 +196,12 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <ReactSelectMaterialUi style={{ width: 100 }} value="Europe" options={options} onChange={this.handleChange} />
+        <ReactSelectMaterialUi
+          style={{ width: 100 }}
+          value="Europe"
+          options={options}
+          onChange={this.handleChange}
+        />
       </div>
     );
   }
@@ -218,7 +226,12 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <SingleSelect value="America" placeholder="Select a continent" options={options} onChange={this.handleChange} />
+        <SingleSelect
+          value="America"
+          placeholder="Select a continent"
+          options={options}
+          onChange={this.handleChange}
+        />
       </div>
     );
   }
@@ -275,7 +288,13 @@ import { TagsSelect } from "react-select-material-ui";
 
 class App extends React.Component {
   render() {
-    const options: string[] = ["Personal", "Work", "Important", "Optional", "Required"];
+    const options: string[] = [
+      "Personal",
+      "Work",
+      "Important",
+      "Optional",
+      "Required"
+    ];
 
     return (
       <div className="App">
@@ -393,10 +412,11 @@ export default App;
 - Fixed the display of values when using SelectOption instead of string
 
 Breaking changes:
+
 - SelectOption accepts only strings for value
 
 | props                      | in 1.x is ... for react-select | in 2.x is ... for react-select |
-|----------------------------|--------------------------------|--------------------------------|
+| -------------------------- | ------------------------------ | ------------------------------ |
 | defaultValue/defaultValues | _ignored_                      | defaultValue                   |
 | value/values               | defaultValue                   | value                          |
 
@@ -425,7 +445,7 @@ Breaking changes:
 
 ### 4.1.0
 
-- Change on behavior of onChange when value(s) is set. Before no call was triggered. Now it is called with the new selection. The component is controlled so there is no change in the visual if value(s) keep(s) the previous value 
+- Change on behavior of onChange when value(s) is set. Before no call was triggered. Now it is called with the new selection. The component is controlled so there is no change in the visual if value(s) keep(s) the previous value
 - Updated packages
 
 ### 4.1.1
@@ -498,3 +518,8 @@ Breaking changes:
 ### 6.3.0
 
 - Updated packages
+
+### 6.4.0
+
+- Updated packages
+- Moved from npm to yarn

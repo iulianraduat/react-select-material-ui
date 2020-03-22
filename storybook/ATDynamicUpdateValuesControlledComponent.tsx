@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const fewOptions = ['Africa', 'America', 'Asia', 'Europe', 'Australia'];
-const manyOptions = Array.from(Array(1000), (x, index) => `Option ${index + 1} / 1000`);
+const fewOptions = ["Africa", "America", "Asia", "Europe", "Australia"];
+const manyOptions = Array.from(
+  Array(1000),
+  (x, index) => `Option ${index + 1} / 1000`
+);
 
-const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesControlledComponentProps> = ({Comp, useHugeOptionsList}) => {
-  const options = useHugeOptionsList ? manyOptions : fewOptions;
+const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesControlledComponentProps> = ({
+  Comp,
+  options,
+  useHugeOptionsList
+}) => {
+  if (!options) {
+    options = useHugeOptionsList ? manyOptions : fewOptions;
+  }
   const [form, setForm] = useState({ selectedOption: options[0] });
 
   /* simulate update of the options in a controlled mode */
@@ -13,7 +22,7 @@ const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesCo
     setForm({ ...form, selectedOption });
   }, 500);
 
-  const handleChange = (selectedOption:string) => {
+  const handleChange = (selectedOption: string) => {
     setForm({ ...form, selectedOption });
   };
 
@@ -37,6 +46,7 @@ const pickRandomOption = (selectOptions: string[]): string => {
 
 interface ATDynamicUpdateValuesControlledComponentProps {
   Comp: typeof React.Component | React.FC;
+  options?: string[];
   useHugeOptionsList?: boolean;
 }
 

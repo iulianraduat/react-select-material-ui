@@ -1,8 +1,12 @@
-import * as React from 'react';
-import SelectCreatable from 'react-select/lib/Creatable';
-import SelectDropdown, { SelectDropdownProps, SelectOption, SelectProps } from './SelectDropdown';
-import SelectReadOnly from 'react-select';
-import { shallow, ShallowWrapper } from 'enzyme';
+import * as React from "react";
+import SelectReadOnly from "react-select";
+import Creatable from "react-select/creatable";
+import { shallow, ShallowWrapper } from "enzyme";
+import SelectDropdown, {
+  SelectDropdownProps,
+  SelectOption,
+  SelectProps
+} from "./SelectDropdown";
 
 describe("SelectDropdown", () => {
   it("produces a normal select", () => {
@@ -15,7 +19,7 @@ describe("SelectDropdown", () => {
     const wrapper: ShallowWrapper = shallow(
       <SelectDropdown selectProps={selectProps} />
     );
-    expect(wrapper.find(SelectCreatable).exists()).toBeTruthy;
+    expect(wrapper.find(Creatable).exists()).toBeTruthy;
   });
 
   it("passes all expected props to the child", () => {
@@ -28,9 +32,9 @@ describe("SelectDropdown", () => {
       onBlur: (event: any) => {}
     };
     const wrapper: ShallowWrapper = shallow(
-      <SelectDropdown {...selectDropdownProps} selectProps={selectProps}/>
+      <SelectDropdown {...selectDropdownProps} selectProps={selectProps} />
     );
-    const props: SelectDropdownProps = wrapper.find<any>(SelectCreatable).props();
+    const props: SelectDropdownProps = wrapper.find<any>(Creatable).props();
     expect(props).toMatchObject(selectDropdownProps);
     expect(props).toMatchObject(selectProps);
   });
@@ -42,13 +46,19 @@ describe("SelectDropdown", () => {
         isValidNewOption
       }
     };
-    const wrapper: ShallowWrapper = shallow(<SelectDropdown {...selectDropdownProps}/>);
-    expect(wrapper.find(SelectReadOnly).prop("isValidNewOption")).toEqual(isValidNewOption);
+    const wrapper: ShallowWrapper = shallow(
+      <SelectDropdown {...selectDropdownProps} />
+    );
+    expect(wrapper.find(SelectReadOnly).prop("isValidNewOption")).toEqual(
+      isValidNewOption
+    );
   });
 
   it("has the correct value for prop createOptionPosition", () => {
-    const wrapper: ShallowWrapper = shallow(<SelectDropdown/>);
-    expect(wrapper.find(SelectReadOnly).prop("createOptionPosition")).toEqual("first");
+    const wrapper: ShallowWrapper = shallow(<SelectDropdown />);
+    expect(wrapper.find(SelectReadOnly).prop("createOptionPosition")).toEqual(
+      "first"
+    );
   });
 
   it("allowes to overwrite prop createOptionPosition", () => {
@@ -58,7 +68,11 @@ describe("SelectDropdown", () => {
         createOptionPosition
       }
     };
-    const wrapper: ShallowWrapper = shallow(<SelectDropdown {...selectDropdownProps}/>);
-    expect(wrapper.find(SelectReadOnly).prop("createOptionPosition")).toEqual(createOptionPosition);
+    const wrapper: ShallowWrapper = shallow(
+      <SelectDropdown {...selectDropdownProps} />
+    );
+    expect(wrapper.find(SelectReadOnly).prop("createOptionPosition")).toEqual(
+      createOptionPosition
+    );
   });
 });

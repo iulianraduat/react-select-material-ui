@@ -1,15 +1,16 @@
 {
   "name": "react-select-material-ui",
-  "version": "6.3.0",
+  "version": "6.4.0",
   "description": "A react SELECT component based on react-select and looking like a material-ui component",
   "main": "lib/index.js",
   "sideEffects": false,
   "scripts": {
     "build": "rimraf ./lib && tsc",
-    "deploy": "cross-env NODE_ENV=production npm run build && npm publish",
+    "deploy": "cross-env NODE_ENV=production yarn build && yarn publish --non-interactive",
     "test": "jest",
     "storybook": "start-storybook -c storybook",
-    "build-storybook": "build-storybook -c storybook -o docs"
+    "build-storybook": "build-storybook -c storybook -o docs",
+    "commit-storybook": "git add . && git commit -m \"Updated storybook\""
   },
   "repository": {
     "type": "git",
@@ -43,35 +44,33 @@
   },
   "homepage": "https://github.com/iulian-radu-at/react-select-material-ui#readme",
   "dependencies": {
-    "@material-ui/core": "^4.9.0",
+    "@material-ui/core": "^4.9.7",
     "lodash": "^4.17.15",
-    "react-select": "^2.4.4"
+    "react-select": "^3.1.0"
   },
   "devDependencies": {
-    "@storybook/react": "^5.3.9",
+    "@storybook/react": "^5.3.17",
     "@types/babel-core": "^6.25.6",
-    "@types/enzyme": "^3.10.4",
-    "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/jest": "^24.9.1",
+    "@types/enzyme": "^3.10.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^25.1.4",
     "@types/lodash": "^4.14.149",
-    "@types/node": "^13.5.0",
-    "@types/react": "16.9.19",
+    "@types/node": "^13.9.3",
+    "@types/react": "16.9.25",
     "@types/react-dom": "16.9.5",
-    "@types/react-select": "^2.0.19",
-    "@types/rimraf": "^2.0.3",
+    "@types/react-select": "^3.0.11",
+    "@types/rimraf": "^3.0.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^25.1.0",
-    "babel-loader": "^8.0.6",
-    "babel-preset-react-app": "^9.1.0",
-    "cross-env": "^7.0.0",
+    "babel-loader": "^8.1.0",
+    "babel-preset-react-app": "^9.1.2",
+    "cross-env": "^7.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "jest": "^25.1.0",
-    "react": "16.9.0",
-    "react-dom": "16.9.0",
-    "rimraf": "^3.0.0",
-    "ts-jest": "^25.0.0",
-    "typescript": "^3.7.5"
+    "rimraf": "^3.0.2",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
   },
   "peerDependencies": {
     "react": "^16.9.0",
