@@ -2,6 +2,8 @@
 
 A react SELECT component based on [react-select](https://github.com/JedWatson/react-select) and looking like a [material-ui](https://material-ui.com/demos/selects/) component
 
+[![](https://data.jsdelivr.com/v1/package/npm/react-select-material-ui/badge)](https://www.jsdelivr.com/package/npm/react-select-material-ui)
+
 ---
 
 ## Demo
