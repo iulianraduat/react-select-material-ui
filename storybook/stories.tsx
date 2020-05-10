@@ -4,33 +4,38 @@ import ColorsSelect from "../src/subcomponents/ColorsSelect";
 import MultipleSelect from "../src/subcomponents/MultipleSelect";
 import React from "react";
 import ReactSelectMaterialUi, {
-  SelectOption
+  SelectOption,
 } from "../src/ReactSelectMaterialUi";
 import SingleSelect from "../src/subcomponents/SingleSelect";
 import TagsSelect from "../src/subcomponents/TagsSelect";
 import { storiesOf } from "@storybook/react";
 import { StylesConfig } from "react-select";
 import { Checkbox, FormControlLabel } from "@material-ui/core";
+import Issue32 from "./Issue32";
 
 const style: React.CSSProperties = {
-  height: 20
+  height: 20,
 };
 
 const styles: { [key: string]: React.CSSProperties } = {
   div: {
     backgroundColor: "#444444",
-    padding: "20px 20px 200px 20px"
+    padding: "20px 20px 200px 20px",
   },
   label: {
-    color: "#ffffff"
-  }
+    color: "#ffffff",
+  },
+  link: {
+    marginLeft: 20,
+    marginBottom: 20,
+  },
 };
 
 const stylesFn: StylesConfig = {
   clearIndicator: (base: any) => ({
     ...base,
     color: "#ffff80",
-    "&:hover": { color: "#ff0000" }
+    "&:hover": { color: "#ff0000" },
   }),
   control: (base: any, state: any) => ({
     ...base,
@@ -43,48 +48,48 @@ const stylesFn: StylesConfig = {
     borderTopWidth: 0,
     borderRadius: 0,
     boxShadow: "none",
-    marginRight: 25
+    marginRight: 25,
   }),
   dropdownIndicator: (base: any) => ({
     ...base,
     color: "#ffff80",
-    "&:hover": { color: "#ff0000" }
+    "&:hover": { color: "#ff0000" },
   }),
   menuList: (base: any) => ({
     ...base,
     backgroundColor: "#123456",
-    color: "#ffffff"
+    color: "#ffffff",
   }),
   multiValue: (base: any) => ({
     ...base,
-    backgroundColor: "#888888"
+    backgroundColor: "#888888",
   }),
   multiValueLabel: (base: any) => ({
     ...base,
-    color: "#ffff80"
+    color: "#ffff80",
   }),
   multiValueRemove: (base: any) => ({
     ...base,
     color: "#ffff80",
-    "&:hover": { color: "#ff0000", backgroundColor: "rgba(0,0,0,0)" }
+    "&:hover": { color: "#ff0000", backgroundColor: "rgba(0,0,0,0)" },
   }),
   noOptionsMessage: (base: any) => ({
     ...base,
     backgroundColor: "#888888",
     color: "#ffff80",
-    textAlign: "left"
+    textAlign: "left",
   }),
   option: (base: any, { isSelected }) => ({
     ...base,
     backgroundColor: isSelected ? "#ffff80" : "#123456",
     color: isSelected ? "#123456" : "#ffffff",
-    "&:hover": { backgroundColor: "#234567", color: "#ffff80" }
+    "&:hover": { backgroundColor: "#234567", color: "#ffff80" },
   }),
   singleValue: (base: any) => ({
     ...base,
     backgroundColor: "#444444",
-    color: "#ffff80"
-  })
+    color: "#ffff80",
+  }),
 };
 
 const simpleOptions: string[] = ["Option 1", "Option 2", "Option 3"];
@@ -92,16 +97,16 @@ const simpleOptions: string[] = ["Option 1", "Option 2", "Option 3"];
 const complexOptions: SelectOption[] = [
   {
     label: "Option 1",
-    value: "Value 1"
+    value: "Value 1",
   },
   {
     label: "Option 2",
-    value: "Value 2"
+    value: "Value 2",
   },
   {
     label: "Option 3",
-    value: "Value 3"
-  }
+    value: "Value 3",
+  },
 ];
 
 const subOptions: SelectOption[] = [
@@ -109,24 +114,24 @@ const subOptions: SelectOption[] = [
     label: "Group 1",
     options: [
       { label: "Group 1, option 1", value: "value 1.1" },
-      { label: "Group 1, option 2", value: "value 1.2" }
-    ]
+      { label: "Group 1, option 2", value: "value 1.2" },
+    ],
   },
   {
     label: "Group 2",
     options: [
       { label: "Group 2, option 1", value: "value 2.1" },
-      { label: "Group 2, option 2", value: "value 2.2" }
-    ]
+      { label: "Group 2, option 2", value: "value 2.2" },
+    ],
   },
   {
     label: "Option 3",
-    value: "Value 3"
+    value: "Value 3",
   },
   {
     label: "Option 4",
-    value: "Value 4"
-  }
+    value: "Value 4",
+  },
 ];
 
 const tagOptions: string[] = ["Tag1", "Tag2", "Tag3"];
@@ -136,10 +141,10 @@ const colorOptions: string[] = ["red", "blue", "#13579a"];
 const customMessages = {
   msgNoOptionsAvailable: "You already used all options",
   msgNoOptionsMatchFilter: "No match. Sorry",
-  msgNoValidValue: "Try 'Hello'"
+  msgNoValidValue: "Try 'Hello'",
 };
 
-const option2value = option => option.value;
+const option2value = (option) => option.value;
 
 const formatCreateLabel = (value: string) => `${value} (New Label)`;
 
@@ -175,7 +180,7 @@ const log = (value: any, option?: SelectOption | SelectOption[]) => {
 const filterOption = (option: any, rawInput: string): boolean => {
   console.log({
     option,
-    rawInput
+    rawInput,
   });
   return true;
 };
@@ -194,7 +199,7 @@ storiesOf("ReactSelectMaterialUi", module)
         options={simpleOptions}
         onChange={doNothing}
         SelectProps={{
-          filterOption
+          filterOption,
         }}
       />
       <div style={style} />
@@ -418,14 +423,16 @@ storiesOf("ReactSelectMaterialUi", module)
           formatCreateLabel,
           isValidNewOption,
           isCreatable: true,
-          isMulti: true
+          isMulti: true,
         }}
         fullWidth={true}
         onChange={doNothing}
       />
     </div>
   ))
-  .add("clear value(s) button", () => <ClearValues disabled={false} />)
+  .add("clear value(s) button", () => {
+    return <ClearValues disabled={false} />;
+  })
   .add("no clear value(s) button when component is disabled", () => (
     <ClearValues disabled={true} />
   ))
@@ -437,7 +444,7 @@ storiesOf("ReactSelectMaterialUi", module)
         defaultValue={simpleOptions[0]}
         SelectProps={{
           isMulti: true,
-          closeMenuOnSelect: true
+          closeMenuOnSelect: true,
         }}
         fullWidth={true}
         onChange={doNothing}
@@ -449,7 +456,7 @@ storiesOf("ReactSelectMaterialUi", module)
         defaultValues={[simpleOptions[0]]}
         SelectProps={{
           isMulti: true,
-          closeMenuOnSelect: false
+          closeMenuOnSelect: false,
         }}
         fullWidth={true}
         onChange={doNothing}
@@ -473,7 +480,7 @@ storiesOf("ReactSelectMaterialUi", module)
         defaultValues={[simpleOptions[0]]}
         disabled={true}
         SelectProps={{
-          isMulti: true
+          isMulti: true,
         }}
         fullWidth={true}
         onChange={doNothing}
@@ -489,7 +496,7 @@ storiesOf("ReactSelectMaterialUi", module)
         InputLabelProps={{ style: styles.label }}
         SelectProps={{
           isClearable: true,
-          styles: stylesFn
+          styles: stylesFn,
         }}
         fullWidth={true}
         onChange={doNothing}
@@ -503,7 +510,7 @@ storiesOf("ReactSelectMaterialUi", module)
         SelectProps={{
           isClearable: true,
           isMulti: true,
-          styles: stylesFn
+          styles: stylesFn,
         }}
         fullWidth={true}
         onChange={doNothing}
@@ -707,13 +714,22 @@ const issue28Options: string[] = [
   "Action flag",
   "Celebration flag",
   "Information flag",
-  "Response flag"
+  "Response flag",
 ];
 
 storiesOf("Issues", module)
   .addParameters({ options: { showPanel: false } })
   .add("#26", () => (
     <div>
+      <div style={styles.link}>
+        <a
+          href="https://github.com/iulian-radu-at/react-select-material-ui/issues/26"
+          target="_blank"
+        >
+          Issue #26 in Github
+        </a>
+      </div>
+
       <ReactSelectMaterialUi
         id="issue26"
         label="Label is referencing the input"
@@ -726,6 +742,14 @@ storiesOf("Issues", module)
   ))
   .add("#28", () => (
     <div>
+      <div style={styles.link}>
+        <a
+          href="https://github.com/iulian-radu-at/react-select-material-ui/issues/28"
+          target="_blank"
+        >
+          Issue #28 in Github
+        </a>
+      </div>
       <ReactSelectMaterialUi
         label="Filter by flag"
         options={issue28Options}
@@ -754,5 +778,10 @@ storiesOf("Issues", module)
       />
       <div style={style} />
       The checkboxes should be covered by options dialog
+    </div>
+  ))
+  .add("#32", () => (
+    <div>
+      <Issue32 />
     </div>
   ));
