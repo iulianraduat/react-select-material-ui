@@ -11,7 +11,8 @@
     "sourceMap": false,
     "jsx": "react",
     "typeRoots": ["index.d.ts", "node_modules/@types"],
-    "lib": ["es5", "es6", "dom"]
+    "lib": ["es5", "es6", "dom"],
+    "skipLibCheck": true
   },
   "include": ["./src/**/*.tsx", "./src/**/*.ts"],
   "exclude": ["node_modules", "./src/**/*.test.tsx"]

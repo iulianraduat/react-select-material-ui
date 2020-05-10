@@ -1,4 +1,4 @@
-# react-select-material-ui ![Weekly downloads](https://img.shields.io/npm/dw/react-select-material-ui 'Weekly downloads')
+# react-select-material-ui ![Weekly downloads](https://img.shields.io/npm/dw/react-select-material-ui "Weekly downloads")
 
 A react SELECT component based on [react-select](https://github.com/JedWatson/react-select) and looking like a [material-ui](https://material-ui.com/demos/selects/) component
 
@@ -61,7 +61,7 @@ It does not accept by default new options containing space.
 > set **SelectProps.isValidNewOption** to something like the following code to define your own validation:
 
 ```js
-(inputValue: string) => inputvalue !== '';
+(inputValue: string) => inputvalue !== "";
 ```
 
 The format for a new options is: 'INPUTED_TEXT (new)'.
@@ -107,6 +107,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 |                        6.2.x |    2.4.4     |    4.6.1    | 16.9.0 |
 |                        6.3.x |    2.4.4     |    4.9.0    | 16.9.0 |
 |                        6.4.x |    3.1.0     |    4.9.7    | 16.9.0 |
+|                        6.5.x |    3.1.0     |   4.9.13    | 16.9.0 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -121,7 +122,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 **SingleSelect** - a component for selecting a single value. It can be imported with:
 
 ```js
-import { SingleSelect } from 'react-select-material-ui';
+import { SingleSelect } from "react-select-material-ui";
 ```
 
 ```js
@@ -145,14 +146,16 @@ export default SingleSelect;
 **MultipleSelect** - a component for selecting multiple values. It can be imported with:
 
 ```js
-import { MultipleSelect } from 'react-select-material-ui';
+import { MultipleSelect } from "react-select-material-ui";
 ```
 
 Setting SelectProps.isClearable to true will display the clearable button only if there are more then one selected value.
 
 ```js
-import * as React from 'react';
-import MaterialUiCreatable, { MaterialUiCreatableProps } from './MaterialUiCreatable';
+import * as React from "react";
+import MaterialUiCreatable, {
+  MaterialUiCreatableProps,
+} from "./MaterialUiCreatable";
 
 const MultipleSelect = (props: MaterialUiCreatableProps) => (
   <MaterialUiCreatable
@@ -160,7 +163,7 @@ const MultipleSelect = (props: MaterialUiCreatableProps) => (
     SelectProps={{
       ...props.SelectProps,
       isMulti: true,
-      isClearable: true
+      isClearable: true,
     }}
     fullWidth={true}
   />
@@ -172,13 +175,13 @@ export default MultipleSelect;
 **TagsSelect** - a component for selecting multiple tag based on MultipleSelect. It can be imported with:
 
 ```js
-import { TagsSelect } from 'react-select-material-ui';
+import { TagsSelect } from "react-select-material-ui";
 ```
 
 **ColorsSelect** - a component for selecting multiple HTML colors (with preview) based on MultipleSelect. It can be imported with:
 
 ```js
-import { ColorsSelect } from 'react-select-material-ui';
+import { ColorsSelect } from "react-select-material-ui";
 ```
 
 ---
@@ -188,16 +191,21 @@ import { ColorsSelect } from 'react-select-material-ui';
 The base component which allowes to create read-only or creatable select components for selecting only one or more values:
 
 ```js
-import * as React from 'react';
-import ReactSelectMaterialUi from 'react-select-material-ui';
+import * as React from "react";
+import ReactSelectMaterialUi from "react-select-material-ui";
 
 class App extends React.Component {
   render() {
-    const options: string[] = ['Africa', 'America', 'Asia', 'Europe'];
+    const options: string[] = ["Africa", "America", "Asia", "Europe"];
 
     return (
       <div className="App">
-        <ReactSelectMaterialUi style={{ width: 100 }} value="Europe" options={options} onChange={this.handleChange} />
+        <ReactSelectMaterialUi
+          style={{ width: 100 }}
+          value="Europe"
+          options={options}
+          onChange={this.handleChange}
+        />
       </div>
     );
   }
@@ -213,16 +221,21 @@ export default App;
 The single select which creates a full width component for selecting a single value:
 
 ```js
-import * as React from 'react';
-import { SingleSelect } from 'react-select-material-ui';
+import * as React from "react";
+import { SingleSelect } from "react-select-material-ui";
 
 class App extends React.Component {
   render() {
-    const options: string[] = ['Africa', 'America', 'Asia', 'Europe'];
+    const options: string[] = ["Africa", "America", "Asia", "Europe"];
 
     return (
       <div className="App">
-        <SingleSelect value="America" placeholder="Select a continent" options={options} onChange={this.handleChange} />
+        <SingleSelect
+          value="America"
+          placeholder="Select a continent"
+          options={options}
+          onChange={this.handleChange}
+        />
       </div>
     );
   }
@@ -238,25 +251,25 @@ export default App;
 The multiple select which creates a full width component for selecting multiple values:
 
 ```js
-import * as React from 'react';
-import { MultipleSelect } from 'react-select-material-ui';
+import * as React from "react";
+import { MultipleSelect } from "react-select-material-ui";
 
 class App extends React.Component {
   render() {
-    const options: string[] = ['New York', 'London', 'Vienna', 'Budapest'];
+    const options: string[] = ["New York", "London", "Vienna", "Budapest"];
 
     return (
       <div className="App">
         <MultipleSelect
           label="Choose some cities"
-          values={['London', 'Vienna']}
+          values={["London", "Vienna"]}
           options={options}
           helperText="You can add a new city by writing its name and pressing enter"
           onChange={this.handleChange}
           SelectProps={{
             isCreatable: true,
-            msgNoOptionsAvailable: 'All cities are selected',
-            msgNoOptionsMatchFilter: 'No city name matches the filter'
+            msgNoOptionsAvailable: "All cities are selected",
+            msgNoOptionsMatchFilter: "No city name matches the filter",
           }}
         />
       </div>
@@ -274,12 +287,18 @@ export default App;
 The select multiple tags component:
 
 ```js
-import * as React from 'react';
-import { TagsSelect } from 'react-select-material-ui';
+import * as React from "react";
+import { TagsSelect } from "react-select-material-ui";
 
 class App extends React.Component {
   render() {
-    const options: string[] = ['Personal', 'Work', 'Important', 'Optional', 'Required'];
+    const options: string[] = [
+      "Personal",
+      "Work",
+      "Important",
+      "Optional",
+      "Required",
+    ];
 
     return (
       <div className="App">
@@ -289,8 +308,8 @@ class App extends React.Component {
           onChange={this.handleChange}
           SelectProps={{
             isCreatable: true,
-            msgNoOptionsAvailable: 'All tags are selected',
-            msgNoOptionsMatchFilter: 'No tag matches the filter'
+            msgNoOptionsAvailable: "All tags are selected",
+            msgNoOptionsMatchFilter: "No tag matches the filter",
           }}
         />
       </div>
@@ -308,12 +327,12 @@ export default App;
 The select multiple colors component:
 
 ```js
-import * as React from 'react';
-import { ColorsSelect } from 'react-select-material-ui';
+import * as React from "react";
+import { ColorsSelect } from "react-select-material-ui";
 
 class App extends React.Component {
   render() {
-    const options: string[] = ['red', '#123456', 'yellow', '#fedcba'];
+    const options: string[] = ["red", "#123456", "yellow", "#fedcba"];
 
     return (
       <div className="App">
@@ -323,7 +342,7 @@ class App extends React.Component {
           helperText="You can add a new color as long as it is a valid HTML color"
           onChange={this.handleChange}
           SelectProps={{
-            isCreatable: true
+            isCreatable: true,
           }}
         />
       </div>
@@ -516,3 +535,8 @@ Breaking changes:
 ### 6.4.2
 
 - Fixed the association between label and input field using the provided id
+
+### 6.5.0
+
+- Fixed the selection of (default)value(s) based on the select type (single/multi)
+- Updated packages
