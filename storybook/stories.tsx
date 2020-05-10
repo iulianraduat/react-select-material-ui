@@ -173,20 +173,11 @@ const showSelectedValue = (id: string) => (
 
 /////////
 
-const log = (value: any, option?: SelectOption | SelectOption[]) => {
-  console.log({ value, option });
-};
-
 const filterOption = (option: any, rawInput: string): boolean => {
   console.log({
     option,
     rawInput,
   });
-  return true;
-};
-
-const isOptionDisabled = (option: any, a: any): boolean => {
-  console.log({ option, a });
   return true;
 };
 
