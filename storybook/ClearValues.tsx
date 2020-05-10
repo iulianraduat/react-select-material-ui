@@ -34,11 +34,13 @@ const ClearValues: React.FC<ClearValuesProps> = ({ disabled }) => {
 
   return (
     <div>
-      <div>
-        <Button onClick={clearValue} color="primary">
-          Clear
-        </Button>
-      </div>
+      {disabled===false && (
+        <div>
+          <Button onClick={clearValue} color="primary">
+            Clear
+          </Button>
+        </div>
+      )}
 
       <div>
         <ReactSelectMaterialUi
