@@ -53,7 +53,19 @@ class ReactSelectMaterialUi extends React.PureComponent<
     defaultValue?: string,
     defaultValues?: string[]
   ): string | string[] | undefined => {
-    return isMulti ? values || defaultValues : value || defaultValue;
+    if(isMulti) {
+      if(values === undefined || values === null) {
+        return defaultValues;
+      } else {
+        return values;
+      }
+    } else {
+      if(value === undefined || value === null) {
+        return defaultValue;
+      } else {
+        return value;
+      }
+    }
   };
 
   private getSelectedOption = (
@@ -72,7 +84,6 @@ class ReactSelectMaterialUi extends React.PureComponent<
     if (isArray(value)) {
       return reject(map(value, this.getOptionForValue(options)), isNil);
     }
-
     return this.getOptionForValue(options)(value);
   }
 
@@ -83,7 +94,6 @@ class ReactSelectMaterialUi extends React.PureComponent<
       options,
       this.matchOptionValue(value)
     );
-
     if (isNil(option)) {
       const subOptions: SelectOption[] = filter(
         options,
@@ -182,7 +192,7 @@ class ReactSelectMaterialUi extends React.PureComponent<
       | undefined = selectedOption;
     if (value === null || values === null) {
       dropdownOption = null;
-    } else if (value || values) {
+    } else if ((value !== undefined && value !== null) || values) {
       const propIsMulti = SelectProps?.isMulti;
       const finalValue: string | string[] | undefined = this.getFinalValue(
         propIsMulti,
@@ -199,7 +209,6 @@ class ReactSelectMaterialUi extends React.PureComponent<
       disabled || (!!SelectProps && SelectProps.isDisabled);
     const selectPlaceholder: string | undefined = label ? "" : placeholder;
     const shrink: boolean = this.isShrinked(dropdownOption);
-
     return (
       <FormControl
         aria-describedby={helperTextId}
