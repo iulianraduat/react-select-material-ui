@@ -140,6 +140,17 @@ const subOptions: SelectOption[] = [
   },
 ];
 
+const emptyStringInitialValueOptions: SelectOption[] = [
+  {
+    value: "",
+    label: "One",
+  },
+  {
+    value: "two",
+    label: "Two",
+  },
+];
+
 const tagOptions: string[] = ["Tag1", "Tag2", "Tag3"];
 
 const colorOptions: string[] = ["red", "blue", "#13579a"];
@@ -167,15 +178,17 @@ const getDiffOption = (value: string, option?: SelectOption) => {
     return "";
   }
 
-  return ` | Selected label: ${option.label}`;
+  return `" | Selected label: "${option.label}`;
 };
 
 const showSelectedValue = (id: string) => (
   value: string,
   option?: SelectOption
-) =>
-  (document.getElementById(id).textContent =
-    value + getDiffOption(value, option));
+) => {
+  document.getElementById(id).textContent = `"${
+    value + getDiffOption(value, option)
+  }"`;
+};
 
 /////////
 
@@ -406,6 +419,18 @@ storiesOf("ReactSelectMaterialUi", module)
       />
       <div style={style} />
       The value passed in onChange(): <span id="v"></span>
+    </div>
+  ))
+  .add("with an empty string as initial value", () => (
+    <div>
+      <ReactSelectMaterialUi
+        defaultValue={""}
+        options={emptyStringInitialValueOptions}
+        fullWidth={true}
+        onChange={showSelectedValue("esiv")}
+      />
+      <div style={style} />
+      The value passed in onChange(): <span id="esiv"></span>
     </div>
   ))
   .add("with and without helper text", () => (

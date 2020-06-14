@@ -48,21 +48,34 @@ class ReactSelectMaterialUi extends React.PureComponent<
 
   private getFinalValue = (
     isMulti?: boolean,
-    value?: string,
-    values?: string[],
-    defaultValue?: string,
-    defaultValues?: string[]
+    value?: string | null,
+    values?: string[] | null,
+    defaultValue?: string | null,
+    defaultValues?: string[] | null
   ): string | string[] | undefined => {
-    return isMulti ? values || defaultValues : value || defaultValue;
+    return isMulti
+      ? this.getFirstNonUndefined(values, defaultValues)
+      : this.getFirstNonUndefined(value, defaultValue);
+  };
+
+  private getFirstNonUndefined = (
+    a: string | string[] | null | undefined,
+    b: string | string[] | null | undefined
+  ): string | string[] | undefined => {
+    return isNil(a) === false
+      ? (a as string | string[])
+      : isNil(b) === false
+      ? (b as string | string[])
+      : undefined;
   };
 
   private getSelectedOption = (
     options: string[] | SelectOption[],
     value?: string | string[]
   ) => {
-    return isNil(value)
-      ? undefined
-      : this.getOneOrMoreSelectOptions(options, value);
+    return isNil(value) === false
+      ? this.getOneOrMoreSelectOptions(options, value)
+      : undefined;
   };
 
   private getOneOrMoreSelectOptions(
@@ -84,22 +97,22 @@ class ReactSelectMaterialUi extends React.PureComponent<
       this.matchOptionValue(value)
     );
 
-    if (isNil(option)) {
-      const subOptions: SelectOption[] = filter(
-        options,
-        this.hasSubOptions
-      ) as SelectOption[];
-
-      if (isEmpty(subOptions)) {
-        return;
-      }
-
-      return this.getOptionForValue(flatMap(subOptions, this.getSubOption))(
-        value
-      );
+    if (isNil(option) === false) {
+      return this.getSelectOption(option!);
     }
 
-    return this.getSelectOption(option);
+    const subOptions: SelectOption[] = filter(
+      options,
+      this.hasSubOptions
+    ) as SelectOption[];
+
+    if (isEmpty(subOptions)) {
+      return;
+    }
+
+    return this.getOptionForValue(flatMap(subOptions, this.getSubOption))(
+      value
+    );
   };
 
   private matchOptionValue = (value: string | SelectOptionValue) => (
@@ -182,7 +195,7 @@ class ReactSelectMaterialUi extends React.PureComponent<
       | undefined = selectedOption;
     if (value === null || values === null) {
       dropdownOption = null;
-    } else if (value || values) {
+    } else if (isNil(value) === false || isNil(values) === false) {
       const propIsMulti = SelectProps?.isMulti;
       const finalValue: string | string[] | undefined = this.getFinalValue(
         propIsMulti,

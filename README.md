@@ -550,3 +550,7 @@ Breaking changes:
 ### 6.6.0
 
 - Updated packages
+
+### 6.6.1
+
+- Fixed the use of an empty string as initial value, value which matches a value defined in an option
