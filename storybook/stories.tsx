@@ -92,6 +92,12 @@ const stylesFn: StylesConfig = {
   }),
 };
 
+const noticeFormHelperTextProps = {
+  style: {
+    color: "#404040",
+  },
+};
+
 const simpleOptions: string[] = ["Option 1", "Option 2", "Option 3"];
 
 const complexOptions: SelectOption[] = [
@@ -300,12 +306,15 @@ storiesOf("ReactSelectMaterialUi", module)
       Selected value: <span id="ohlvd"></span>
     </div>
   ))
-  .add("with defaultValue", () => (
+  .add("with defaultValue(s)", () => (
     <div>
       <ReactSelectMaterialUi
         label="Default value - Label and value equal - Single select"
         options={simpleOptions}
         defaultValue={simpleOptions[1]}
+        defaultValues={simpleOptions.slice(1, 3)}
+        helperText="uses defaultValue, ignore defaultValues"
+        FormHelperTextProps={noticeFormHelperTextProps}
         fullWidth={true}
         onChange={showSelectedValue("dv")}
       />
@@ -314,6 +323,9 @@ storiesOf("ReactSelectMaterialUi", module)
         label="Default value - Label and value different - Single select"
         options={complexOptions}
         defaultValue={complexOptions[1].value}
+        defaultValues={simpleOptions.slice(1, 3)}
+        helperText="uses defaultValue, ignore defaultValues"
+        FormHelperTextProps={noticeFormHelperTextProps}
         fullWidth={true}
         onChange={showSelectedValue("dv")}
       />
@@ -321,7 +333,10 @@ storiesOf("ReactSelectMaterialUi", module)
       <ReactSelectMaterialUi
         label="Default value - Label and value equal - Multiple select"
         options={simpleOptions}
-        defaultValue={simpleOptions.slice(1, 3)}
+        defaultValues={simpleOptions.slice(1, 3)}
+        defaultValue={simpleOptions[1]}
+        helperText="uses defaultValues, ignore defaultValue"
+        FormHelperTextProps={noticeFormHelperTextProps}
         SelectProps={{ isMulti: true }}
         fullWidth={true}
         onChange={showSelectedValue("dv")}
@@ -330,7 +345,10 @@ storiesOf("ReactSelectMaterialUi", module)
       <ReactSelectMaterialUi
         label="Default value - Label and value different - Multiple select"
         options={complexOptions}
-        defaultValue={complexOptions.slice(1, 3).map(option2value)}
+        defaultValues={complexOptions.slice(1, 3).map(option2value)}
+        defaultValue={simpleOptions[1]}
+        helperText="uses defaultValues, ignore defaultValue"
+        FormHelperTextProps={noticeFormHelperTextProps}
         SelectProps={{ isMulti: true }}
         fullWidth={true}
         onChange={showSelectedValue("dv")}
@@ -339,12 +357,15 @@ storiesOf("ReactSelectMaterialUi", module)
       Selected value: <span id="dv"></span>
     </div>
   ))
-  .add("with value", () => (
+  .add("with value(s)", () => (
     <div>
       <ReactSelectMaterialUi
         label="Value - Label and value equal - Single select"
         options={simpleOptions}
         value={simpleOptions[1]}
+        values={simpleOptions.slice(1, 3)}
+        helperText="uses value, ignore values"
+        FormHelperTextProps={noticeFormHelperTextProps}
         fullWidth={true}
         onChange={showSelectedValue("v")}
       />
@@ -353,6 +374,9 @@ storiesOf("ReactSelectMaterialUi", module)
         label="Value - Label and value different - Single select"
         options={complexOptions}
         value={complexOptions[1].value}
+        values={simpleOptions.slice(1, 3)}
+        helperText="uses value, ignore values"
+        FormHelperTextProps={noticeFormHelperTextProps}
         fullWidth={true}
         onChange={showSelectedValue("v")}
       />
@@ -360,7 +384,10 @@ storiesOf("ReactSelectMaterialUi", module)
       <ReactSelectMaterialUi
         label="Value - Label and value equal - Multiple select"
         options={simpleOptions}
-        value={simpleOptions.slice(1, 3)}
+        values={simpleOptions.slice(1, 3)}
+        value={simpleOptions[1]}
+        helperText="uses values, ignore value"
+        FormHelperTextProps={noticeFormHelperTextProps}
         SelectProps={{ isMulti: true }}
         fullWidth={true}
         onChange={showSelectedValue("v")}
@@ -369,7 +396,10 @@ storiesOf("ReactSelectMaterialUi", module)
       <ReactSelectMaterialUi
         label="Value - Label and value different - Multiple select"
         options={complexOptions}
-        value={complexOptions.slice(1, 3).map(option2value)}
+        values={complexOptions.slice(1, 3).map(option2value)}
+        value={simpleOptions[1]}
+        helperText="uses values, ignore value"
+        FormHelperTextProps={noticeFormHelperTextProps}
         SelectProps={{ isMulti: true }}
         fullWidth={true}
         onChange={showSelectedValue("v")}
@@ -511,7 +541,7 @@ storiesOf("ReactSelectMaterialUi", module)
 
 storiesOf("Group of options", module)
   .addParameters({ options: { showPanel: false } })
-  .add("without defaultValue nor value", () => (
+  .add("without defaultValue(s) nor value(s)", () => (
     <div>
       <ReactSelectMaterialUi
         label="Single select"
@@ -531,7 +561,7 @@ storiesOf("Group of options", module)
       The value passed in onChange(): <span id="so1"></span>
     </div>
   ))
-  .add("with defaultValue", () => (
+  .add("with defaultValue(s)", () => (
     <div>
       <ReactSelectMaterialUi
         label="Single select"
@@ -553,7 +583,7 @@ storiesOf("Group of options", module)
       The value passed in onChange(): <span id="so2"></span>
     </div>
   ))
-  .add("with value", () => (
+  .add("with value(s)", () => (
     <div>
       <ReactSelectMaterialUi
         label="Single select"
