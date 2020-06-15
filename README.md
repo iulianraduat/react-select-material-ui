@@ -554,3 +554,7 @@ Breaking changes:
 ### 6.6.1
 
 - Fixed the use of an empty string as initial value, value which matches a value defined in an option
+
+### 6.6.2
+
+- Fixed the broken index.js produced by typescript 3.9.5 because of the "export \*"
