@@ -72,10 +72,10 @@ class ReactSelectMaterialUi extends React.PureComponent<
   private getSelectedOption = (
     options: string[] | SelectOption[],
     value?: string | string[]
-  ) => {
-    return isNil(value) === false
-      ? this.getOneOrMoreSelectOptions(options, value)
-      : undefined;
+  ): SelectOption | SelectOption[] | undefined => {
+    return isNil(value)
+      ? undefined
+      : this.getOneOrMoreSelectOptions(options, value);
   };
 
   private getOneOrMoreSelectOptions(
@@ -83,7 +83,11 @@ class ReactSelectMaterialUi extends React.PureComponent<
     value: string | string[] | undefined
   ): SelectOption | SelectOption[] | undefined {
     if (isArray(value)) {
-      return reject(map(value, this.getOptionForValue(options)), isNil);
+      const foundOptions = reject(
+        map(value, this.getOptionForValue(options)),
+        isNil
+      );
+      return foundOptions.length === 0 ? undefined : foundOptions;
     }
 
     return this.getOptionForValue(options)(value);
@@ -188,21 +192,29 @@ class ReactSelectMaterialUi extends React.PureComponent<
     const helperTextId = id && helperText ? `${id}-helper-text` : undefined;
     const { hasInputFocus, selectedOption } = this.state;
 
+    const propIsMulti: boolean = SelectProps?.isMulti === true;
+    const onlyValue = propIsMulti ? values : value;
+    const finalValue: string | string[] | undefined = this.getFinalValue(
+      propIsMulti,
+      value as string,
+      values as string[]
+    );
+
     let dropdownOption:
       | SelectOption
       | SelectOption[]
       | null
       | undefined = selectedOption;
-    if (value === null || values === null) {
+
+    if (onlyValue === null) {
       dropdownOption = null;
-    } else if (isNil(value) === false || isNil(values) === false) {
-      const propIsMulti = SelectProps?.isMulti;
-      const finalValue: string | string[] | undefined = this.getFinalValue(
-        propIsMulti,
-        value as string,
-        values as string[]
-      );
-      dropdownOption = this.getSelectedOption(options, finalValue);
+    } else if (isArray(onlyValue) && isEmpty(onlyValue)) {
+      dropdownOption = null;
+    } else if (finalValue !== undefined) {
+      const foundOptions = this.getSelectedOption(options, finalValue);
+      if (foundOptions) {
+        dropdownOption = foundOptions;
+      }
     }
 
     const propIsClearable = SelectProps?.isClearable;
@@ -254,17 +266,25 @@ class ReactSelectMaterialUi extends React.PureComponent<
   }
 
   private isShrinked(
-    selectedOption?: SelectOption | SelectOption[] | null
+    option: SelectOption | SelectOption[] | null | undefined
   ): boolean {
-    if (this.hasInputFocus() || this.hasFilter()) {
+    if (this.isShrinkable()) {
       return true;
     }
 
-    return isEmpty(selectedOption) === false;
+    if (isArray(option)) {
+      return isEmpty(option) === false;
+    }
+
+    return isEmpty(option) === false;
+  }
+
+  private isShrinkable(): boolean {
+    return this.hasInputFocus() || this.hasFilter();
   }
 
   private isClearable(
-    dropdownOption: SelectOption | SelectOption[] | null | undefined
+    option: SelectOption | SelectOption[] | null | undefined
   ) {
     const { disabled } = this.props;
 
@@ -272,15 +292,11 @@ class ReactSelectMaterialUi extends React.PureComponent<
       return false;
     }
 
-    if (isEmpty(dropdownOption)) {
-      return false;
+    if (isArray(option)) {
+      return size(option) >= 2;
     }
 
-    if (isArray(dropdownOption) && size(dropdownOption) < 2) {
-      return false;
-    }
-
-    return true;
+    return isEmpty(option) === false;
   }
 
   private hasInputFocus(): boolean {
@@ -296,12 +312,10 @@ class ReactSelectMaterialUi extends React.PureComponent<
   ) => {
     const { onChange, value, values } = this.props;
 
-    if (isEmpty(value) && isEmpty(values)) {
-      this.setState({
-        filter: "",
-        selectedOption: newValue,
-      });
-    }
+    this.setState({
+      filter: "",
+      selectedOption: newValue,
+    });
 
     if (isFunction(onChange)) {
       onChange(

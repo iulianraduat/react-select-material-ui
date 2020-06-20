@@ -12,6 +12,7 @@ import { storiesOf } from "@storybook/react";
 import { StylesConfig } from "react-select";
 import { Checkbox, FormControlLabel } from "@material-ui/core";
 import Issue32 from "./Issue32";
+import Issue37 from "./Issue37";
 
 const style: React.CSSProperties = {
   height: 20,
@@ -826,8 +827,8 @@ storiesOf("Issues", module)
       The checkboxes should be covered by options dialog
     </div>
   ))
-  .add("#32", () => (
+  .add("#37", () => (
     <div>
-      <Issue32 />
+      <Issue37 />
     </div>
   ));

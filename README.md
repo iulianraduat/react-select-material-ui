@@ -558,3 +558,7 @@ Breaking changes:
 ### 6.6.2
 
 - Fixed the broken index.js produced by typescript 3.9.5 because of the "export \*"
+
+### 6.6.3
+
+- Fixed the issue when the value is not matched by any option
