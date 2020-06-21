@@ -1,17 +1,16 @@
-import ATDynamicUpdateValuesControlledComponent from "./ATDynamicUpdateValuesControlledComponent";
-import ClearValues from "./ClearValues";
-import ColorsSelect from "../src/subcomponents/ColorsSelect";
-import MultipleSelect from "../src/subcomponents/MultipleSelect";
+import { Checkbox, FormControlLabel } from "@material-ui/core";
+import { storiesOf } from "@storybook/react";
 import React from "react";
+import { StylesConfig } from "react-select";
 import ReactSelectMaterialUi, {
   SelectOption,
 } from "../src/ReactSelectMaterialUi";
+import ColorsSelect from "../src/subcomponents/ColorsSelect";
+import MultipleSelect from "../src/subcomponents/MultipleSelect";
 import SingleSelect from "../src/subcomponents/SingleSelect";
 import TagsSelect from "../src/subcomponents/TagsSelect";
-import { storiesOf } from "@storybook/react";
-import { StylesConfig } from "react-select";
-import { Checkbox, FormControlLabel } from "@material-ui/core";
-import Issue32 from "./Issue32";
+import ATDynamicUpdateValuesControlledComponent from "./ATDynamicUpdateValuesControlledComponent";
+import ClearValues from "./ClearValues";
 import Issue37 from "./Issue37";
 
 const style: React.CSSProperties = {
@@ -170,25 +169,37 @@ const isValidNewOption = (inputValue: string) => inputValue === "Hello";
 
 const doNothing = () => {};
 
-const getDiffOption = (value: string, option?: SelectOption) => {
+const getValueOption = (value: string, option?: SelectOption) => {
   if (
     option === undefined ||
     option.label === undefined ||
     option.label === value
   ) {
-    return "";
+    return value;
   }
 
-  return `" | Selected label: "${option.label}`;
+  return `{value: "${value}" | label: "${option.label}"}`;
 };
 
 const showSelectedValue = (id: string) => (
-  value: string,
-  option?: SelectOption
+  value: string | string[],
+  option?: SelectOption | SelectOption[]
 ) => {
-  document.getElementById(id).textContent = `"${
-    value + getDiffOption(value, option)
-  }"`;
+  let text: string = "";
+  if (Array.isArray(value)) {
+    text = value.map((v, i) => getValueOption(v, option[i])).join(", ");
+  } else {
+    text = getValueOption(value, option as SelectOption);
+  }
+  document.getElementById(id).textContent = text;
+};
+
+const getNewOptionData = (inputValue: string) => {
+  return {
+    label: inputValue,
+    value: inputValue + " (changed)",
+    isNew: true,
+  };
 };
 
 /////////
@@ -508,6 +519,34 @@ storiesOf("ReactSelectMaterialUi", module)
         fullWidth={true}
         onChange={doNothing}
       />
+    </div>
+  ))
+  .add("changing a newly added option", () => (
+    <div>
+      <ReactSelectMaterialUi
+        label="Single select"
+        options={complexOptions}
+        SelectProps={{
+          isCreatable: true,
+          getNewOptionData,
+        }}
+        fullWidth={true}
+        onChange={showSelectedValue("cnao")}
+      />
+      <div style={style} />
+      <ReactSelectMaterialUi
+        label="Multiple select"
+        options={complexOptions}
+        SelectProps={{
+          isMulti: true,
+          isCreatable: true,
+          getNewOptionData,
+        }}
+        fullWidth={true}
+        onChange={showSelectedValue("cnao")}
+      />
+      <div style={style} />
+      The value passed in onChange(): <span id="cnao"></span>
     </div>
   ))
   .add("disabled", () => (
