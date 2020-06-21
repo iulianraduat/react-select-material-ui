@@ -14,22 +14,26 @@ const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesCo
   if (!options) {
     options = useHugeOptionsList ? manyOptions : fewOptions;
   }
-  const [form, setForm] = useState({ selectedOption: options[0] });
+  const [form, setForm] = useState({
+    selectedOption: options[0],
+    selectedOption2: options[1],
+  });
 
   /* simulate update of the options in a controlled mode */
   setTimeout(() => {
     const selectedOption: string = pickRandomOption(options);
-    setForm({ ...form, selectedOption });
+    const selectedOption2: string = pickRandomOption(options);
+    setForm({ ...form, selectedOption, selectedOption2 });
   }, 500);
 
   const handleChange = (selectedOption: string) => {
-    setForm({ ...form, selectedOption });
+    setForm({ ...form, selectedOption, selectedOption2: null });
   };
 
   return (
     <Comp
       value={form.selectedOption}
-      values={form.selectedOption}
+      values={[form.selectedOption, form.selectedOption2]}
       options={options}
       placeholder="Dynamically update of values of a controlled component"
       fullWidth={true}
