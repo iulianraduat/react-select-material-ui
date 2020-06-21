@@ -9,7 +9,7 @@ const manyOptions = Array.from(
 const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesControlledComponentProps> = ({
   Comp,
   options,
-  useHugeOptionsList
+  useHugeOptionsList,
 }) => {
   if (!options) {
     options = useHugeOptionsList ? manyOptions : fewOptions;
@@ -29,6 +29,7 @@ const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesCo
   return (
     <Comp
       value={form.selectedOption}
+      values={form.selectedOption}
       options={options}
       placeholder="Dynamically update of values of a controlled component"
       fullWidth={true}
