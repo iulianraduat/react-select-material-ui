@@ -194,13 +194,11 @@ const showSelectedValue = (id: string) => (
   document.getElementById(id).textContent = text;
 };
 
-const getNewOptionData = (inputValue: string) => {
-  return {
-    label: inputValue,
-    value: inputValue + " (changed)",
-    isNew: true,
-  };
-};
+const getNewOptionData = (inputValue: string) => ({
+  label: inputValue,
+  value: inputValue + " (changed)",
+  isNew: true,
+});
 
 /////////
 
