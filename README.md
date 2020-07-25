@@ -114,6 +114,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 |                        6.4.x |    3.1.0     |    4.9.7    | 16.9.0 |
 |                        6.5.x |    3.1.0     |   4.9.13    | 16.9.0 |
 |                        6.6.x |    3.1.0     |   4.10.12   | 16.9.0 |
+|                        6.7.x |    3.1.0     |   4.11.0    | 16.9.0 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -562,3 +563,7 @@ Breaking changes:
 ### 6.6.3
 
 - Fixed the issue when the value is not matched by any option
+
+### 6.7.0
+
+- Updated packages
