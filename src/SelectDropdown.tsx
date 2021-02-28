@@ -1,29 +1,18 @@
-import * as React from "react";
-import Creatable, { CreatableProps } from "react-select/creatable";
-import SelectReadOnly from "react-select";
-import { isArray, isEmpty, isNil, some, toString } from "lodash";
-import { Props as ReactSelectProps } from "react-select";
-import { getStyles } from "./SelectDropdownStyles";
+import * as React from 'react';
+import Creatable, { CreatableProps } from 'react-select/creatable';
+import SelectReadOnly from 'react-select';
+import { isArray, isEmpty, isNil, some, toString } from 'lodash';
+import { Props as ReactSelectProps } from 'react-select';
+import { getStyles } from './SelectDropdownStyles';
 
 class SelectDropdown extends React.Component<SelectDropdownProps> {
   private static spaces: RegExp = /\s/;
-  private static SENSITIVITY: Intl.CollatorOptions = { sensitivity: "base" };
+  private static SENSITIVITY: Intl.CollatorOptions = { sensitivity: 'base' };
 
   public render() {
-    const {
-      inputId,
-      hasInputFocus,
-      value,
-      placeholder,
-      options,
-      selectProps,
-      onChange,
-      onFocus,
-      onBlur
-    } = this.props;
+    const { inputId, hasInputFocus, value, placeholder, options, selectProps, onChange, onFocus, onBlur } = this.props;
 
-    const Select: React.ComponentClass<any> =
-      selectProps && selectProps.isCreatable ? Creatable : SelectReadOnly;
+    const Select: React.ComponentClass<any> = selectProps && selectProps.isCreatable ? Creatable : SelectReadOnly;
 
     return (
       <Select
@@ -52,27 +41,16 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
     }
 
     if (isEmpty(obj) || isEmpty(obj.inputValue)) {
-      return (
-        selectProps.msgNoOptionsAvailable || "No more options are available"
-      );
+      return selectProps.msgNoOptionsAvailable || 'No more options are available';
     }
 
     const { inputValue } = obj;
 
-    if (
-      selectProps.isCreatable !== true ||
-      this.containsValue(inputValue) ||
-      this.containsOptions(inputValue)
-    ) {
-      return (
-        selectProps.msgNoOptionsMatchFilter || "No options match the filter"
-      );
+    if (selectProps.isCreatable !== true || this.containsValue(inputValue) || this.containsOptions(inputValue)) {
+      return selectProps.msgNoOptionsMatchFilter || 'No options match the filter';
     }
 
-    return (
-      selectProps.msgNoValidValue ||
-      "The new value is not valid (contains space)"
-    );
+    return selectProps.msgNoValidValue || 'The new value is not valid (contains space)';
   };
 
   private isValidNewOption = (inputValue: string) => {
@@ -89,9 +67,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
   };
 
   private containsOptions(inputValue: string): boolean {
-    return some(this.props.options, (option: SelectOption) =>
-      this.equalsIgnoringCase(inputValue, option.value)
-    );
+    return some(this.props.options, (option: SelectOption) => this.equalsIgnoringCase(inputValue, option.value));
   }
 
   private containsValue(inputValue: string): boolean {
@@ -101,15 +77,11 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
       return false;
     }
 
-    return some(value, (option: SelectOption) =>
-      this.equalsIgnoringCase(inputValue, option.value)
-    );
+    return some(value, (option: SelectOption) => this.equalsIgnoringCase(inputValue, option.value));
   }
 
   private equalsIgnoringCase(a: string, b: SelectOptionValue) {
-    return (
-      a.localeCompare(toString(b), undefined, SelectDropdown.SENSITIVITY) === 0
-    );
+    return a.localeCompare(toString(b), undefined, SelectDropdown.SENSITIVITY) === 0;
   }
 }
 
@@ -125,9 +97,7 @@ export interface SelectDropdownProps {
   onBlur?: (event: any) => void;
 }
 
-export interface SelectProps
-  extends ReactSelectProps<SelectOption>,
-    CreatableProps<SelectOption> {
+export interface SelectProps extends ReactSelectProps<SelectOption>, CreatableProps<SelectOption, any> {
   isCreatable?: boolean;
   msgNoOptionsAvailable?: string;
   msgNoOptionsMatchFilter?: string;
