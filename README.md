@@ -25,7 +25,7 @@ The component accepts the props defined bellow in the table plus all props defin
 | options       | string[] \| SelectOption[]                                                       | yes      | -         | The selectable options                                     |
 | SelectProps   | SelectProps                                                                      | no       | undefined | The props for react-select component                       |
 | value         | string                                                                           | no       | undefined | The value for a single select\*                            |
-| values        | string[]                                                                         | no       | undefined | The value for a multiple select\*                          |
+| values        | string[]                                                                         | no       | undefined | The values for a multiple select\*                         |
 
 \* The order of the evaluated fields for deciding which is the selected value (take attention to the presence or not of the "s" after "value"):
 
