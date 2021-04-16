@@ -66,7 +66,7 @@ It does not accept by default new options containing space.
 > set **SelectProps.isValidNewOption** to something like the following code to define your own validation:
 
 ```js
-(inputValue: string) => inputvalue !== '';
+(inputValue: string) => inputValue !== '';
 ```
 
 The format for a new options is: 'INPUTED_TEXT (new)'.
