@@ -1,7 +1,7 @@
 import { Checkbox, createMuiTheme, FormControlLabel, ThemeProvider } from '@material-ui/core';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { StylesConfig } from 'react-select';
+import { OptionTypeBase, StylesConfig } from 'react-select';
 import ReactSelectMaterialUi, { SelectOption } from '../src/ReactSelectMaterialUi';
 import ColorsSelect from '../src/subcomponents/ColorsSelect';
 import MultipleSelect from '../src/subcomponents/MultipleSelect';
@@ -29,7 +29,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 };
 
-const stylesFn: StylesConfig = {
+const stylesFn: StylesConfig<OptionTypeBase, false> = {
   clearIndicator: (base: any) => ({
     ...base,
     color: '#ffff80',
@@ -38,7 +38,7 @@ const stylesFn: StylesConfig = {
   control: (base: any, state: any) => ({
     ...base,
     background: 'transparent',
-    borderBottom: state.isFocused ? '#ff0000' : '#ffff80',
+    borderBottomColor: state.isFocused ? '#ff0000' : '#ffff80',
     borderBottomWidth: 3,
     borderBottomStyle: 'solid',
     borderLeftWidth: 0,

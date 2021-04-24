@@ -7,7 +7,6 @@ const styleControl = (hasInputFocus: boolean = false) => ({
   borderWidth: 0,
   borderBottomStyle: 'solid' as any,
   borderBottomWidth: 1,
-  borderBottomColor: 'currentColor',
   borderRadius: 0,
   boxShadow: 'none',
   marginRight: 25,

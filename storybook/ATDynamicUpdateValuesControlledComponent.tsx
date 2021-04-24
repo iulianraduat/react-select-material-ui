@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-const fewOptions = ["Africa", "America", "Asia", "Europe", "Australia"];
-const manyOptions = Array.from(
-  Array(1000),
-  (x, index) => `Option ${index + 1} / 1000`
-);
+const fewOptions = ['Africa', 'America', 'Asia', 'Europe', 'Australia'];
+const manyOptions = Array.from(Array(1000), (x, index) => `Option ${index + 1} / 1000`);
 
 const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesControlledComponentProps> = ({
   Comp,
@@ -50,7 +47,7 @@ const pickRandomOption = (selectOptions: string[]): string => {
 };
 
 interface ATDynamicUpdateValuesControlledComponentProps {
-  Comp: typeof React.Component | React.FC;
+  Comp: typeof React.Component | React.FC<any>;
   options?: string[];
   useHugeOptionsList?: boolean;
 }
