@@ -598,6 +598,7 @@ storiesOf('ReactSelectMaterialUi', module)
           label="Single select"
           options={simpleOptions}
           defaultValue={simpleOptions[0]}
+          helperText="A helper text"
           SelectProps={{
             isClearable: true,
           }}
@@ -609,6 +610,7 @@ storiesOf('ReactSelectMaterialUi', module)
           label="Multiple select"
           options={simpleOptions}
           defaultValues={[simpleOptions[0]]}
+          helperText="A helper text"
           SelectProps={{
             isClearable: true,
             isMulti: true,

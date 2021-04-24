@@ -1,9 +1,11 @@
-import * as React from 'react';
-import Creatable, { CreatableProps } from 'react-select/creatable';
-import SelectReadOnly from 'react-select';
 import { isArray, isEmpty, isNil, some, toString } from 'lodash';
-import { Props as ReactSelectProps } from 'react-select';
+import * as React from 'react';
+import SelectReadOnly, { Props as ReactSelectProps } from 'react-select';
+import Creatable, { CreatableProps } from 'react-select/creatable';
+import { MySingleValue } from './MySingleValue';
 import { getStyles } from './SelectDropdownStyles';
+
+const components = { SingleValue: MySingleValue };
 
 class SelectDropdown extends React.Component<SelectDropdownProps> {
   private static spaces: RegExp = /\s/;
@@ -29,6 +31,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
+        components={components}
       />
     );
   }

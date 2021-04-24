@@ -1,25 +1,24 @@
-import { colorClearHover, colorClearNormal, colorFocus, colorHover, colorNoFocus } from './ColorConstants';
+import * as React from 'react';
+import { colorClearHover, colorClearNormal } from './ColorConstants';
 import { SelectProps } from './SelectDropdown';
 
 const styleControl = (hasInputFocus: boolean = false) => ({
   background: 'transparent',
   borderWidth: 0,
-  borderBottom: getBorder(hasInputFocus),
+  borderBottomStyle: 'solid' as any,
+  borderBottomWidth: 1,
+  borderBottomColor: 'currentColor',
   borderRadius: 0,
   boxShadow: 'none',
   marginRight: 25,
   '&:hover': {
     boxShadow: 'none',
-    background: `linear-gradient(to bottom, ${colorHover} 0%, ${colorHover} 100%)`,
     backgroundPosition: '0 100%',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 1px',
     transition: 'background-size .2s',
   },
 });
-
-// FIXME hasInputFocus should produce a 2px border, but such a border moves the content up so we use only 1px
-const getBorder = (hasInputFocus: boolean) => (hasInputFocus ? `solid 1px ${colorFocus}` : `solid 1px ${colorNoFocus}`);
 
 const styleIndicatorsContainer: React.CSSProperties = {
   position: 'absolute',
