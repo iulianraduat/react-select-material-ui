@@ -117,6 +117,7 @@ Please check the code in [storybook/stories.tsx](https://github.com/iulian-radu-
 |                        6.7.x |    3.1.0     |   4.11.0    |      16.9.0      |
 |                        6.8.x |    3.2.0     |   4.11.3    | 16.9.0 or 17.0.0 |
 |                        7.0.x |    3.2.0     |   4.11.3    | 16.9.0 or 17.0.0 |
+|                        7.1.x |    4.3.1     |   4.12.3    | 16.9.0 or 17.0.0 |
 
 ### About versioning schema used for ReactSelectMaterialUi
 
@@ -560,3 +561,7 @@ Breaking changes:
 ### 7.0.0
 
 - Breaking change: the component uses the colors provided by material-ui theme or CSS instead of some hard-coded values
+
+### 7.1.0
+
+- Using react-select 4.3 instead of 3.2

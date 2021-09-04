@@ -83,12 +83,9 @@ export const getStyles = (props?: SelectProps, hasInputFocus?: boolean) => {
     valueContainer: mixStyle(styleValueContainer(isClearable), customStyles.valueContainer),
   };
 };
-type StyleFn = (base: React.CSSProperties, state: any) => React.CSSProperties;
-const mixStyle = (customStyle: React.CSSProperties | StyleFn, styleFn?: StyleFn): StyleFn => (
-  base: any,
-  state: any
-) => ({
+type StyleFn = (base: any, props: any) => any;
+const mixStyle = (customStyle: any | StyleFn, styleFn?: StyleFn): StyleFn => (base: any, props: any) => ({
   ...base,
-  ...(typeof customStyle === 'function' ? customStyle(base, state) : customStyle),
-  ...(styleFn ? styleFn(base, state) : {}),
+  ...(typeof customStyle === 'function' ? customStyle(base, props) : customStyle),
+  ...(styleFn ? styleFn(base, props) : {}),
 });
