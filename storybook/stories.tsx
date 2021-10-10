@@ -1,7 +1,7 @@
-import { Checkbox, createMuiTheme, FormControlLabel, ThemeProvider } from '@material-ui/core';
+import { Checkbox, createTheme, FormControlLabel, ThemeProvider } from '@mui/material';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { OptionTypeBase, StylesConfig } from 'react-select';
+import { StylesConfig } from 'react-select';
 import ReactSelectMaterialUi, { SelectOption } from '../src/ReactSelectMaterialUi';
 import ColorsSelect from '../src/subcomponents/ColorsSelect';
 import MultipleSelect from '../src/subcomponents/MultipleSelect';
@@ -29,7 +29,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 };
 
-const stylesFn: StylesConfig<OptionTypeBase, false> = {
+const stylesFn: StylesConfig<unknown, false> = {
   clearIndicator: (base: any) => ({
     ...base,
     color: '#ffff80',
@@ -201,9 +201,9 @@ const filterOption = (option: any, rawInput: string): boolean => {
   return true;
 };
 
-const darkTheme = createMuiTheme({
+const darkTheme = createTheme({
   palette: {
-    type: 'dark',
+    mode: 'dark',
   },
 });
 

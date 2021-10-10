@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import ReactSelectMaterialUi from "../src/ReactSelectMaterialUi";
-import { Button } from "@material-ui/core";
+import { Button } from '@mui/material';
+import React, { useState } from 'react';
+import ReactSelectMaterialUi from '../src/ReactSelectMaterialUi';
 
 const styles: { [key: string]: React.CSSProperties } = {
   dropdown: {
     margin: 10,
-    width: "40%",
+    width: '40%',
   },
   link: {
     marginLeft: 20,
@@ -13,7 +13,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 };
 
-const options: string[] = ["Option 1", "Option 2", "Option 3"];
+const options: string[] = ['Option 1', 'Option 2', 'Option 3'];
 
 const Issue37: React.FC = () => {
   const [singleValue, setSingleValue] = useState();
@@ -27,10 +27,7 @@ const Issue37: React.FC = () => {
   return (
     <div>
       <div style={styles.link}>
-        <a
-          href="https://github.com/iulian-radu-at/react-select-material-ui/issues/37"
-          target="_blank"
-        >
+        <a href="https://github.com/iulian-radu-at/react-select-material-ui/issues/37" target="_blank">
           Issue #37 in Github
         </a>
       </div>
@@ -46,7 +43,7 @@ const Issue37: React.FC = () => {
           label="SingleSelect with prop value set to a value not matching an option"
           helperText="Add a new option to see if it is ignored when the options do not include it"
           options={options}
-          value={singleValue ? "missing option" : null}
+          value={singleValue ? 'missing option' : null}
           SelectProps={{
             isCreatable: true,
             isClearable: true,
@@ -59,7 +56,7 @@ const Issue37: React.FC = () => {
           label="MultipleSelect with prop value set to a value not matching an option"
           helperText="Add a new option to see if it is ignored when the options do not include it"
           options={options}
-          values={multiValue ? ["missing option"] : null}
+          values={multiValue ? ['missing option'] : null}
           SelectProps={{
             isMulti: true,
             isCreatable: true,

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { isEmpty } from "lodash";
-import FormHelperText, { FormHelperTextProps } from "@material-ui/core/FormHelperText/FormHelperText";
+import * as React from 'react';
+import { isEmpty } from 'lodash';
+import { FormHelperText, FormHelperTextProps } from '@mui/material';
 
 const SelectHelperText = (props: SelectHelperTextProps) => {
   const { id, helperText, formHelperTextProps } = props;
@@ -10,7 +10,7 @@ const SelectHelperText = (props: SelectHelperTextProps) => {
   }
 
   return (
-    <FormHelperText id={id} {...formHelperTextProps}>
+    <FormHelperText id={id} variant="standard" {...formHelperTextProps}>
       {helperText}
     </FormHelperText>
   );

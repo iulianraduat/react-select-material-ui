@@ -1,11 +1,13 @@
 import { isArray, isEmpty, isNil, some, toString } from 'lodash';
 import * as React from 'react';
-import SelectReadOnly, { Props as ReactSelectProps } from 'react-select';
+import SelectReadOnly, { Props as ReactSelectProps, SelectComponentsConfig, StylesConfig } from 'react-select';
 import Creatable, { CreatableProps } from 'react-select/creatable';
 import { MySingleValue } from './MySingleValue';
 import { getStyles } from './SelectDropdownStyles';
 
-const components = { SingleValue: MySingleValue };
+const components: SelectComponentsConfig<any, boolean> = {
+  SingleValue: MySingleValue,
+};
 
 class SelectDropdown extends React.Component<SelectDropdownProps> {
   private static spaces: RegExp = /\s/;
@@ -14,10 +16,31 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
   public render() {
     const { inputId, hasInputFocus, value, placeholder, options, selectProps, onChange, onFocus, onBlur } = this.props;
 
-    const Select: React.ComponentClass<any> = selectProps && selectProps.isCreatable ? Creatable : SelectReadOnly;
+    const comps = selectProps?.components ? { ...components, ...selectProps?.components } : components;
+
+    if (selectProps?.isCreatable) {
+      return (
+        <Creatable
+          inputId={inputId}
+          isValidNewOption={this.isValidNewOption}
+          captureMenuScroll={false}
+          createOptionPosition="first"
+          {...selectProps}
+          value={value}
+          placeholder={placeholder}
+          options={options}
+          styles={getStyles(selectProps, hasInputFocus)}
+          noOptionsMessage={this.noOptionsMessage}
+          onChange={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          components={comps}
+        />
+      );
+    }
 
     return (
-      <Select
+      <SelectReadOnly
         inputId={inputId}
         isValidNewOption={this.isValidNewOption}
         captureMenuScroll={false}
@@ -31,7 +54,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-        components={components}
+        components={comps}
       />
     );
   }
@@ -83,7 +106,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
     return some(value, (option: SelectOption) => this.equalsIgnoringCase(inputValue, option.value));
   }
 
-  private equalsIgnoringCase(a: string, b: SelectOptionValue) {
+  private equalsIgnoringCase(a: string, b: any) {
     return a.localeCompare(toString(b), undefined, SelectDropdown.SENSITIVITY) === 0;
   }
 }
@@ -100,19 +123,25 @@ export interface SelectDropdownProps {
   onBlur?: (event: any) => void;
 }
 
-export interface SelectProps extends ReactSelectProps<SelectOption>, CreatableProps<SelectOption, any> {
+export type SelectProps =
+  | (ReactSelectProps<SelectOption> & SelectCommonProps)
+  | (CreatableProps<SelectOption, any, any> & SelectCommonProps);
+
+interface SelectCommonProps {
+  components?: SelectComponentsConfig<any, boolean>;
+  isClearable?: boolean;
   isCreatable?: boolean;
+  isDisabled?: boolean;
   msgNoOptionsAvailable?: string;
   msgNoOptionsMatchFilter?: string;
   msgNoValidValue?: string;
+  styles?: StylesConfig<any, boolean>;
 }
 
 export interface SelectOption {
   label: string;
   options?: SelectOption[];
-  value?: SelectOptionValue;
+  value?: any;
 }
-
-export type SelectOptionValue = any;
 
 export default SelectDropdown;

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import FormControl from '@material-ui/core/FormControl/FormControl';
-import SelectDropdown, { SelectOption, SelectOptionValue, SelectProps } from './SelectDropdown';
+import SelectDropdown, { SelectOption, SelectProps } from './SelectDropdown';
 import SelectHelperText from './SelectHelperText';
 import SelectLabel from './SelectLabel';
-import { BaseTextFieldProps } from '@material-ui/core/TextField';
+import { BaseTextFieldProps, FormControl } from '@mui/material';
 import {
   filter,
   find,
@@ -76,7 +75,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
   }
 
   private getOptionForValue = (options: (string | SelectOption)[]) => (
-    value: string | SelectOptionValue | undefined
+    value: string | any | undefined
   ): SelectOption | undefined => {
     const option: string | SelectOption | undefined = find(options, this.matchOptionValue(value));
 
@@ -93,7 +92,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
     return this.getOptionForValue(flatMap(subOptions, this.getSubOption))(value);
   };
 
-  private matchOptionValue = (value: string | SelectOptionValue) => (option: string | SelectOption): boolean => {
+  private matchOptionValue = (value: string | any) => (option: string | SelectOption): boolean => {
     if (isString(option)) {
       return value === option;
     }
@@ -147,7 +146,6 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
       placeholder,
       required,
       rows,
-      rowsMax,
       select,
       SelectProps,
       type,
@@ -275,7 +273,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
     }
   };
 
-  private getValues(value: SelectOption | SelectOption[] | null): SelectOptionValue | SelectOptionValue[] | null {
+  private getValues(value: SelectOption | SelectOption[] | null): any | any[] | null {
     if (isNil(value)) {
       return null;
     }
@@ -287,7 +285,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
     return this.getValue(value);
   }
 
-  private getValue(option: SelectOption): SelectOptionValue {
+  private getValue(option: SelectOption): any {
     return option.value;
   }
 
@@ -322,17 +320,18 @@ interface ReactSelectMaterialUiState {
   selectedOption?: SelectOption | SelectOption[] | null;
 }
 
-export interface ReactSelectMaterialUiProps extends Omit<BaseTextFieldProps, 'onChange'> {
-  defaltValue?: SelectOptionValue;
-  defaultValues?: SelectOptionValue[];
+export interface ReactSelectMaterialUiProps<T = any> extends Omit<BaseTextFieldProps, 'onChange'> {
+  defaltValue?: any;
+  defaultValues?: any[];
+  key?: React.Key;
   options: string[] | SelectOption[];
   onBlur?: (event: React.FocusEvent<HTMLElement>) => void;
-  onChange: (value: SelectOptionValue | SelectOptionValue[], option?: SelectOption | SelectOption[]) => void;
+  onChange: (value: any | any[], option?: SelectOption | SelectOption[]) => void;
   onFocus?: (event: React.FocusEvent<HTMLElement>) => void;
   ref?: any;
   SelectProps?: SelectProps | any;
-  value?: SelectOptionValue;
-  values?: SelectOptionValue[];
+  value?: any;
+  values?: any[];
 }
 
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;

@@ -67,9 +67,9 @@ const styleValueContainer = (isClearable: boolean = false): React.CSSProperties 
 });
 
 export const getStyles = (props?: SelectProps, hasInputFocus?: boolean) => {
-  const customStyles = props && props.styles ? props.styles : {};
-  const isDisabled = props && props.isDisabled ? true : false;
-  const isClearable = props && props.isClearable ? true : false;
+  const customStyles = props?.styles || {};
+  const isDisabled = props?.isDisabled ? true : false;
+  const isClearable = props?.isClearable ? true : false;
 
   return {
     ...customStyles,

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "rootDirs": ["src", "stories"],
+    "rootDirs": ["src", "storybook"],
     "outDir": "./lib",
     "target": "es5",
     "module": "commonjs",
@@ -9,7 +9,8 @@
     "removeComments": true,
     "declaration": false,
     "sourceMap": false,
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
     "typeRoots": ["index.d.ts", "node_modules/@types"],
     "lib": ["es5", "es6", "dom"],
     "skipLibCheck": true
