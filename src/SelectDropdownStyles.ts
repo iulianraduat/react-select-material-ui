@@ -2,13 +2,14 @@ import * as React from 'react';
 import { colorClearHover, colorClearNormal } from './ColorConstants';
 import { SelectProps } from './SelectDropdown';
 
-const styleControl = (hasInputFocus: boolean = false) => ({
+const styleControl = () => ({
   background: 'transparent',
   borderWidth: 0,
   borderBottomStyle: 'solid' as any,
   borderBottomWidth: 1,
   borderRadius: 0,
   boxShadow: 'none',
+  marginTop: 8,
   marginRight: 25,
   '&:hover': {
     boxShadow: 'none',
@@ -66,14 +67,14 @@ const styleValueContainer = (isClearable: boolean = false): React.CSSProperties 
   textOverflow: 'ellipsis',
 });
 
-export const getStyles = (props?: SelectProps, hasInputFocus?: boolean) => {
+export const getStyles = (props?: SelectProps) => {
   const customStyles = props?.styles || {};
   const isDisabled = props?.isDisabled ? true : false;
   const isClearable = props?.isClearable ? true : false;
 
   return {
     ...customStyles,
-    control: mixStyle(styleControl(hasInputFocus), customStyles.control),
+    control: mixStyle(styleControl(), customStyles.control),
     clearIndicator: mixStyle(styleClearIndicator, customStyles.clearIndicator),
     dropdownIndicator: mixStyle(styleDropdownIndicator, customStyles.dropdownIndicator),
     indicatorsContainer: mixStyle(styleIndicatorsContainer, customStyles.indicatorsContainer),

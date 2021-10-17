@@ -9,22 +9,8 @@ const SelectLabel = (props: SelectLabelProps) => {
     return null;
   }
 
-  const style: React.CSSProperties = {
-    position: 'relative',
-    marginBottom: '-1rem',
-    paddingRight: '2rem',
-  };
-
-  const userStyle: React.CSSProperties | undefined = inputLabelProps ? inputLabelProps.style : undefined;
-
   return (
-    <InputLabel
-      {...inputLabelProps}
-      htmlFor={inputId}
-      style={getStyle(style, userStyle)}
-      shrink={shrink}
-      variant="standard"
-    >
+    <InputLabel {...inputLabelProps} htmlFor={inputId} shrink={shrink} variant="standard">
       {label}
     </InputLabel>
   );

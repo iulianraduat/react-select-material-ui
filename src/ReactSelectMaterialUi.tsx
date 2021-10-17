@@ -1,7 +1,3 @@
-import * as React from 'react';
-import SelectDropdown, { SelectOption, SelectProps } from './SelectDropdown';
-import SelectHelperText from './SelectHelperText';
-import SelectLabel from './SelectLabel';
 import { BaseTextFieldProps, FormControl } from '@mui/material';
 import {
   filter,
@@ -17,6 +13,11 @@ import {
   reject,
   size,
 } from 'lodash';
+import * as React from 'react';
+import { CSSProperties, ReactNode } from 'react';
+import SelectDropdown, { SelectOption, SelectProps } from './SelectDropdown';
+import SelectHelperText from './SelectHelperText';
+import SelectLabel from './SelectLabel';
 
 class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiProps, ReactSelectMaterialUiState> {
   constructor(props: ReactSelectMaterialUiProps) {
@@ -217,6 +218,7 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
           onFocus={this.handleGotFocus}
           onBlur={this.handleLostFocus}
         />
+        {fullWidth ? undefined : forceMinWidth(label)}
         <SelectHelperText id={helperTextId} helperText={helperText} formHelperTextProps={FormHelperTextProps} />
       </FormControl>
     );
@@ -312,6 +314,16 @@ class ReactSelectMaterialUi extends React.PureComponent<ReactSelectMaterialUiPro
       onBlur(event);
     }
   };
+}
+
+function forceMinWidth(label: ReactNode) {
+  const style: CSSProperties = {
+    fontSize: '110%',
+    height: 0,
+    paddingRight: 35,
+    visibility: 'hidden',
+  };
+  return <span style={style}>{label}</span>;
 }
 
 interface ReactSelectMaterialUiState {
