@@ -256,3 +256,7 @@ Breaking changes:
 - Fixed the bug related to label overwriting the dropdown button
 - Fixed the bug related to passing custom components
 - Fixed the ColorsSelect to display the color preview
+
+## 8.0.1
+
+- Corrected the location of the label
