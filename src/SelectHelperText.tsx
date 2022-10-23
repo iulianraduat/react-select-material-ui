@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { isEmpty } from 'lodash';
 import { FormHelperText, FormHelperTextProps } from '@mui/material';
+import isEmpty from 'lodash/isEmpty';
+import { ReactNode } from 'react';
 
-const SelectHelperText = (props: SelectHelperTextProps) => {
+export default function SelectHelperText(props: SelectHelperTextProps) {
   const { id, helperText, formHelperTextProps } = props;
 
   if (isEmpty(helperText)) {
@@ -14,12 +14,10 @@ const SelectHelperText = (props: SelectHelperTextProps) => {
       {helperText}
     </FormHelperText>
   );
-};
+}
 
 interface SelectHelperTextProps {
   id?: string;
-  helperText?: React.ReactNode;
+  helperText?: ReactNode;
   formHelperTextProps?: Partial<FormHelperTextProps>;
 }
-
-export default SelectHelperText;

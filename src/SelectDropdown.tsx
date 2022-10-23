@@ -1,23 +1,43 @@
-import { isArray, isEmpty, isNil, some, toString } from 'lodash';
-import * as React from 'react';
-import SelectReadOnly, { Props as ReactSelectProps, SelectComponentsConfig, StylesConfig } from 'react-select';
+import isArray from 'lodash/isArray';
+import isEmpty from 'lodash/isEmpty';
+import isNil from 'lodash/isNil';
+import some from 'lodash/some';
+import toString from 'lodash/toString';
+import { Component } from 'react';
+import SelectReadOnly, {
+  GroupBase,
+  Props as ReactSelectProps,
+  SelectComponentsConfig,
+  StylesConfig,
+} from 'react-select';
 import Creatable, { CreatableProps } from 'react-select/creatable';
 import { MySingleValue } from './MySingleValue';
 import { getStyles } from './SelectDropdownStyles';
 
-const components: SelectComponentsConfig<any, boolean> = {
+const components: SelectComponentsConfig<any, boolean, GroupBase<any>> = {
   SingleValue: MySingleValue,
 };
 
-class SelectDropdown extends React.Component<SelectDropdownProps> {
+class SelectDropdown extends Component<SelectDropdownProps> {
   private static spaces: RegExp = /\s/;
   private static SENSITIVITY: Intl.CollatorOptions = { sensitivity: 'base' };
 
   public render() {
-    const { inputId, placeholder, onChange, onFocus, onBlur, options, selectProps, value } = this.props;
+    const {
+      inputId,
+      placeholder,
+      onChange,
+      onFocus,
+      onBlur,
+      options,
+      selectProps,
+      value,
+    } = this.props;
 
     const styles = getStyles(selectProps);
-    const comps = selectProps?.components ? { ...components, ...selectProps?.components } : components;
+    const comps = selectProps?.components
+      ? { ...components, ...selectProps?.components }
+      : components;
 
     if (selectProps?.isCreatable) {
       return (
@@ -43,9 +63,7 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
     return (
       <SelectReadOnly
         inputId={inputId}
-        isValidNewOption={this.isValidNewOption}
         captureMenuScroll={false}
-        createOptionPosition="first"
         {...selectProps}
         value={value}
         placeholder={placeholder}
@@ -68,16 +86,27 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
     }
 
     if (isEmpty(obj) || isEmpty(obj.inputValue)) {
-      return selectProps.msgNoOptionsAvailable || 'No more options are available';
+      return (
+        selectProps.msgNoOptionsAvailable || 'No more options are available'
+      );
     }
 
     const { inputValue } = obj;
 
-    if (selectProps.isCreatable !== true || this.containsValue(inputValue) || this.containsOptions(inputValue)) {
-      return selectProps.msgNoOptionsMatchFilter || 'No options match the filter';
+    if (
+      selectProps.isCreatable !== true ||
+      this.containsValue(inputValue) ||
+      this.containsOptions(inputValue)
+    ) {
+      return (
+        selectProps.msgNoOptionsMatchFilter || 'No options match the filter'
+      );
     }
 
-    return selectProps.msgNoValidValue || 'The new value is not valid (contains space)';
+    return (
+      selectProps.msgNoValidValue ||
+      'The new value is not valid (contains space)'
+    );
   };
 
   private isValidNewOption = (inputValue: string) => {
@@ -94,7 +123,9 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
   };
 
   private containsOptions(inputValue: string): boolean {
-    return some(this.props.options, (option: SelectOption) => this.equalsIgnoringCase(inputValue, option.value));
+    return some(this.props.options, (option: SelectOption) =>
+      this.equalsIgnoringCase(inputValue, option.value)
+    );
   }
 
   private containsValue(inputValue: string): boolean {
@@ -104,11 +135,15 @@ class SelectDropdown extends React.Component<SelectDropdownProps> {
       return false;
     }
 
-    return some(value, (option: SelectOption) => this.equalsIgnoringCase(inputValue, option.value));
+    return some(value, (option: SelectOption) =>
+      this.equalsIgnoringCase(inputValue, option.value)
+    );
   }
 
   private equalsIgnoringCase(a: string, b: any) {
-    return a.localeCompare(toString(b), undefined, SelectDropdown.SENSITIVITY) === 0;
+    return (
+      a.localeCompare(toString(b), undefined, SelectDropdown.SENSITIVITY) === 0
+    );
   }
 }
 
@@ -129,7 +164,7 @@ export type SelectProps =
   | (CreatableProps<SelectOption, any, any> & SelectCommonProps);
 
 interface SelectCommonProps {
-  components?: SelectComponentsConfig<any, boolean>;
+  components?: SelectComponentsConfig<any, boolean, GroupBase<any>>;
   isClearable?: boolean;
   isCreatable?: boolean;
   isDisabled?: boolean;

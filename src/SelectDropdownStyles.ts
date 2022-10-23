@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { CSSProperties } from 'react';
 import { colorClearHover, colorClearNormal } from './ColorConstants';
 import { SelectProps } from './SelectDropdown';
 
@@ -20,7 +20,7 @@ const styleControl = () => ({
   },
 });
 
-const styleIndicatorsContainer: React.CSSProperties = {
+const styleIndicatorsContainer: CSSProperties = {
   position: 'absolute',
   right: 0,
   marginLeft: 8,
@@ -29,7 +29,7 @@ const styleIndicatorsContainer: React.CSSProperties = {
   height: '100%',
 };
 
-const styleClearIndicator = (base: any): React.CSSProperties | any => ({
+const styleClearIndicator = (base: any): CSSProperties | any => ({
   color: colorClearNormal,
   margin: '0 4px 0 0',
   padding: 0,
@@ -39,27 +39,29 @@ const styleClearIndicator = (base: any): React.CSSProperties | any => ({
   },
 });
 
-const styleDropdownIndicator: React.CSSProperties = {
+const styleDropdownIndicator: CSSProperties = {
   margin: '0 0 0 4px',
   padding: 0,
   cursor: 'pointer',
 };
 
-const styleMenuList: React.CSSProperties = {
+const styleMenuList: CSSProperties = {
   padding: 0,
 };
 
-const styleNoOptionsMessage: React.CSSProperties = {
+const styleNoOptionsMessage: CSSProperties = {
   textAlign: 'left',
   color: '#ff8080',
 };
 
-const styleMultiValueRemove = (isDisabled: boolean = false) => (base: any) => ({
-  ...base,
-  display: isDisabled ? 'none' : base.display,
-});
+const styleMultiValueRemove =
+  (isDisabled: boolean = false) =>
+  (base: any) => ({
+    ...base,
+    display: isDisabled ? 'none' : base.display,
+  });
 
-const styleValueContainer = (isClearable: boolean = false): React.CSSProperties => ({
+const styleValueContainer = (isClearable: boolean = false): CSSProperties => ({
   padding: 0,
   marginRight: isClearable ? 25 : 0,
   overflow: 'hidden',
@@ -76,17 +78,36 @@ export const getStyles = (props?: SelectProps) => {
     ...customStyles,
     control: mixStyle(styleControl(), customStyles.control),
     clearIndicator: mixStyle(styleClearIndicator, customStyles.clearIndicator),
-    dropdownIndicator: mixStyle(styleDropdownIndicator, customStyles.dropdownIndicator),
-    indicatorsContainer: mixStyle(styleIndicatorsContainer, customStyles.indicatorsContainer),
+    dropdownIndicator: mixStyle(
+      styleDropdownIndicator,
+      customStyles.dropdownIndicator
+    ),
+    indicatorsContainer: mixStyle(
+      styleIndicatorsContainer,
+      customStyles.indicatorsContainer
+    ),
     menuList: mixStyle(styleMenuList, customStyles.menuList),
-    multiValueRemove: mixStyle(styleMultiValueRemove(isDisabled), customStyles.multiValueRemove),
-    noOptionsMessage: mixStyle(styleNoOptionsMessage, customStyles.noOptionsMessage),
-    valueContainer: mixStyle(styleValueContainer(isClearable), customStyles.valueContainer),
+    multiValueRemove: mixStyle(
+      styleMultiValueRemove(isDisabled),
+      customStyles.multiValueRemove
+    ),
+    noOptionsMessage: mixStyle(
+      styleNoOptionsMessage,
+      customStyles.noOptionsMessage
+    ),
+    valueContainer: mixStyle(
+      styleValueContainer(isClearable),
+      customStyles.valueContainer
+    ),
   };
 };
 type StyleFn = (base: any, props: any) => any;
-const mixStyle = (customStyle: any | StyleFn, styleFn?: StyleFn): StyleFn => (base: any, props: any) => ({
-  ...base,
-  ...(typeof customStyle === 'function' ? customStyle(base, props) : customStyle),
-  ...(styleFn ? styleFn(base, props) : {}),
-});
+const mixStyle =
+  (customStyle: any | StyleFn, styleFn?: StyleFn): StyleFn =>
+  (base: any, props: any) => ({
+    ...base,
+    ...(typeof customStyle === 'function'
+      ? customStyle(base, props)
+      : customStyle),
+    ...(styleFn ? styleFn(base, props) : {}),
+  });

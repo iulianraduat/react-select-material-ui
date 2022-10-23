@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 const getStyle = (color: string) => ({
   display: 'inline-block',
   backgroundColor: color,
@@ -10,7 +8,9 @@ const getStyle = (color: string) => ({
   boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.75)',
 });
 
-const ColoredDot = (props: ColoredDotProps) => <div style={getStyle(props.color)} />;
+const ColoredDot = (props: ColoredDotProps) => (
+  <div style={getStyle(props.color)} />
+);
 
 interface ColoredDotProps {
   color: string;

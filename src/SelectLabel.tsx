@@ -1,6 +1,6 @@
 import { InputLabel, InputLabelProps } from '@mui/material';
-import { isEmpty } from 'lodash';
-import * as React from 'react';
+import isEmpty from 'lodash/isEmpty';
+import { CSSProperties, ReactNode } from 'react';
 
 const SelectLabel = (props: SelectLabelProps) => {
   const { inputId, label, shrink, inputLabelProps } = props;
@@ -10,20 +10,27 @@ const SelectLabel = (props: SelectLabelProps) => {
   }
 
   return (
-    <InputLabel {...inputLabelProps} htmlFor={inputId} shrink={shrink} variant="standard">
+    <InputLabel
+      {...inputLabelProps}
+      htmlFor={inputId}
+      shrink={shrink}
+      variant="standard"
+    >
       {label}
     </InputLabel>
   );
 };
 
-const getStyle = (style: React.CSSProperties, userStyle?: React.CSSProperties): React.CSSProperties =>
-  userStyle ? { ...style, ...userStyle } : style;
+const getStyle = (
+  style: CSSProperties,
+  userStyle?: CSSProperties
+): CSSProperties => (userStyle ? { ...style, ...userStyle } : style);
 
 interface SelectLabelProps {
   hasInputFocus?: boolean;
   inputId?: string;
   inputLabelProps?: Partial<InputLabelProps>;
-  label?: React.ReactNode;
+  label?: ReactNode;
   shrink?: boolean;
 }
 
