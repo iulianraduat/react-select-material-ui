@@ -100,9 +100,6 @@
       ".+\\.js$": "babel-jest",
       ".+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "src/.+\\.test\\.tsx$",
-    "setupFiles": [
-      "./enzymeAdapter.setup.js"
-    ]
+    "testRegex": "src/.+\\.test\\.tsx$"
   }
 }
