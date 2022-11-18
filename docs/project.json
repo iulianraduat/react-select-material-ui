@@ -1,15 +1,1 @@
-{
-  "generatedAt": 1666543806069,
-  "builder": { "name": "webpack4" },
-  "hasCustomBabel": false,
-  "hasCustomWebpack": false,
-  "hasStaticDirs": false,
-  "hasStorybookEslint": false,
-  "refCount": 0,
-  "packageManager": { "type": "yarn", "version": "1.22.19" },
-  "storybookVersion": "6.5.12",
-  "language": "typescript",
-  "storybookPackages": { "@storybook/react": { "version": "6.5.12" } },
-  "framework": { "name": "react" },
-  "addons": {}
-}
+{"generatedAt":1668798695431,"builder":{"name":"webpack4"},"hasCustomBabel":false,"hasCustomWebpack":false,"hasStaticDirs":false,"hasStorybookEslint":false,"refCount":0,"packageManager":{"type":"yarn","version":"1.22.19"},"storybookVersion":"6.5.12","language":"typescript","storybookPackages":{"@storybook/react":{"version":"6.5.12"}},"framework":{"name":"react"},"addons":{}}
