@@ -27,6 +27,7 @@
 |                        7.1.x |    4.3.1     |   4.12.3    | 16.9.0 or 17.0.0 |
 |                        8.0.x |    4.3.1     |    5.0.3    | 16.9.0 or 17.0.0 |
 |                        9.0.x |    5.5.4     |   5.10.10   |      18.0.0      |
+|                        9.1.x |    5.6.1     |   5.10.14   |      18.0.0      |
 
 ## About versioning schema used for ReactSelectMaterialUi
 
@@ -266,3 +267,7 @@ Breaking changes:
 
 - Accepting React 18 or later as peerDependencies
 - Changed the import of lodash functions to reduce the bundle size
+
+## 9.1.0
+
+- Updated packages

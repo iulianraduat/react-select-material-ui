@@ -1,6 +1,6 @@
 {
   "name": "react-select-material-ui",
-  "version": "9.0.0",
+  "version": "9.1.0",
   "description": "A react SELECT component based on react-select and looking like a material-ui component",
   "main": "lib/index.js",
   "sideEffects": false,
@@ -46,31 +46,31 @@
   },
   "homepage": "https://github.com/iulian-radu-at/react-select-material-ui#readme",
   "dependencies": {
-    "@emotion/styled": "11.10.4",
-    "@mui/material": "5.10.10",
+    "@emotion/styled": "11.10.5",
+    "@mui/material": "5.10.14",
     "lodash": "4.17.21",
-    "react-select": "5.5.4"
+    "react-select": "5.6.1"
   },
   "devDependencies": {
-    "@storybook/react": "6.5.12",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
+    "@storybook/react": "6.5.13",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "13.4.0",
     "@types/babel-core": "6.25.7",
-    "@types/jest": "29.2.0",
-    "@types/lodash": "4.14.186",
-    "@types/node": "14.18.32",
-    "@types/react": "18.0.21",
-    "@types/react-dom": "18.0.6",
+    "@types/jest": "29.2.3",
+    "@types/lodash": "4.14.189",
+    "@types/node": "14.18.33",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
     "@types/rimraf": "3.0.2",
     "babel-core": "6.26.3",
-    "babel-jest": "29.2.1",
+    "babel-jest": "29.3.1",
     "babel-loader": "8.2.5",
     "babel-preset-react-app": "10.0.1",
     "cross-env": "7.0.3",
-    "jest": "29.2.1",
+    "jest": "29.3.1",
     "rimraf": "3.0.2",
     "ts-jest": "29.0.3",
-    "typescript": "4.8.4"
+    "typescript": "4.9.3"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
