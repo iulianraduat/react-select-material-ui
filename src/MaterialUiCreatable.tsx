@@ -1,3 +1,4 @@
+import * as React from 'react';
 import ReactSelectMaterialUi, {
   ReactSelectMaterialUiProps,
 } from './ReactSelectMaterialUi';

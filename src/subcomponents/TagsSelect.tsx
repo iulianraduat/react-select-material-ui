@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { MaterialUiCreatableProps } from '../MaterialUiCreatable';
 import MultipleSelect from './MultipleSelect';
 

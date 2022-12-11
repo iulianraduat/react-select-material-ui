@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { CSSProperties } from 'react';
 import { MaterialUiCreatableProps } from '../MaterialUiCreatable';
 import ColoredDot from './ColoredDot';

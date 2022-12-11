@@ -21,8 +21,13 @@ interface ClearValuesProps {
 }
 
 const ClearValues: React.FC<ClearValuesProps> = ({ disabled }) => {
-  const [singleValue, setSingleValue] = useState(flavours[1].value);
-  const [multiValue, setMultiValue] = useState([flavours[1].value, flavours[2].value]);
+  const [singleValue, setSingleValue] = useState<string | null>(
+    flavours[1].value
+  );
+  const [multiValue, setMultiValue] = useState([
+    flavours[1].value,
+    flavours[2].value,
+  ]);
 
   const clearValue = () => {
     setSingleValue(null);

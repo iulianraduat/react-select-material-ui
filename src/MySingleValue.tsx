@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { SingleValueProps } from 'react-select/dist/declarations/src/components/SingleValue';
 
 export function MySingleValue(props: SingleValueProps<any>) {

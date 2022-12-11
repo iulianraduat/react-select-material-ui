@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { InputLabel, InputLabelProps } from '@mui/material';
 import isEmpty from 'lodash/isEmpty';
 import { CSSProperties, ReactNode } from 'react';

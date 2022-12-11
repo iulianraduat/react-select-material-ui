@@ -1,3 +1,4 @@
+import * as React from 'react';
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 import isNil from 'lodash/isNil';

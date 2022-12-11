@@ -1,3 +1,4 @@
+import * as React from 'react';
 import MaterialUiCreatable, {
   MaterialUiCreatableProps,
 } from '../MaterialUiCreatable';

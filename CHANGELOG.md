@@ -28,6 +28,7 @@
 |                        8.0.x |    4.3.1     |    5.0.3    | 16.9.0 or 17.0.0 |
 |                        9.0.x |    5.5.4     |   5.10.10   |      18.0.0      |
 |                        9.1.x |    5.6.1     |   5.10.14   |      18.0.0      |
+|                        9.2.x |    5.7.0     |   5.10.17   |      18.0.0      |
 
 ## About versioning schema used for ReactSelectMaterialUi
 
@@ -269,5 +270,9 @@ Breaking changes:
 - Changed the import of lodash functions to reduce the bundle size
 
 ## 9.1.0
+
+- Updated packages
+
+## 9.1.1
 
 - Updated packages
