@@ -281,3 +281,7 @@ Breaking changes:
 ## 9.3.0
 
 - Updated packages
+
+## 9.3.1
+
+- Fixed bundled lib
