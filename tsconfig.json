@@ -15,6 +15,11 @@
     "lib": ["es5", "es6", "dom"],
     "skipLibCheck": true
   },
-  "include": ["./src/**/*.tsx", "./src/**/*.ts"],
+  "include": [
+    "./src/**/*.tsx",
+    "./src/**/*.ts",
+    "./storybook/**/*.tsx",
+    "./storybook/**/*.ts"
+  ],
   "exclude": ["node_modules", "./src/**/*.test.tsx"]
 }

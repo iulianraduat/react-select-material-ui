@@ -27,7 +27,10 @@ const Issue37: React.FC = () => {
   return (
     <div>
       <div style={styles.link}>
-        <a href="https://github.com/iulian-radu-at/react-select-material-ui/issues/37" target="_blank">
+        <a
+          href="https://github.com/iulian-radu-at/react-select-material-ui/issues/37"
+          target="_blank"
+        >
           Issue #37 in Github
         </a>
       </div>
@@ -56,7 +59,7 @@ const Issue37: React.FC = () => {
           label="MultipleSelect with prop value set to a value not matching an option"
           helperText="Add a new option to see if it is ignored when the options do not include it"
           options={options}
-          values={multiValue ? ['missing option'] : null}
+          values={multiValue ? ['missing option'] : []}
           SelectProps={{
             isMulti: true,
             isCreatable: true,

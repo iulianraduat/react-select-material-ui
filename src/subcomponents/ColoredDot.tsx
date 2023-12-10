@@ -1,3 +1,5 @@
+import React from 'react';
+
 const getStyle = (color: string) => ({
   display: 'inline-block',
   backgroundColor: color,

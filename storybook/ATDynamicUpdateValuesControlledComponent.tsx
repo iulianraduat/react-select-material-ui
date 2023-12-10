@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 
 const fewOptions = ['Africa', 'America', 'Asia', 'Europe', 'Australia'];
-const manyOptions = Array.from(Array(1000), (x, index) => `Option ${index + 1} / 1000`);
+const manyOptions = Array.from(
+  Array(1000),
+  (x, index) => `Option ${index + 1} / 1000`
+);
 
-const ATDynamicUpdateValuesControlledComponent: React.FC<ATDynamicUpdateValuesControlledComponentProps> = ({
-  Comp,
-  options,
-  useHugeOptionsList,
-}) => {
-  if (!options) {
-    options = useHugeOptionsList ? manyOptions : fewOptions;
-  }
-  const [form, setForm] = useState({
+const ATDynamicUpdateValuesControlledComponent: React.FC<
+  ATDynamicUpdateValuesControlledComponentProps
+> = (props) => {
+  const { Comp, useHugeOptionsList } = props;
+  const { options = useHugeOptionsList ? manyOptions : fewOptions } = props;
+  const [form, setForm] = useState<{
+    selectedOption?: string | null;
+    selectedOption2?: string | null;
+  }>({
     selectedOption: options[0],
     selectedOption2: options[1],
   });

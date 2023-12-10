@@ -29,6 +29,7 @@
 |                        9.0.x |    5.5.4     |   5.10.10   |      18.0.0      |
 |                        9.1.x |    5.6.1     |   5.10.14   |      18.0.0      |
 |                        9.2.x |    5.7.0     |   5.10.17   |      18.0.0      |
+|                        9.3.x |    5.8.0     |   5.14.20   |      18.0.0      |
 
 ## About versioning schema used for ReactSelectMaterialUi
 
@@ -274,5 +275,9 @@ Breaking changes:
 - Updated packages
 
 ## 9.1.1
+
+- Updated packages
+
+## 9.3.0
 
 - Updated packages

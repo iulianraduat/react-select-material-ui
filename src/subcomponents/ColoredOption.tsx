@@ -1,4 +1,5 @@
 import { MenuItem } from '@mui/material';
+import React from 'react';
 import { OptionProps } from 'react-select';
 import ColoredDot from './ColoredDot';
 
